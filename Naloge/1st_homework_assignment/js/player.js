@@ -18,7 +18,7 @@ function Player() {
 
     this.draw = function() {
         //sliko izreze iz spritesheet iamge invadersimage
-        image(invadersImage, this.x, this.y, this.width, this.height, this.sX, this.sY, this.sWidth, this.sHeight);
+        ctx.drawImage(invadersImage, this.sX, this.sY, this.sWidth, this.sHeight, this.x, this.y, this.width, this.height);
     }
     this.collision = function() {
         //preverimo ce gremo cez rob canvasa

@@ -61,14 +61,14 @@ function Enemy(x, y, row) {
     this.draw = function() {
         if (this.status) {
             if ((millis() - startTime) / 1000 <= 1) {
-                image(invadersImage, this.x, this.y, this.width, this.height, this.sX, this.sY, this.sWidth, this.sHeight);
+                ctx.drawImage(invadersImage, this.sX, this.sY, this.sWidth, this.sHeight, this.x, this.y, this.width, this.height);
             } else if ((millis() - startTime) / 1000 <= 2) {
-                image(invadersImage, this.x, this.y, this.width, this.height, this.sX2, this.sY2, this.sWidth, this.sHeight);
+                ctx.drawImage(invadersImage,  this.sX2, this.sY2, this.sWidth, this.sHeight, this.x, this.y, this.width, this.height);
             } else {
                 startTime = millis();
             }
         } else if (this.explosion) {
-            image(invadersImage, this.x, this.y, this.width, this.height, 358, 632, 96, 55);
+            ctx.drawImage(invadersImage, 358, 632, 96, 55, this.x, this.y, this.width, this.height);
         }
 
     }

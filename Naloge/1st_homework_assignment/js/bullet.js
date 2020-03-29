@@ -13,7 +13,7 @@ function Bullet(type) {
 
     this.draw = function() {
         if (this.status) {
-            image(bulletImage, this.x, this.y, this.width, this.height);
+            ctx.drawImage(bulletImage, this.x, this.y, this.width, this.height);
         }
     }
     this.collision = function() {
@@ -22,7 +22,6 @@ function Bullet(type) {
                 this.status = false;
                 if (this.type == 0) {
                     player.bulletsActive++;
-                    console.log("test");
                     
                 }
             } else if (this.type == 1) { //enemybullet colliison 

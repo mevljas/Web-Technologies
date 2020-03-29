@@ -13,15 +13,15 @@ function Wall(x, y) {
         if (this.status) {
             if (this == walls[0] || this == walls[2] || this == walls[4]) {
                 if (this.lives == 3 || this.lives == 4) {
-                    image(wallLeftImage, this.x, this.y, this.width, this.height);
+                    ctx.drawImage(wallLeftImage, this.x, this.y, this.width, this.height);
                 } else {
-                    image(wallLeftBrokenImage, this.x, this.y, this.width, this.height);
+                    ctx.drawImage(wallLeftBrokenImage, this.x, this.y, this.width, this.height);
                 }
             } else {
                 if (this.lives == 3 || this.lives == 4) {
-                    image(wallRightImage, this.x, this.y, this.width, this.height);
+                    ctx.drawImage(wallRightImage, this.x, this.y, this.width, this.height);
                 } else {
-                    image(wallRightBrokenImage, this.x, this.y, this.width, this.height);
+                    ctx.drawImage(wallRightBrokenImage, this.x, this.y, this.width, this.height);
                 }
             }
         }
