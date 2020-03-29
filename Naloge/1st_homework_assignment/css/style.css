@@ -22,9 +22,10 @@ body{
     text-align: center;
     font-size: 50px;
 }
-#canvas { 
+#canvas{
     margin: auto;
     width: 50%;
+    height: 88%;
 }
 .colorClass{
     background-color: rgba(0, 0, 0, 0.6);

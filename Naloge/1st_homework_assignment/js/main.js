@@ -3,10 +3,12 @@ var flyDownInterval;
 var scoreBoard = [];
 var HighScore = 0;
 var playerName;
+var lastRender = 0;
 
 
 
 function setup() {
+    
     var themeSound = document.getElementById("themeSound");
     document.getElementById("themeSound").volume = 0.2;
     document.getElementById("explosionSound").volume = 0.2;
@@ -14,9 +16,9 @@ function setup() {
     themeSound.loop = true;
     themeSound.play();
     
-    noLoop();
-    canvas = createCanvas(window.innerWidth / 2, window.innerHeight - (window.innerHeight / 11)); //naredi canvas in dobi velikost okna
-    canvas.parent('canvas');
+    stop();
+    let c = document.getElementById("canvas");
+    ctx = c.getContext("2d");
     frameRate(30);
     score = 0;
     lives = 3;
@@ -33,9 +35,22 @@ function setup() {
     getLocalStorage();
     document.getElementById("highscore").innerHTML = 'High Score: ' + HighScore;
     enterName();
+    
 }
 
-function update() {
+
+function loop(timestamp) {
+    var progress = timestamp - lastRender
+  
+    update(progress)
+    draw()
+  
+    lastRender = timestamp
+    start();
+  }
+
+function update(progress) {
+    // Update the state of the world for the elapsed time since last render
     if (player.lives <= 0) {
         gameOver(); 
     }
@@ -71,6 +86,7 @@ function update() {
 }
 
 function draw() {
+    // Draw the state of the world
     update();
     clear();
     player.draw();
@@ -164,5 +180,18 @@ function setLocalStorage() {
         // Store
         // converts to string and save
         localStorage.setItem("SpaceInvadersCode", JSON.stringify(scoreBoard));
+    }
+}
+
+function start() {
+    if (!requestId) {
+       requestId = window.requestAnimationFrame(loop);
+    }
+}
+
+function stop() {
+    if (requestId) {
+       window.cancelAnimationFrame(requestId);
+       requestId = undefined;
     }
 }
