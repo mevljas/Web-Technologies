@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<title>Responsive design</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="style.css" rel="stylesheet">
+
+<header class="col-12">
+  <h1>Lab session 2: Responsive Web Design</h1>
+</header>
+
+<div class="row">
+  <nav class="col-3">
+    <a href="index.html">Index</a>
+    <a href="svg.html">HTML5: SVG</a>
+    <a href="#">Item 3</a>
+    <a href="#">Item 4</a>
+  </nav>
+
+  <article class="col-9">
+    <h1>SVG embedded in HTML</h1>
+
+    <p>In HTML5, you can embed SVG elements directly into your HTML pages.</p>
+    <p>Read more about it <a href="https://www.w3schools.com/graphics/svg_intro.asp"
+    target="_blank">here.</a></p>
+
+    <p>Complete the SVG figure below by adding a pair of eyes to the smiley face.</p>
+
+    <figure>
+      <svg width="200" height="200">
+        <!-- head -->
+        <rect x="25" y="20" rx="20" ry="20" width="150" height="120"
+          style="fill:#9933cc; stroke:black; stroke-width:5; opacity:0.25" />
+
+        <!-- left eye, hint: use ellipse -->
+        <ellipse cx="60" cy="50" rx="21" ry="17" 
+        style="fill:white;stroke:black;stroke-width:2" />
+        <ellipse cx="60" cy="50" rx="8" ry="16" 
+        style="fill:black;stroke:black;stroke-width:2" />
+
+        <!-- right eye, hint: use ellipse -->
+        <ellipse cx="130" cy="50" rx="21" ry="17" 
+        style="fill:white;stroke:black;stroke-width:2" />
+        <ellipse cx="130" cy="50" rx="8" ry="16" 
+        style="fill:black;stroke:black;stroke-width:2" />
+
+        <!-- mouth -->
+        <path d="M 60 100 Q 100 130 140 100" stroke="#0099cc" stroke-width="5" fill="none" />
+      </svg>
+      <figcaption>Figure 1 -- Hello SVG world!</figcaption>
+    </figure>
+    
+  </article>
+</div>
+
+<footer class="col-12">
+  <p>Some footer text.</p>
+</footer>

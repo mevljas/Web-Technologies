@@ -1,0 +1,124 @@
+/* Some CSS to make the page prettier; not relevant to RWD */
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+header {
+  background-color: #9933cc;
+  color: #ffffff;
+  padding: 15px;
+}
+
+footer {
+  background-color: #0099cc;
+  color: #ffffff;
+  text-align: center;
+  font-size: 12px;
+  padding: 15px;
+}
+
+aside {
+  background-color: #33b5e5;
+  padding: 15px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+              0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+nav a {
+  display: block;
+  text-decoration: none;
+  margin: 0;
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+              0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: transform 0.5s;
+}
+
+nav a:hover {
+  background-color: #0099cc;
+}
+
+/* RWD starts here */
+
+/* This ensures the padding and border are included
+in the total width and height of an element. */
+* {
+  box-sizing: border-box;
+  /* velikost uposteva padding, border in margin */
+}
+
+/* The columns inside a row float to the left, and 
+are therefore taken out of the flow of the page, and
+other elements will be placed as if the columns do
+not exist. To prevent this, we will add a style that
+clears the flow. See what happens if you
+1) comment out the command below and
+2) change the class of footer from col-12 to col-2. 
+*/
+/* Elementi so vzeti iz običajnega toka elementov in se bodo poravnali levo. */
+.row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+/* CSS3 selektor, ki omogoci, da  nastavimo dolocene lastnosti vsem elementom, kateri so razreda, ki v imenu vsebujejo "col-".
+TO velja za vse tiste classe spodaj. 
+The ::after selector inserts something after the content of each selected element(s).
+*/
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 601px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+
+}
+
+/* Nastavimo divom oz. blocnim elementom velikost. Imamom mrezo s 12 stolpci. 8.33 = 1/12*/
+@media only screen and (min-width: 993px) {
+  /* For desktop: */
+  .col-1 { width: 8.33%; }
+  .col-2 { width: 16.66%; }
+  .col-3 { width: 25%; }
+  .col-4 { width: 33.33%; }
+  .col-5 { width: 41.66%; }
+  .col-6 { width: 50%; }
+  .col-7 { width: 58.33%; }
+  .col-8 { width: 66.66%; }
+  .col-9 { width: 75%; }
+  .col-10 { width: 83.33%; }
+  .col-11 { width: 91.66%; }
+  .col-12 { width: 100%; }
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
+
