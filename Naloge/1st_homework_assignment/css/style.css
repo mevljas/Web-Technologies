@@ -1,0 +1,72 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+@font-face { 
+    font-family: 'Press Start';
+    src: url('../fonts/press-start.regular.ttf');
+} 
+body{
+    background-image: url("../images/background.png");
+}
+#container{
+    color: white;
+    font-family: 'Press Start';
+    position: relative;
+    width: 100%;
+    min-width: 1200px;
+    height: 90%;
+    min-height: 650px;
+}
+#container h1{
+    text-align: center;
+    font-size: 50px;
+}
+#canvas { 
+    margin: auto;
+    width: 50%;
+}
+.colorClass{
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 3px solid rgba(255, 255, 255, 1);
+    color: white;
+    position: absolute;
+    top: 10%;
+    border-radius: 2%;
+}
+#stats{  
+    right: 2%;
+    width: 20%;
+    height: 30%;
+}
+#stats span{
+    display:block;
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 100%;
+    font-size: 12px;
+}
+#menu{
+    left: 1%;
+    width: 20%;
+    height: 30%;
+}
+.playerimg{
+    width: 8%;
+    height: 6%;
+    margin-left: 0.5%;
+}
+.bulletimg{
+    width: 4%;
+    height: 8%;
+    margin-left: 0.5%;
+}
+#menu button{
+    display: block;
+    margin: auto;
+    width: 80%;
+    margin-top: 6%;
+    font-size: 15px;
+}
+
+

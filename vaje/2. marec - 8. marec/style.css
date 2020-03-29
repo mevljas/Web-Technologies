@@ -1,0 +1,101 @@
+*{
+	text-align: center;
+	margin-left:auto; 
+	margin-right:auto;
+}
+#naslov{
+	background-color: #B8B970;
+	font-weight: bold;
+	font-size: 50px;
+	padding: 2%;
+	margin: 0;
+}
+#barva{
+	background-color: #FDF9DC;
+
+}
+#list{
+	font-size: 20px;
+	padding-top: 1%;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+table, th, td{
+	border: 1px solid #C45B5F;
+  	border-collapse: collapse;
+}
+
+table{
+	width:50%;
+	margin-top: 0;
+
+   
+}
+
+th{
+	background-color: #C45B5F;
+	color: white;
+
+}
+
+
+#barva{
+	background-color: #FCF8DB;
+	
+
+}
+
+#barva2{
+	padding-top: 1%;
+	padding-bottom: 1%;
+	background-color: #FAE4C4;
+	height: 20%;
+
+
+
+}
+
+#barva2 fieldset{
+	margin-top: 0;
+	width: 35%;
+	
+
+	
+}
+
+#barva2 fieldset label, #barva2 fieldset input, select, option{
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	line-height: 0;
+	background-color: white;
+	color: black;
+}
+
+#barva2 fieldset label, select{
+	text-align: left;
+	width: 45%;
+
+	
+
+}
+
+#barva2 fieldset input, option{
+	text-align: right;
+	width: 50%;
+
+	
+
+}
+
+button{
+	width: 15%;
+	position: relative;
+	left: 13%;
+	margin-top: 3%;
+	color: black;
+}
+
+
+

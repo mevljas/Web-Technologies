@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css"/>
+
+<title>A page</title>
+
+<header>
+    Web technologies
+</header>
+
+<div id="content1">
+    <table id="participant-table">
+        <caption>The list of class participants.</caption>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Role</th>
+        </tr>
+        <tr>
+            <td>Aleš</td>
+            <td>Smrdel</td>
+            <td>Lecturer</td>
+        </tr>
+        <tr>
+            <td>David</td>
+            <td>Jelenc</td>
+            <td>Teaching assistant</td>
+        </tr>
+        <tr>
+            <td>Your</td>
+            <td>Name</td>
+            <td>Student</td>
+        </tr>
+    </table>
+
+    <img src="fri_logo.png" alt="Image could not be loaded">
+
+</div>
+
+<div id="content2">
+    <fieldset>
+        <legend>Add a new participant</legend>
+        <label for="first">First name: </label>
+        <input id="first" type="text" autofocus/>
+
+        <label for="last">Last name: </label>
+        <input id="last" type="text"/>
+
+        <label for="role">Role: </label>
+        <select id="role" name="role">
+            <option>Lecturer</option>
+            <option>Teaching assistant</option>
+            <option selected="selected">Student</option>
+        </select>
+
+        <button id="addButton">Add participant</button>
+    </fieldset>
+</div>
+
+<footer>
+    An example footer text. Web technologies @ UL-FRI
+</footer>
