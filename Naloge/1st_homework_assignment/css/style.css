@@ -1,7 +1,10 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  /* velikost uposteva padding, border in margin */
 }
+
 @font-face {
   font-family: "Press Start";
   src: url("../fonts/press-start.regular.ttf");
@@ -9,88 +12,75 @@
 body {
   background-image: url("../images/background.png");
 }
-/* #container{
-    color: white;
-    font-family: 'Press Start';
-    position: relative;
-    width: 100%;
-    min-width: 1200px;
-    height: 90%;
-    min-height: 650px;
-}
-#container h1{
-    text-align: center;
-    font-size: 50px;
-}
 
-.colorClass{
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 3px solid rgba(255, 255, 255, 1);
-    color: white;
-    position: absolute;
-    top: 10%;
-    border-radius: 2%;
+/* #stats {
+  right: 2%;
+  width: 20%;
+  height: 30%;
 }
-#stats{  
-    right: 2%;
-    width: 20%;
-    height: 30%;
+#stats span {
+  display: block;
+  margin-top: 5%;
+  margin-left: 5%;
+  width: 100%;
+  font-size: 12px;
+} */
+/* 
+.playerimg {
+  width: 8%;
+  height: 6%;
+  margin-left: 0.5%;
 }
-#stats span{
-    display:block;
-    margin-top: 5%;
-    margin-left: 5%;
-    width: 100%;
-    font-size: 12px;
-}
-#menu{
-    left: 1%;
-    width: 20%;
-    height: 30%;
-}
-.playerimg{
-    width: 8%;
-    height: 6%;
-    margin-left: 0.5%;
-}
-.bulletimg{
-    width: 4%;
-    height: 8%;
-    margin-left: 0.5%;
-}
-#menu button{
-    display: block;
-    margin: auto;
-    width: 80%;
-    margin-top: 6%;
-    font-size: 15px;
+.bulletimg {
+  width: 4%;
+  height: 8%;
+  margin-left: 0.5%;
 } */
 
 .grid-container {
   display: grid;
-  grid-gap: 10px;
-  background-color: #2196f3;
-  padding: 10px;
   height: 100%;
-  grid-template-rows: 10%  80% 10%;
+  grid-template-rows: 10% 80% 10%;
   grid-template-columns: 15% 70% 15%;
 }
 
 .grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px;
-  font-size: 30px;
+  color: white;
+  font-family: "Press Start";
 }
 
 .item1 {
   grid-column: 1 / 4;
   grid-row: 1;
+  text-align: center;
+  font-size: 30px;
 }
 
 .item2 {
-  grid-column: 1 ;
+  grid-column: 1;
   grid-row: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(255, 255, 255, 1);
+  color: white;
+  border-radius: 2%;
+  padding: 13%;
+}
+.item2 nav a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(204, 197, 197, 0.774),
+    0 1px 2px rgba(117, 25, 25, 0.856);
+  transition: transform 0.5s;
+  margin: auto;
+  margin-top: 15%;
+  font-size: 8px;
+}
+
+nav a:hover {
+  background-color: #0099cc;
 }
 
 .item3 {
@@ -104,7 +94,6 @@ body {
 }
 
 .item5 {
-    grid-column: 2;
-    grid-row: 3;
+  grid-column: 2;
+  grid-row: 3;
 }
-
