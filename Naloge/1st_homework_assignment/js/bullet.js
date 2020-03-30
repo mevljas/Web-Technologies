@@ -101,14 +101,14 @@ function Bullet(type) {
         }
 
     }
-    this.update = function() {
+    this.update = function(delta) {
         if (this.status) {
             //enemybullet
             if (this.type == 1) {
-                this.y += this.speed;
+                this.y += this.speed * delta;
                 this.collision();
             } else { //player bullet
-                this.y -= this.speed;
+                this.y -= this.speed * delta;
                 this.collision();
             }
         }

@@ -4,3 +4,5 @@ https://pietschsoft.com/post/2015/09/05/javascript-basics-how-to-create-a-dictio
 https://stackoverflow.com/questions/14348175/how-can-i-check-that-a-key-has-been-pressed
 https://keycode.info/   
 https://stackoverflow.com/questions/2142535/how-to-clear-the-canvas-for-redrawing
+https://stackoverflow.com/questions/25612452/html5-canvas-game-loop-delta-time-calculations/25628203
+https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing

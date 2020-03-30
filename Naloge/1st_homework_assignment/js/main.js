@@ -3,8 +3,13 @@ var flyDownInterval;
 var scoreBoard = [];
 var HighScore = 0;
 var playerName;
-var lastRender = 0;
-let d = new Date();
+let d = performance.now();
+let delta = 0;
+timestamp = 0;
+lastFrameTimeMs = 0;
+fps = 30;
+// We want to simulate 1000 ms / 60 FPS = 16.667 ms per frame every time we run update()
+var timestep = 1000 / fps;
 
 function setup() {
   var themeSound = document.getElementById("themeSound");
@@ -24,7 +29,7 @@ function setup() {
   player.makeBullets();
   setInterval(enemyShoot, 500); //enemy strelja
   makeEnemies();
-//   fill("white");
+  //   fill("white");
   // textSize(20);
   makeWalls();
   playerimg1 = document.getElementById("player1");
@@ -32,31 +37,35 @@ function setup() {
   playerimg3 = document.getElementById("player3");
   getLocalStorage();
   document.getElementById("highscore").innerHTML = "High Score: " + HighScore;
-  enterName();
-  
+  //   enterName();
+  playerName = "test";
+  start();
 }
 
-function loop(timestamp) {
-  var progress = timestamp - lastRender;
+function gameLoop(timestamp) {
+  // Track the accumulated time that hasn't been simulated yet
+  delta += timestamp - lastFrameTimeMs; // note += here
+  lastFrameTimeMs = timestamp;
 
-  update(progress);
+  // Simulate the total elapsed time in fixed-size chunks
+  while (delta >= timestep) {
+    update(timestep);
+    delta -= timestep;
+  }
   draw();
 
-  lastRender = timestamp;
-  console.log(requestId);
-  if(requestId){
-    requestId = requestAnimationFrame(loop);
+  if (requestId) {
+    requestId = requestAnimationFrame(gameLoop);
   }
-  
 }
 
-function update(progress) {
+function update(delta) {
   // Update the state of the world for the elapsed time since last render
   if (player.lives <= 0) {
     gameOver();
   }
-  updatePlayer();
-  updateEnemies();
+  updatePlayer(delta);
+  updateEnemies(delta);
   if (level == 1) {
     updateWalls();
     if (enemiesAlive == 0) {
@@ -89,7 +98,6 @@ function update(progress) {
 
 function draw() {
   // Draw the state of the world
-  update();
   clear();
   player.draw();
   player.drawBullets();
@@ -179,16 +187,16 @@ function setLocalStorage() {
 }
 
 function start() {
-  requestId = requestAnimationFrame(loop);
+  requestId = requestAnimationFrame(gameLoop);
 }
 
 function stop() {
-    cancelAnimationFrame(requestId);
-    requestId = undefined;
+  cancelAnimationFrame(requestId);
+  requestId = undefined;
 }
 
-function clear(){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function clear() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 setup();

@@ -24,17 +24,17 @@ function Player() {
         //preverimo ce gremo cez rob canvasa
         return this.x + this.width < width && this.x > 0;
     }
-    this.update = function() {
+    this.update = function(delta) {
         if (pressedKeys[39]) {
-            player.x += player.speed;
+            player.x += player.speed * delta;
             if (!player.collision()) {
-                player.x -= player.speed;
+                player.x -= player.speed * delta;
             }
         }
         if (pressedKeys[37]) {
-            player.x -= player.speed;
+            player.x -= player.speed * delta;
             if (!player.collision()) {
-                player.x += player.speed;
+                player.x += player.speed * delta;
             }
         }
         if (pressedKeys[32]) { //space button
@@ -57,9 +57,9 @@ function Player() {
         }
         this.bulletsActive = this.bullets.length; //shrani kolko bulletov je active
     }
-    this.updateBullets = function() {
+    this.updateBullets = function(delta) {
         for (var i = 0; i < this.bullets.length; i++) {
-            this.bullets[i].update();
+            this.bullets[i].update(delta);
         }
     }
     this.drawBullets = function() {
@@ -69,9 +69,9 @@ function Player() {
     }
 }
 
-function updatePlayer() {
-    player.update();
-    player.updateBullets();
+function updatePlayer(delta) {
+    player.update(delta);
+    player.updateBullets(delta);
 }
 
 
