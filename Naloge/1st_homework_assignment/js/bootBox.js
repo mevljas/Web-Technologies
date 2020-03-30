@@ -14,7 +14,7 @@ function enterName(){
 
 
 function navodila(){
-  noLoop();
+  stop();
   clearInterval(flyDownInterval);
   clearInterval(MakeEnemiesVisible);
   bootbox.alert({ 
@@ -23,7 +23,7 @@ function navodila(){
     message: "Goal of the game is to defeat as many enemies as possible."+ 
     " You can move by using arrow keys and shoot with a spacebar.<br>"+
     "Good luck!", 
-    callback: function(){ loop(); 
+    callback: function(){ start(); 
     if (level == 1) {
         if (wallsAlive == -1) { //ce v 1. levelu unicimo vse defense walle
             flyDownInterval = setInterval(doFlyDown, 5000); //start fly down
@@ -43,7 +43,7 @@ function navodila(){
 function tocke(){
   clearInterval(flyDownInterval);
   clearInterval(MakeEnemiesVisible);
-  noLoop();
+  stop();
   getLocalStorage();
   var msg = "";
   for (var i = 0; i < scoreBoard.length; i++) {
@@ -69,7 +69,7 @@ function tocke(){
 }
 
 function gameOver(){
-  noLoop();
+  stop();
   bootbox.alert({ 
     size: "small",
     title: "Game over",
