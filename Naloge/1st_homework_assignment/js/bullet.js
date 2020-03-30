@@ -30,7 +30,6 @@ function Bullet(type) {
                     this.x < player.x + player.width && this.x > player.x && this.y + this.height > player.y + player.height / 2) {
                     this.status = false;
                     player.lives -= this.damage;
-                    console.log("player hit")
                 }
                 //walls colliison
                 if (wallsAlive > 0) {

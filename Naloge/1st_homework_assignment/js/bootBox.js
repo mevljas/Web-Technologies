@@ -14,7 +14,7 @@ function enterName(){
 
 
 function navodila(){
-  stop();
+  // stop();
   clearInterval(flyDownInterval);
   clearInterval(MakeEnemiesVisible);
   bootbox.alert({ 

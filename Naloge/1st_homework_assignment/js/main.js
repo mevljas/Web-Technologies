@@ -13,8 +13,6 @@ function setup() {
   document.getElementById("shootSound").volume = 0.2;
   themeSound.loop = true;
   themeSound.play();
-
-  stop();
   let canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   width = canvas.width;
@@ -45,7 +43,11 @@ function loop(timestamp) {
   draw();
 
   lastRender = timestamp;
-  start();
+  console.log(requestId);
+  if(requestId){
+    requestId = requestAnimationFrame(loop);
+  }
+  
 }
 
 function update(progress) {
@@ -177,17 +179,12 @@ function setLocalStorage() {
 }
 
 function start() {
-  if (typeof variable === "undefined") {
-    requestId = window.requestAnimationFrame(loop);
-  }
+  requestId = requestAnimationFrame(loop);
 }
 
 function stop() {
-  if (typeof variable !== "undefined") {
-    window.cancelAnimationFrame(requestId);
+    cancelAnimationFrame(requestId);
     requestId = undefined;
-    console.log("clear interval")
-  }
 }
 
 function clear(){
