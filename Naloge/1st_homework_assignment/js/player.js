@@ -25,16 +25,28 @@ function Player() {
         return this.x + this.width < width && this.x > 0;
     }
     this.update = function() {
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (pressedKeys[39]) {
             player.x += player.speed;
             if (!player.collision()) {
                 player.x -= player.speed;
             }
         }
-        if (keyIsDown(LEFT_ARROW)) {
+        if (pressedKeys[37]) {
             player.x -= player.speed;
             if (!player.collision()) {
                 player.x += player.speed;
+            }
+        }
+        if (pressedKeys[32]) { //space button
+            for (var i = 0; i < player.bullets.length; i++) {
+                if (!player.bullets[i].status) { //ce je bulet status == false
+                    player.bullets[i].x = player.x + player.width / 2 - player.bullets[i].width / 2;
+                    player.bullets[i].y = player.y;
+                    player.bullets[i].status = true;
+                    player.bulletsActive--;
+                    shootSound.play();
+                    break; //da naredi samo en bullet
+                }
             }
         }
 
@@ -63,17 +75,3 @@ function updatePlayer() {
 }
 
 
-function keyPressed() {
-    if (keyCode === 32) { //space button
-        for (var i = 0; i < player.bullets.length; i++) {
-            if (!player.bullets[i].status) { //ce je bulet status == false
-                player.bullets[i].x = player.x + player.width / 2 - player.bullets[i].width / 2;
-                player.bullets[i].y = player.y;
-                player.bullets[i].status = true;
-                player.bulletsActive--;
-                shootSound.play();
-                break; //da naredi samo en bullet
-            }
-        }
-    }
-}

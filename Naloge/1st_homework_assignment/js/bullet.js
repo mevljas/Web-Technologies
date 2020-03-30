@@ -18,19 +18,19 @@ function Bullet(type) {
     }
     this.collision = function() {
         if (this.status) {
-            if (this.y <= 0 || this.y + this.width >= height) {
+            if (this.y <= 0 || this.y + this.height >= height) {
                 this.status = false;
                 if (this.type == 0) {
                     player.bulletsActive++;
                     
                 }
             } else if (this.type == 1) { //enemybullet colliison 
-
                 //player collsion
                 if (this.x + this.width > player.x && this.x + this.width < player.x + player.width && this.y + this.height > player.y + player.height / 2 ||
                     this.x < player.x + player.width && this.x > player.x && this.y + this.height > player.y + player.height / 2) {
                     this.status = false;
                     player.lives -= this.damage;
+                    console.log("player hit")
                 }
                 //walls colliison
                 if (wallsAlive > 0) {

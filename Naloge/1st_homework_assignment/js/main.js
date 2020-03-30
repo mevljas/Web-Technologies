@@ -4,6 +4,7 @@ var scoreBoard = [];
 var HighScore = 0;
 var playerName;
 var lastRender = 0;
+let d = new Date();
 
 function setup() {
   var themeSound = document.getElementById("themeSound");
@@ -34,6 +35,7 @@ function setup() {
   getLocalStorage();
   document.getElementById("highscore").innerHTML = "High Score: " + HighScore;
   enterName();
+  
 }
 
 function loop(timestamp) {
@@ -184,7 +186,12 @@ function stop() {
   if (typeof variable !== "undefined") {
     window.cancelAnimationFrame(requestId);
     requestId = undefined;
+    console.log("clear interval")
   }
+}
+
+function clear(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 setup();

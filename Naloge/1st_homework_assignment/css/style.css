@@ -23,7 +23,7 @@ body{
     font-size: 50px;
 }
 #canvas{
-    margin: auto;
+    margin-left: 30%;
     width: 50%;
     height: 88%;
 }

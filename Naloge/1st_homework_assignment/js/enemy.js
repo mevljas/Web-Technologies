@@ -60,12 +60,12 @@ function Enemy(x, y, row) {
 
     this.draw = function() {
         if (this.status) {
-            if ((millis() - startTime) / 1000 <= 1) {
+            if ((d.getTime() - startTime) / 1000 <= 1) {
                 ctx.drawImage(invadersImage, this.sX, this.sY, this.sWidth, this.sHeight, this.x, this.y, this.width, this.height);
-            } else if ((millis() - startTime) / 1000 <= 2) {
+            } else if ((d.getTime() - startTime) / 1000 <= 2) {
                 ctx.drawImage(invadersImage,  this.sX2, this.sY2, this.sWidth, this.sHeight, this.x, this.y, this.width, this.height);
             } else {
-                startTime = millis();
+                startTime = d.getTime();
             }
         } else if (this.explosion) {
             ctx.drawImage(invadersImage, 358, 632, 96, 55, this.x, this.y, this.width, this.height);
