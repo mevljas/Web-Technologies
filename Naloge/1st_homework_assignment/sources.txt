@@ -6,3 +6,5 @@ https://keycode.info/
 https://stackoverflow.com/questions/2142535/how-to-clear-the-canvas-for-redrawing
 https://stackoverflow.com/questions/25612452/html5-canvas-game-loop-delta-time-calculations/25628203
 https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
+https://www.w3schools.com/css/css_grid.asp
+https://www.w3schools.com/css/css_grid_item.asp
