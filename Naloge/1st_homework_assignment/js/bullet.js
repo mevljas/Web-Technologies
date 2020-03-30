@@ -5,7 +5,7 @@ function Bullet(type) {
     this.height = height / 30;
     this.x;
     this.y;
-    this.speed = height / 100;
+    this.speed = height * 0.001;
     this.status = false;
     this.type = type;
     this.damage = 1;

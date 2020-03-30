@@ -4,7 +4,7 @@ function Player() {
     this.height = height / 20;
     this.x = (width / 2) - this.width;
     this.y = height - this.height;
-    this.speed = height / 70;
+    this.speed = width * 0.0005;
     this.bullets = new Array();
     this.lives = 3;
     this.explosion = false;
@@ -48,6 +48,7 @@ function Player() {
                     break; //da naredi samo en bullet
                 }
             }
+            pressedKeys[32] = undefined;
         }
 
     }

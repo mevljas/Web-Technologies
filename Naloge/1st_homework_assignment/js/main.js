@@ -7,7 +7,7 @@ let d = performance.now();
 let delta = 0;
 timestamp = 0;
 lastFrameTimeMs = 0;
-fps = 30;
+fps = 120;
 // We want to simulate 1000 ms / 60 FPS = 16.667 ms per frame every time we run update()
 var timestep = 1000 / fps;
 

@@ -307,7 +307,7 @@ function doFlyDown() {
       if (!enemies[i][j].flyDown && Math.floor(Math.random() * 3 + 1) == 1) {
         enemies[i][j].oldY = enemies[i][j].y;
         enemies[i][j].flyDown = true;
-        enemies[i][j].speedY = (Math.random() * 4 + 1);
+        enemies[i][j].speedY = (Math.random() * 4 + 1) * 0.0001;
         breakLoop = true;
         break;
       }
