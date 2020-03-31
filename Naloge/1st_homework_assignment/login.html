@@ -5,19 +5,23 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <div class="grid-container">
-      <div class="grid-item item1">
-        <h1 id="title">Space Inavders</h1>
+
+    <div class="header">
+      <h1>Space Inavders</h1>
+    </div>
+    
+    <div class=" row">
+      <div class=" colorClass col-3 menu">
+        <ul>
+          <li>New game</li>
+          <li>Instructions</li>
+          <li>ScoreBoard</li>
+          <li>Sources</li>
+          <li>Restart game</li>
+        </ul>
       </div>
-      <div class="grid-item item2">
-        <nav>
-          <a href="#">Login</a>
-          <a href="index.html" onclick="navodila()">Instructions</a>
-          <a href="svg.html" onclick="tocke()">ScoreBoard</a>
-          <a href="#" onclick="restartgame();"> Restart game</a>
-        </nav>
-      </div>
-      <div class="grid-item item3">
+    
+      <div class="col-6">
         <p id="inputText">
           Please enter your username.
         </p>
@@ -298,11 +302,35 @@
             <option value="Zimbabwe">Zimbabwe</option>
           </select>
 
-          <a href="#" id="login"> Login</a>
+          <button id="login"> Login</button>
         </div>
       </div>
-      <div class="grid-item item4"></div>
-      <div class="grid-item item5"></div>
+
+      <div class="colorClass col-6" id="controls">
+          <img class="controls" id="shoot" src="images/shoot.png">
+          <img class="controls" id="left" src="images/left.png">
+          <img class="controls" id="right" src="images/right.png">
+      </div>
+    
+      <div class="col-3 colorClass right">
+        <div class=" aside">
+          <span id="lives"
+          >Lives:
+          <img src="images/player.gif" class="playerimg" id="player1" />
+          <img src="images/player.gif" class="playerimg" id="player2" />
+          <img src="images/player.gif" class="playerimg" id="player3" />
+        </span>
+       <br> 
+        <span id="bullets"
+          >Bullets:
+          <img src="images/bullet.png" class="bulletimg" id="bullet1" />
+          <img src="images/bullet.png" class="bulletimg" id="bullet2" />
+          <img src="images/bullet.png" class="bulletimg" id="bullet3" />
+        </span>
+        </div>
+      </div>
     </div>
-  </body>
+    
+  
+
 </html>
