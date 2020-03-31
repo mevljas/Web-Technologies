@@ -8,3 +8,5 @@ https://stackoverflow.com/questions/25612452/html5-canvas-game-loop-delta-time-c
 https://isaacsukin.com/news/2015/01/detailed-explanation-javascript-game-loops-and-timing
 https://www.w3schools.com/css/css_grid.asp
 https://www.w3schools.com/css/css_grid_item.asp
+https://www.w3schools.com/css/css_form.asp
+https://www.technicalkeeda.com/html-tutorials/all-countries-drop-down-list-in-html

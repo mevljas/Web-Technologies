@@ -8,7 +8,10 @@
 @font-face {
   font-family: "Press Start";
   src: url("../fonts/press-start.regular.ttf");
+  unicode-range: U+00-FF;
 }
+
+
 body {
   background-image: url("../images/background.png");
 }
@@ -47,9 +50,11 @@ body {
 .grid-item {
   color: white;
   font-family: "Press Start";
-  border-radius: 2%;
+  /* border-radius: 2%; */
   background-color: rgba(0, 0, 0, 0.6);
-  border: 3px solid rgba(255, 255, 255, 1);
+  border: 0.5vh solid rgba(255, 255, 255, 1);
+  text-align: center;
+  border-collapse: collapse;
   
   
 }
@@ -57,9 +62,9 @@ body {
 .item1 {
   grid-column: 1 / 4;
   grid-row: 1;
-  text-align: center;
-  font-size: 30px;
+  font-size: 1.5vw;
   border: 0;
+  padding: 1%;
 }
 
 .item2 {
@@ -67,22 +72,27 @@ body {
   grid-row: 2;
   padding: 12%;
   padding-top: 0%;
+  
 }
 
-.item2 nav a {
+a {
   display: block;
   text-decoration: none;
   text-align: center;
-  padding: 5%;
   box-shadow: 0 1px 3px rgba(204, 197, 197, 0.774);
-  transition: transform 0.5s;
   margin: auto;
-  margin-top: 15%;
-  font-size: 8px;
   color: white;
 }
 
-nav a:hover {
+.item2 nav a {
+  padding: 7%;
+  margin-top: 15%;
+  font-size: 0.8vw;
+  line-height: 2;
+ 
+}
+
+a:hover {
   background-color: #313536;
 }
 
@@ -108,3 +118,46 @@ nav a:hover {
   padding-top: 0%;
 
 }
+
+#inputText{
+  text-align: center;
+  padding-top: 5%;
+}
+#inputForm{
+  padding-top: 5%;
+  width: 50%;
+  margin: 0 auto;
+}
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Press Start";
+}
+
+#login{
+  color: white;
+  padding: 5%;
+  margin-top: 10%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Press Start";
+}
+
+#inputForm input{
+  margin-bottom: 8%;
+}
+
+#inputForm input, select{
+  color: white;
+  background-color: rgba#0e0f0f;
+  opacity: 0.2;
+}
+
+
