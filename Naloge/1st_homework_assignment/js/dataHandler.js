@@ -1,4 +1,4 @@
-let usersArray = [];
+usersArray = [];
 let lastId = -1;
 
 function setLocalStorage() {
@@ -18,18 +18,6 @@ function addUser() {
   const lName = document.querySelector("#lname").value;
   const score = 0;
 
-  //   // Create participant object
-  //   const participant = {
-  //     id: usersArray[i].id,
-  //     fName: usersArray[i].fName,
-  //     lName: usersArray[i].lName,
-  //     country: usersArray[i].country,
-  //     score: usersArray[i].score
-  //   };
-
-  // Add participant to the HTML
-  //pdoatke se bodo prikazali v novi vrstici
-  //   domAddParticipant(participant);
 
   usersArray.push({
     id: id,
@@ -47,52 +35,9 @@ function loadUsers() {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
       lastId = usersArray[usersArray.length - 1].id;
-      //   for (let i = 0; i < usersArray.length; i++) {
-      //     let participant = {
-      //       id: usersArray[i].id,
-      //       fName: usersArray[i].fName,
-      //       lName: usersArray[i].lName,
-      //       country: usersArray[i].country,
-      //       score: usersArray[i].score
-      //     };
 
-      //     domAddParticipant(participant);
-      //   }
     }
   }
 }
 
-// function domAddParticipant(participant) {
 
-//     //poiscemo refernco na tabelo
-//     const table = document.querySelector("#participant-table");
-
-//     //naredimo novo vrstico
-//     const tr = document.createElement("tr");
-
-//     //dolocim id
-//     tr.id = ++lastId;
-
-//     //dodamo v tabelo
-//     table.appendChild(tr);
-
-//     // //dodamo stolpce
-//     // const tdFirst = document.createElement("td");
-//     // tdFirst.innerText = participant.first;
-//     // tr.appendChild(tdFirst);
-//     //
-//     // const tdLast = document.createElement("td");
-//     // tdLast.innerText = participant.last;
-//     // tr.appendChild(tdLast);
-//     //
-//     // const tdRole = document.createElement("td");
-//     // tdRole.innerText = participant.role;
-//     // tr.appendChild(tdRole);
-
-//     //nridmo na lepsi nacin
-//     for (const key in participant) {
-//         const td = document.createElement("td");
-//         td.innerText = participant[key];
-//         tr.appendChild(td);
-//     }
-// }
