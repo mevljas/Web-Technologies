@@ -81,8 +81,7 @@ body {
   text-align: center;
 }
 
-#inputForm input[type="text"],
-select {
+#inputForm input[type="text"] {
   width: 100%;
   padding: 3%;
   margin-top: 2%;
@@ -109,10 +108,6 @@ select {
   margin-bottom: 8%;
 }
 
-#inputForm select {
-  color: white;
-  background-color: #0e0f0f;
-}
 
 .controls {
   width: 30%;
@@ -130,6 +125,41 @@ select {
   padding: 3%;
   margin-top: 5%;
 }
+
+table {
+  border-collapse: collapse;
+  margin: auto;
+  border: 1vw solid #1E5735;
+  font-size: 2.8vw;
+}
+
+caption{
+  text-align: left;
+  margin-bottom: 6%;
+}
+
+tr{
+  width: 100%;
+}
+
+th {
+  text-align: center;
+  background-color: #1E5735;
+  color: #F2F0E1;
+}
+
+td {
+  text-align: center;
+  border: 1px solid #1E5735;
+
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
 
 
 
@@ -183,8 +213,7 @@ select {
     text-align: center;
   }
 
-  #inputForm input[type="text"],
-  select {
+  #inputForm input[type="text"] {
     width: 50%;
     margin: 4%;
   }

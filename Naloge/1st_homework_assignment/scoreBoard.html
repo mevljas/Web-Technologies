@@ -24,12 +24,31 @@
       </div>
 
       <div class="col-6 colorClass">
-        <p id="InstructionsText">
-          Goal of the game is to defeat as many enemies as possible. You can
-          move by using arrow keys and shoot with a space bar. Alternatively, on
-          mobile phones, you can use special on-screen buttons. Good luck!
-        </p>
-        <button class="colorClass" id="continueButton" onclick="window.location.href = '';">Continue</button>
+        <table id="participant-table">
+          <caption>
+            The list of class participants.
+          </caption>
+          <tr class="notRemovable">
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Country</th>
+            <th>Score</th>
+          </tr>
+          <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+            <td>500</td>
+          </tr>
+        </table>
+
+        <button
+          class="colorClass"
+          id="continueButton"
+          onclick="window.location.href = '';"
+        >
+          Continue
+        </button>
       </div>
 
       <div class="col-3 colorClass">

@@ -16,7 +16,6 @@ function addUser() {
   const id = ++lastId;
   const fName = document.querySelector("#fname").value;
   const lName = document.querySelector("#lname").value;
-  const country = $("#country option:selected").text();
   const score = 0;
 
   //   // Create participant object
@@ -36,7 +35,6 @@ function addUser() {
     id: id,
     fName: fName,
     lName: lName,
-    country: country,
     score: score
   });
   localStorage.setItem("users", JSON.stringify(usersArray));
