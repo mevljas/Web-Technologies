@@ -11,8 +11,8 @@ function setLocalStorage() {
   }
 }
 
-function addParticipant() {
-  loadParticipants();
+function addUser() {
+  loadUsers();
   const id = lastId++;
   const fName = document.querySelector("#fname").value;
   const lName = document.querySelector("#lname").value;
@@ -43,7 +43,7 @@ function addParticipant() {
 
 }
 
-function loadParticipants() {
+function loadUsers() {
   // Check browser support
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {

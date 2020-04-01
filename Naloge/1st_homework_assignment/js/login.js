@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('form').on("submit",function(){
-        addParticipant();
+        addUser();
         window.location.href = "instructions.html";
     });
 });
