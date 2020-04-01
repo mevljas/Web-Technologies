@@ -17,3 +17,4 @@ https://stackoverflow.com/questions/5012111/how-to-position-a-div-in-the-middle-
 https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
 https://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
 https://www.w3schools.com/js/js_validation_api.asp
+https://www.w3schools.com/cssref/pr_class_cursor.asp
