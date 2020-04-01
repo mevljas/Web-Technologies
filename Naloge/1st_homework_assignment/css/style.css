@@ -54,6 +54,7 @@ body {
 .menu li:hover,
 #inputForm input[type="submit"]:hover {
   background-color: #313536;
+  cursor: pointer;
 }
 
 .aside {
