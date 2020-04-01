@@ -12,3 +12,5 @@ https://www.w3schools.com/css/css_form.asp
 https://www.technicalkeeda.com/html-tutorials/all-countries-drop-down-list-in-html
 http://pixelartmaker.com/art/c2a4164b5f3fc81
 https://www.pinclipart.com/pindetail/xhmJhb_pixel-art-maker-arrows-keys-png-clipart/
+https://www.w3schools.com/css/css_rwd_mediaqueries.asp
+https://stackoverflow.com/questions/5012111/how-to-position-a-div-in-the-middle-of-the-screen-when-the-page-is-bigger-than-t

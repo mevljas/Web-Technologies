@@ -2,17 +2,16 @@
 <html lang="en">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <title>Space invaders</title>
   </head>
   <body>
-
     <div class="header">
       <h1>Space Inavders</h1>
     </div>
-    
+
     <div class=" row">
       <div class=" colorClass col-3 menu">
         <ul>
@@ -23,9 +22,9 @@
           <li>Restart game</li>
         </ul>
       </div>
-    
-      <div class="col-6">
-        <p id="inputText">
+
+      <div class="col-6 colorClass">
+        <p id="Instructions">
           Please enter your username.
         </p>
         <div id="inputForm">
@@ -36,16 +35,18 @@
             name="firstname"
             placeholder="Your name.."
           />
+          <br />
 
-          <label for="lname">Last Name</label>
+          <label for="lname">Last Name&nbsp</label>
           <input
             type="text"
             id="lname"
             name="lastname"
             placeholder="Your last name.."
           />
+          <br />
 
-          <label for="country">Country</label>
+          <label for="country">Country&nbsp&nbsp</label>
           <select id="country" name="country">
             <option value="Afganistan">Afghanistan</option>
             <option value="Albania">Albania</option>
@@ -304,36 +305,84 @@
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
           </select>
+          <br />
 
-          <button id="login"> Login</button>
+          <button id="loginButton">Login</button>
         </div>
       </div>
 
       <div class="colorClass col-6" id="controls">
-          <img class="controls" id="shoot" src="images/shoot.png" alt="shootButton">
-          <img class="controls" id="left" src="images/left.png" alt="leftButton">
-          <img class="controls" id="right" src="images/right.png" alt="rightButtobn">
+        <img
+          class="controls"
+          id="shoot"
+          src="images/shoot.png"
+          alt="shootButton"
+        />
+        <img
+          class="controls"
+          id="left"
+          src="images/left.png"
+          alt="leftButton"
+        />
+        <img
+          class="controls"
+          id="right"
+          src="images/right.png"
+          alt="rightButtobn"
+        />
       </div>
-    
-      <div class="col-3 colorClass right">
+
+      <div class="col-3 colorClass">
         <div class=" aside">
           <span id="lives"
-          >Lives:
-          <img src="images/player.gif" class="playerimg" id="player1" alt="playerShip"/>
-          <img src="images/player.gif" class="playerimg" id="player2" alt="playerShip"/>
-          <img src="images/player.gif" class="playerimg" id="player3" alt="playerShip"/>
-        </span>
-       <br> 
-        <span id="bullets"
-          >Bullets:
-          <img src="images/bullet.png" class="bulletimg" id="bullet1" alt="bullet"/>
-          <img src="images/bullet.png" class="bulletimg" id="bullet2" alt="bullet"/>
-          <img src="images/bullet.png" class="bulletimg" id="bullet3" alt="bullet"/>
-        </span>
+            >Lives:
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player1"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player2"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player3"
+              alt="playerShip"
+            />
+          </span>
+          <br />
+          <span id="bullets"
+            >Bullets:
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet1"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet2"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet3"
+              alt="bullet"
+            />
+          </span>
         </div>
       </div>
     </div>
+    <div class="colorClass col-6" id="footer">
+      <p id="message"></p>
+    </div>
     
-  
-
+  </body>
 </html>

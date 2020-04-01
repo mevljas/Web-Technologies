@@ -16,7 +16,7 @@ body {
 }
 
 .colorClass {
-  background-color: rgba(27, 26, 26, 0.6);
+  background-color: rgba(20, 20, 20, 0.3);
   border: 0.5vh solid rgba(255, 255, 255, 1);
   border-radius: 1vh;
 }
@@ -42,23 +42,29 @@ body {
   padding: 0;
 }
 
-.menu li, #login {
-  padding: 3%;
+.menu li,
+#loginButton {
+  padding: 5%;
   margin-bottom: 5%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 1);
   color: #ffffff;
   box-shadow: 0 1px 3px rgba(204, 197, 197, 0.774);
 }
 
-.menu li:hover, #login:hover {
+.menu li:hover,
+#loginButton:hover {
   background-color: #313536;
 }
 
 .aside {
-
   text-align: left;
   font-size: 2.8vw;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+#footer {
+  text-align: center;
+  padding: 1%;
+  font-size: 3vw;
 }
 
 /* For mobile phones: */
@@ -77,9 +83,6 @@ body {
 #inputText {
   text-align: center;
 }
-#inputForm {
-  
-}
 
 #inputForm input[type="text"],
 select {
@@ -94,32 +97,31 @@ select {
   font-family: "Press Start";
 }
 
-#login {
- background-color: #0e0f0f;
- font-family: "Press Start";
-}
-
-#inputForm input {
-  margin-bottom: 8%;
+#loginButton {
+  background-color: rgba(0, 0, 0, 1);
+  font-family: "Press Start";
+  margin-top: 5%;
+  padding: 3%;
 }
 
 #inputForm input {
   color: white;
   background-color: rgba#0e0f0f;
   opacity: 0.2;
-  
+  margin-bottom: 8%;
 }
 
 #inputForm select {
   color: white;
-  background-color: black;
+  background-color: rgb(0, 0, 0);
 }
 
-
-.controls{
+.controls {
   width: 30%;
   width: 20%;
 }
+
+
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
@@ -160,14 +162,31 @@ select {
     width: 100%;
   }
 
-
-
   .aside {
     font-size: 1vw;
   }
 
-  #controls{
+  #controls {
     display: none;
   }
-}
+  #inputForm {
+    text-align: center;
+  }
 
+  #inputForm input[type="text"],
+  select {
+    width: 50%;
+    margin: 4%;
+  }
+
+  #inputForm #fname {
+    margin-top: 5%;
+  }
+
+  #footer {
+    text-align: center;
+    padding: 1%;
+    font-size: 1vw;
+    transform: translate(+50%);
+  }
+}
