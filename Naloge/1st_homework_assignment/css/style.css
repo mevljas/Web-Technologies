@@ -62,11 +62,7 @@ body {
   font-size: 2.8vw;
 }
 
-#footer {
-  text-align: center;
-  padding: 1%;
-  font-size: 3vw;
-}
+
 
 /* For mobile phones: */
 [class*="col-"] {
@@ -183,10 +179,4 @@ select {
     margin-top: 5%;
   }
 
-  #footer {
-    text-align: center;
-    padding: 1%;
-    font-size: 1vw;
-    transform: translate(+50%);
-  }
 }
