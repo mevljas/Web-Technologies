@@ -13,7 +13,7 @@ function setLocalStorage() {
 
 function addUser() {
   loadUsers();
-  const id = lastId++;
+  const id = ++lastId;
   const fName = document.querySelector("#fname").value;
   const lName = document.querySelector("#lname").value;
   const country = $("#country option:selected").text();
@@ -48,6 +48,7 @@ function loadUsers() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
+      lastId = usersArray[usersArray.length - 1].id;
       //   for (let i = 0; i < usersArray.length; i++) {
       //     let participant = {
       //       id: usersArray[i].id,
