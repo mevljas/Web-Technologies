@@ -128,24 +128,28 @@ body {
 
 table {
   border-collapse: collapse;
-  margin: auto;
-  border: 1vw solid #1E5735;
+  margin: 0 auto;
+  border: 1vw solid rgba(204, 197, 197, 0.774);
   font-size: 2.8vw;
+  margin-bottom: 4%;
+  width: 100%;
 }
 
 caption{
   text-align: left;
-  margin-bottom: 6%;
+  margin-bottom: 2%;
 }
 
-tr{
-  width: 100%;
-}
+
 
 th {
   text-align: center;
-  background-color: #1E5735;
-  color: #F2F0E1;
+  background-color: rgb(17, 17, 17);
+  color: white;
+  padding: 0.5%;
+  padding: 2%;
+  line-height: 3.5vw;
+  
 }
 
 td {
@@ -157,6 +161,17 @@ td {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  padding: 2%;
+  border: 0.5vw solid rgba(204, 197, 197, 0.774);
+  background-color: rgb(72, 77, 74);
+  font-size: 2.5vw;
+}
+
+#orderColumn{
+  color: white;
+  font-family: "Press Start";
+  padding: 2%;
+  background-color: rgb(17, 17, 17);
 }
 
 

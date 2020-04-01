@@ -4,10 +4,7 @@ let lastId = -1;
 function setLocalStorage() {
   // Check browser support
   if (typeof Storage !== "undefined") {
-    scoreBoard.push(playerName + " " + score); //save
-    // Store
-    // converts to string and save
-    localStorage.setItem("SpaceInvadersCode", JSON.stringify(scoreBoard));
+    localStorage.setItem("users", JSON.stringify(usersArray));
   }
 }
 
@@ -25,7 +22,7 @@ function addUser() {
     lName: lName,
     score: score
   });
-  localStorage.setItem("users", JSON.stringify(usersArray));
+  setLocalStorage();
 
 }
 
@@ -34,7 +31,13 @@ function loadUsers() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
-      lastId = usersArray[usersArray.length - 1].id;
+      if(usersArray.length == 0) {
+        lastId = -1
+      }
+      else{
+        lastId = usersArray[usersArray.length - 1].id;
+      }
+     
 
     }
   }

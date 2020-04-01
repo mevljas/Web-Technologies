@@ -1,5 +1,4 @@
 function loadTable() {
-  loadUsers();
   for (let i = 0; i < usersArray.length; i++) {
     let user = {
       id: usersArray[i].id,
@@ -28,4 +27,53 @@ function domAddParticipant(user) {
   }
 }
 
-loadTable();
+function removeParticipant(event) {
+  let parent = event.target.parentElement;
+  let name = parent.firstElementChild.innerHTML;
+  if (
+    parent.rowIndex !== 0 &&
+    window.confirm("Are you sure you want to delete " + name + "?")
+  ) {
+    parent.remove();
+    usersArray.splice(parent.id, 1);
+    setLocalStorage();
+    loadTable();
+  }
+}
+
+function fillSelect() {
+  let select = document.getElementById("orderColumn");
+  let columns = { fName: "First name", lName: "Last name", score: "Score" };
+  for (key in columns) {
+    option = document.createElement("option");
+    option.setAttribute("value", key);
+    option.appendChild(document.createTextNode(columns[key]));
+    select.appendChild(option);
+  }
+}
+
+function sortArray() {
+  $("#users-table tr").remove();
+  let e = document.getElementById("orderColumn");
+  let orderColumn = e.options[e.selectedIndex].value;
+
+  usersArray.sort(function(a, b) {
+    console.log(orderColumn);
+    var nameA = a[orderColumn];
+    var nameB = b[orderColumn];
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    return 0;
+  });
+  loadTable();
+}
+loadUsers();
+fillSelect();
+sortArray();
+document.getElementsByTagName("table")[0].onclick = removeParticipant;
+document.getElementById("orderColumn").onchange = sortArray;

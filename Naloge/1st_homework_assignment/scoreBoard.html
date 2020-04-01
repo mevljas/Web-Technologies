@@ -24,23 +24,29 @@
       </div>
 
       <div class="col-6 colorClass">
-        <table id="participant-table">
+        <p id="scoreInstructions">
+          Delete a user from the table by clicking on it.
+          <br />
+          <br />
+          Change table order by selecting another column.
+        </p>
+        <table id="users-table">
           <caption>
-            The list of class participants.
+            The list of existing users.
           </caption>
           <tr class="notRemovable">
             <th>First name</th>
             <th>Last name</th>
-            <th>Country</th>
             <th>Score</th>
           </tr>
-          <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-            <td>500</td>
-          </tr>
         </table>
+
+        <div id="order">
+          <span id="orderText">Order by: </span>
+          <select id="orderColumn" class="colorClass">
+            
+          </select>
+        </div>
 
         <button
           class="colorClass"
@@ -102,6 +108,6 @@
 
     <script src="libraries/jquery-3.4.1.slim.min.js"></script>
     <script src="js/dataHandler.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/scoreBoard.js"></script>
   </body>
 </html>
