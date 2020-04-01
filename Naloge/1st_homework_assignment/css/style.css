@@ -43,7 +43,7 @@ body {
 }
 
 .menu li,
-#loginButton {
+#loginButton, #continueButton {
   padding: 5%;
   margin-bottom: 5%;
   background-color: rgba(0, 0, 0, 1);
@@ -52,7 +52,7 @@ body {
 }
 
 .menu li:hover,
-#inputForm input[type="submit"]:hover {
+#inputForm input[type="submit"]:hover, #continueButton:hover {
   background-color: #313536;
   cursor: pointer;
 }
@@ -119,6 +119,20 @@ select {
   width: 20%;
 }
 
+#InstructionsText{
+  text-align: left;
+  font-size: 3vw;
+  line-height: 5vw;
+}
+
+#continueButton{
+  font-family: inherit;
+  padding: 3%;
+  margin-top: 5%;
+}
+
+
+
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {
@@ -177,6 +191,12 @@ select {
 
   #inputForm #fname {
     margin-top: 5%;
+  }
+
+  #InstructionsText{
+    text-align: left;
+    font-size: 1vw;
+    line-height: 2vw;
   }
 
 }

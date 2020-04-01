@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Space invaders</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Space invaders</h1>
+    </div>
+
+    <div class=" row">
+      <div class=" colorClass col-3 menu">
+        <ul>
+          <li>New game</li>
+          <li>Instructions</li>
+          <li>ScoreBoard</li>
+          <li>Sources</li>
+          <li>Restart game</li>
+        </ul>
+      </div>
+
+      <div class="col-6 colorClass">
+        <p id="InstructionsText">
+          Goal of the game is to defeat as many enemies as possible. You can
+          move by using arrow keys and shoot with a space bar. Alternatively, on
+          mobile phones, you can use special on-screen buttons. Good luck!
+        </p>
+        <button class="colorClass" id="continueButton" onclick="window.location.href = '';">Continue</button>
+      </div>
+
+      <div class="col-3 colorClass">
+        <div class=" aside">
+          <span id="lives"
+            >Lives:
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player1"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player2"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player3"
+              alt="playerShip"
+            />
+          </span>
+          <br />
+          <span id="bullets"
+            >Bullets:
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet1"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet2"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet3"
+              alt="bullet"
+            />
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script src="libraries/jquery-3.4.1.slim.min.js"></script>
+    <script src="js/dataHandler.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>
