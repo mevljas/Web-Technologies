@@ -52,7 +52,7 @@ body {
 }
 
 .menu li:hover,
-#loginButton:hover {
+#inputForm input[type="submit"]:hover {
   background-color: #313536;
 }
 
@@ -95,33 +95,32 @@ select {
   border-radius: 4px;
   box-sizing: border-box;
   font-family: "Press Start";
+  color: white;
 }
 
-#loginButton {
-  background-color: rgba(0, 0, 0, 1);
+#inputForm input[type="submit"] {
   font-family: "Press Start";
   margin-top: 5%;
   padding: 3%;
+  color: white;
+  background-color: black;
 }
 
 #inputForm input {
-  color: white;
-  background-color: rgba#0e0f0f;
-  opacity: 0.2;
+  background-color: #0e0f0f;
+  opacity: 1;
   margin-bottom: 8%;
 }
 
 #inputForm select {
   color: white;
-  background-color: rgb(0, 0, 0);
+  background-color: #0e0f0f;
 }
 
 .controls {
   width: 30%;
   width: 20%;
 }
-
-
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
