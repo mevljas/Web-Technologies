@@ -43,7 +43,8 @@ body {
 }
 
 .menu li,
-#loginButton, #continueButton {
+#loginButton,
+#continueButton {
   padding: 5%;
   margin-bottom: 5%;
   background-color: rgba(0, 0, 0, 1);
@@ -52,7 +53,8 @@ body {
 }
 
 .menu li:hover,
-#inputForm input[type="submit"]:hover, #continueButton:hover {
+#inputForm input[type="submit"]:hover,
+#continueButton:hover {
   background-color: #313536;
   cursor: pointer;
 }
@@ -61,8 +63,6 @@ body {
   text-align: left;
   font-size: 2.8vw;
 }
-
-
 
 /* For mobile phones: */
 [class*="col-"] {
@@ -108,19 +108,18 @@ body {
   margin-bottom: 8%;
 }
 
-
 .controls {
   width: 30%;
   width: 20%;
 }
 
-#InstructionsText{
+#InstructionsText {
   text-align: left;
   font-size: 3vw;
   line-height: 5vw;
 }
 
-#continueButton{
+#continueButton {
   font-family: inherit;
   padding: 3%;
   margin-top: 5%;
@@ -129,54 +128,55 @@ body {
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  border: 1vw solid rgba(204, 197, 197, 0.774);
+  border: 1vw solid rgb(17, 17, 17);
   font-size: 2.8vw;
   margin-bottom: 4%;
   width: 100%;
 }
 
-caption{
+caption {
   text-align: left;
   margin-bottom: 2%;
 }
 
-
-
-th {
-  text-align: center;
-  background-color: rgb(17, 17, 17);
-  color: white;
-  padding: 0.5%;
-  padding: 2%;
-  line-height: 3.5vw;
-  
-}
-
-td {
-  text-align: center;
-  border: 1px solid #1E5735;
-
+tr{
   /* Prevent text selection */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+tr:hover td{
+  background-color: rgb(102, 107, 104) ;
+}
+
+th {
+  text-align: center;
+  background-color: rgb(43, 40, 40);
+  color: white;
+  padding: 0.5%;
+  padding: 2%;
+  line-height: 3.5vw;
+}
+
+td {
+  text-align: center;
+  border: 1vw solid rgb(17, 17, 17);
+
+  
   user-select: none;
   padding: 2%;
-  border: 0.5vw solid rgba(204, 197, 197, 0.774);
+  border: 0.5vw solid rgb(17, 17, 17);
   background-color: rgb(72, 77, 74);
   font-size: 2.5vw;
 }
 
-#orderColumn{
+#orderColumn {
   color: white;
   font-family: "Press Start";
   padding: 2%;
   background-color: rgb(17, 17, 17);
 }
-
-
-
-
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */
@@ -237,10 +237,37 @@ td {
     margin-top: 5%;
   }
 
-  #InstructionsText{
+  #InstructionsText {
     text-align: left;
     font-size: 1vw;
     line-height: 2vw;
   }
+
+  #scoreInstructions {
+    font-size: 1vw;
+    text-align: left;
+    margin-bottom: 5%;
+  }
+
+  table {
+    font-size: 1vw;
+    margin-bottom: 5%;
+  }
+
+  caption {
+    text-align: left;
+    margin-bottom: 2%;
+  }
+
+  th {
+    line-height: 1.5vw;
+    font-size: 1vw;
+  }
+
+  td {
+    font-size: 1vw;
+    padding: 1.5%;
+  }
+
 
 }

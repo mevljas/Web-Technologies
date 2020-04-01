@@ -1,4 +1,5 @@
 function loadTable() {
+  clearTable();
   for (let i = 0; i < usersArray.length; i++) {
     let user = {
       id: usersArray[i].id,
@@ -23,6 +24,7 @@ function domAddParticipant(user) {
     }
     const td = document.createElement("td");
     td.innerText = user[key];
+    td.id = "deletable";
     tr.appendChild(td);
   }
 }
@@ -53,7 +55,6 @@ function fillSelect() {
 }
 
 function sortArray() {
-  $("#users-table tr").remove();
   let e = document.getElementById("orderColumn");
   let orderColumn = e.options[e.selectedIndex].value;
 
@@ -71,6 +72,10 @@ function sortArray() {
     return 0;
   });
   loadTable();
+}
+
+function clearTable() {
+  $("#users-table tr #deletable").remove();
 }
 loadUsers();
 fillSelect();
