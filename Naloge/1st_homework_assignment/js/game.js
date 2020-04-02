@@ -164,7 +164,7 @@ function gameOver() {
   clearInterval(flyDownInterval);
   clearInterval(MakeEnemiesVisible);
   stop();
-  alert(playerName + ", you're dead!");
+  alert(tempUser.fName + ", you're dead!" + "\nScore: " +score);
   saveUser(score);
   // window.location.href = "game.html";
 }

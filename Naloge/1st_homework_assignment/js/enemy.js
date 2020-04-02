@@ -328,7 +328,7 @@ function MakeEnemiesVisible() {
         //random x
         var x = Math.random() * (width - enemyWidth - enemyWidth) + enemyWidth;
         //preveri odmik
-        if (abs(previousEnemyX - x) < enemyWidth) {
+        if (Math.abs(previousEnemyX - x) < enemyWidth) {
           //preveri ce sta zadosti narazen
           continue; //next enemy
         }

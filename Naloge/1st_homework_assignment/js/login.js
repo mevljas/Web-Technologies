@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('form').on("submit",function(){
-        addUser();
+        addTempUser();
         window.location.href = "instructions.html";
     });
 });
