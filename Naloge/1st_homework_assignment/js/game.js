@@ -19,6 +19,9 @@ function setup() {
   themeSound.play();
   let canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
+  let wrapper = document.getElementById("canvasWrapper");
+  canvas.width = wrapper.clientWidth;
+  canvas.height = wrapper.clientWidth ;
   width = canvas.width;
   height = canvas.height;
   // frameRate(30);
@@ -166,8 +169,6 @@ function getLocalStorage() {
   }
   for (var i = 0; i < scoreBoard.length; i++) {
     var arrayOfStrings = scoreBoard[i].split(" ");
-
-
   }
 }
 

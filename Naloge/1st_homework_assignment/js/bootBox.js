@@ -19,6 +19,7 @@ function gameOver(){
   clearInterval(MakeEnemiesVisible);
   stop();
   alert(playerName+", you're dead!")
-  window.location.href = "index.html";
+  // window.location.href = "index.html";
+  window.location.href = "game.html";
 }
 

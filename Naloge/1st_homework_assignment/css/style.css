@@ -193,6 +193,15 @@ td {
   margin-bottom: 4%;
 }
 
+#canvasWrapper{
+  padding: 0;
+}
+
+#canvas{
+
+
+}
+
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {
