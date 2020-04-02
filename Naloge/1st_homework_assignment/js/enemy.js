@@ -1,8 +1,9 @@
 var startTime = 0;
-var previousEnemyX = 0; //za racunanje odmika
+var previousEnemyX = 0; //offSet calculation
 var changeDirection = false;
-var alreadyMovedDown = false; //prevents da se premaknejo veckrat - ker so 4 vrstice, 4 krat klicejo
-let enemyWidth; //dinamicna veliksot enemy
+var alreadyMovedDown = false; //prevents multiple movements ( they'd move 4 times - 4 rows)
+let enemyWidth;
+let enemyHeight;
 let speedX;
 
 function Enemy(x, y, row) {
@@ -11,7 +12,7 @@ function Enemy(x, y, row) {
   this.x = x;
   this.y = y;
   this.status = true;
-  this.bullet = new Bullet(1);
+  this.bullet = new Bullet(bulletType.ENEMY);
   this.flyDown = false;
   this.row = row;
   this.lives = 1;
@@ -132,15 +133,14 @@ function Enemy(x, y, row) {
           }
           this.y += this.speedY * delta;
           if (this.y <= this.oldY && this.y >= this.oldY - this.height) {
-            //parkira na mesto
+            //positions it back to original position
             this.flyDown = false;
             this.y = this.oldY;
           }
         } else if (
-          this.x + this.width + speedX * delta >= width - this.width ||
-          this.x + speedX <= this.width
+          this.x + this.width * 2 + speedX * delta >= width||
+          this.x + speedX * delta <= this.width / 4  // - + - = +
         ) {
-          // +  ker je speed -
           if (level == 2 && !alreadyMovedDown) {
             alreadyMovedDown = true;
             dropDownAndReverse();
@@ -158,26 +158,27 @@ function Enemy(x, y, row) {
 enemies = new Array();
 
 function makeEnemies() {
-  enemyWidth = width / 20; //dinamicna veliksot enemy
-  speedX = width * 0.00008;
+  enemyWidth = width / 22; //dinamicna veliksot enemy
+  enemyHeight = height / 22; //dinamicna veliksot enemy
+  speedX = width * 0.00004;
   //naredi array of enemies
   for (var i = 0; i < 4; i++) {
     enemies[i] = new Array();
     for (var j = 0; j < 10; j++) {
       enemies[i][j] = new Enemy(
-        enemyWidth + j * enemyWidth * 1.5,
-        enemyWidth * 2 + i * enemyWidth * 1.3,
+        enemyWidth  + j * enemyWidth * 1.5,
+        enemyHeight * 2 + i * enemyHeight * 1.5,
         i
       );
       if (level == 3) {
-        //v level 3 jih damo use na false da se en pokazejo
+        //hide them
         enemies[i][j].status = false;
       }
     }
   }
   enemiesAlive = enemies.length * enemies[0].length; //stevilo enemies
   if (level < 3) {
-    //zgornji ship / boss
+    //top ship / boss
     boss = new Enemy(enemyWidth * 7, enemyWidth / 2, -1);
     boss.lives = 3;
     enemiesAlive++;
@@ -226,7 +227,7 @@ function drawEnemies() {
 
 function enemyShoot(enemy) {
   if (enemy == undefined) {
-    //normalen enmey, ne boss
+    //ordinary enemy, not the boss
     var breakFromLoop = false;
     for (var i = 0; i < enemies.length; i++) {
       for (var j = 0; j < enemies[i].length; j++) {
@@ -246,7 +247,7 @@ function enemyShoot(enemy) {
             enemies[i][j].bullet.y = enemies[i][j].y;
             enemies[i][j].bullet.status = true;
             breakFromLoop = true;
-            break; //da naredi samo en bullet
+            break; //make just one bullet.
           }
         }
       }
@@ -286,7 +287,7 @@ function dropDownAndReverse() {
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < enemies[i].length; j++) {
       enemies[i][j].y += enemies[i][j].height;
-      // da najde pravo pozicjo ko pride nazj
+      // find the right position
       if (enemies[i][j].flyDown) {
         enemies[i][j].oldY += enemies[i][j].height;
       }
@@ -300,14 +301,13 @@ function dropDownAndReverse() {
 
 function doFlyDown() {
   //start flying down
-
   var breakLoop = false;
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < enemies[i].length; j++) {
       if (!enemies[i][j].flyDown && Math.floor(Math.random() * 3 + 1) == 1) {
         enemies[i][j].oldY = enemies[i][j].y;
         enemies[i][j].flyDown = true;
-        enemies[i][j].speedY = (Math.random() * 4 + 1) * 0.0001;
+        enemies[i][j].speedY = (Math.random() * 4 + 1) / 100 ;
         breakLoop = true;
         break;
       }
@@ -319,21 +319,19 @@ function doFlyDown() {
 }
 
 function MakeEnemiesVisible() {
-  //pokaze enemies - leve 3
+  //show enemies - level 3
   var breakFromLoop = false;
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < enemies[i].length; j++) {
       if (!enemies[i][j].status) {
-        //ce je status false
+        //status must be false
         //random x
         var x = Math.random() * (width - enemyWidth - enemyWidth) + enemyWidth;
-        //preveri odmik
+        //check offset
         if (Math.abs(previousEnemyX - x) < enemyWidth) {
-          //preveri ce sta zadosti narazen
           continue; //next enemy
         }
         previousEnemyX = x;
-        //enemy z random sliko
         enemies[i][j] = new Enemy(
           x,
           -enemyWidth,
@@ -341,7 +339,7 @@ function MakeEnemiesVisible() {
         );
         enemies[i][j].speedY = Math.random() * 4 + 1; //random speed
         enemies[i][j].status = true;
-        breakFromLoop = true; //da anreidmo samo 1 enemy
+        breakFromLoop = true; //make just 1 enemy
         break;
       }
     }

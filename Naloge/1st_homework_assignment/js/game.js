@@ -8,38 +8,75 @@ lastFrameTimeMs = 0;
 fps = 120;
 // We want to simulate 1000 ms / 120 FPS
 var timestep = 1000 / fps;
+let running = true;
 
 function setup() {
   loadUsers();
-  var themeSound = document.getElementById("themeSound");
+  themeSound = document.getElementById("themeSound");
   document.getElementById("themeSound").volume = 0.2;
   document.getElementById("explosionSound").volume = 0.2;
   document.getElementById("shootSound").volume = 0.2;
   themeSound.loop = true;
-  themeSound.play();
   let canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   let wrapper = document.getElementById("canvasWrapper");
-  canvas.width = wrapper.clientWidth * 0.9;
-  canvas.height = wrapper.clientHeight * 2.5;
+  canvas.width = wrapper.clientWidth * 0.99;
+  canvas.height = wrapper.clientHeight * 3;
   width = canvas.width;
   height = canvas.height;
   score = 0;
   lives = 3;
   player = new Player();
   player.makeBullets();
-  setInterval(enemyShoot, 1000); //enemy strelja
+  setInterval(enemyShoot, 1000);
   makeEnemies();
   makeWalls();
   playerimg1 = document.getElementById("player1");
   playerimg2 = document.getElementById("player2");
   playerimg3 = document.getElementById("player3");
-  start();
+  scorelabel = document.getElementById("score");
+  levelLabel = document.getElementById("level");
+  requestId = requestAnimationFrame(gameLoop);
+  $("#shoot").click(function() {
+    pressedKeys[32] = true;
+    $("#shoot").css({ opacity: 0.5 });
+    if (typeof playerShootInterval !== 'undefined') {
+      clearInterval(playerShootInterval);
+    }
+    playerShootInterval = setTimeout(function() {
+      pressedKeys[32] = false;
+      $("#shoot").css({ opacity: 1 });
+    }, 100);
+  });
+
+  $("#left").click(function() {
+    pressedKeys[37] = true;
+    if (typeof playerLeftInterval !== 'undefined') {
+      clearInterval(playerLeftInterval);
+      $("#left").css({ opacity: 0.5 });
+    }
+    playerLeftInterval = setTimeout(function() {
+      pressedKeys[37] = false;
+      $("#left").css({ opacity: 1 });
+    }, 100);
+  });
+
+  $("#right").click(function() {
+    pressedKeys[39] = true;
+    if (typeof playerRightInterval !== 'undefined') {
+      clearInterval(playerRightInterval);
+      $("#right").css({ opacity: 0.5 });
+    }
+    playerRightInterval = setTimeout(function() {
+      pressedKeys[39] = false;
+      $("#right").css({ opacity: 1 });
+    }, 100);
+  });
 }
 
 function gameLoop(timestamp) {
   // Track the accumulated time that hasn't been simulated yet
-  delta += timestamp - lastFrameTimeMs; // note += here
+  delta += timestamp - lastFrameTimeMs;
   lastFrameTimeMs = timestamp;
 
   // Simulate the total elapsed time in fixed-size chunks
@@ -55,31 +92,29 @@ function gameLoop(timestamp) {
 }
 
 function update(delta) {
-  // Update the state of the world for the elapsed time since last render
   if (player.lives <= 0) {
     gameOver(score);
   }
   updatePlayer(delta);
   updateEnemies(delta);
-  if (level == 1) {
+  if (level === 1) {
     updateWalls();
-    if (enemiesAlive == 0) {
+    if (enemiesAlive === 0) {
       setTimeout(function() {
         level = 2;
+        destroyWalls();
         makeEnemies();
-        if (flyDownInterval == undefined)
-          //prverimo ce ni se intervala
-          flyDownInterval = setInterval(doFlyDown, 5000);
+        if (flyDownInterval == undefined) console.log("test");
+        flyDownInterval = setInterval(doFlyDown, 5000);
       }, 2000);
       enemiesAlive = -1;
-    } else if (wallsAlive == 0) {
-      //ce v 1. levelu unicimo vse defense walle
+    } else if (wallsAlive === 0) {
+      //if all wals are destroyed
       wallsAlive = -1;
       flyDownInterval = setInterval(doFlyDown, 5000); //start fly down
     }
-  }
-  if (level == 2) {
-    if (enemiesAlive == 0) {
+  } else if (level === 2) {
+    if (enemiesAlive === 0) {
       setTimeout(function() {
         clearInterval(flyDownInterval);
         level = 3;
@@ -92,14 +127,13 @@ function update(delta) {
 }
 
 function draw() {
-  // Draw the state of the world
   clear();
   player.draw();
   player.drawBullets();
   drawEnemies();
   if (level == 1) drawWalls();
-  document.getElementById("score").innerHTML = "Score: " + score;
-  document.getElementById("level").innerHTML = "level: " + level;
+  scorelabel.innerHTML = "Score: " + score;
+  levelLabel.innerHTML = "level: " + level;
   switch (player.lives) {
     case 3:
       playerimg1.style.visibility = "visible";
@@ -147,26 +181,21 @@ function draw() {
   }
 }
 
-function start() {
-  requestId = requestAnimationFrame(gameLoop);
-}
-
-function stop() {
-  cancelAnimationFrame(requestId);
-  requestId = undefined;
-}
-
 function clear() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function gameOver() {
-  clearInterval(flyDownInterval);
-  clearInterval(MakeEnemiesVisible);
-  stop();
-  alert(tempUser.fName + ", you're dead!" + "\nScore: " +score);
-  saveUser(score);
-  // window.location.href = "game.html";
+  if (running) {
+    running = false;
+    clearInterval(flyDownInterval);
+    clearInterval(MakeEnemiesVisible);
+    cancelAnimationFrame(requestId);
+    requestId = undefined;
+    alert(tempUser.fName + ", you're dead!" + "\nScore: " + score);
+    saveUser(score);
+    // window.location.href = "game.html";
+  }
 }
 
 setup();

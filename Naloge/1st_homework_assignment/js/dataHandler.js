@@ -1,6 +1,5 @@
 usersArray = [];
-lastId = -1; 
-
+lastId = -1;
 
 function saveUsers() {
   // Check browser support
@@ -29,9 +28,9 @@ function addTempUser() {
     fName: fName,
     lName: lName,
     score: score
-  }
+  };
 
-  saveTempUser(); 
+  saveTempUser();
 }
 
 function loadUsers() {
