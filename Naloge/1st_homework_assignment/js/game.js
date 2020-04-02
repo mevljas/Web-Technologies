@@ -1,16 +1,16 @@
 var level = 1;
 var flyDownInterval;
 var scoreBoard = [];
-var playerName;
 let d = performance.now();
 let delta = 0;
 timestamp = 0;
 lastFrameTimeMs = 0;
 fps = 120;
-// We want to simulate 1000 ms / 60 FPS = 16.667 ms per frame every time we run update()
+// We want to simulate 1000 ms / 120 FPS
 var timestep = 1000 / fps;
 
 function setup() {
+  loadUsers();
   var themeSound = document.getElementById("themeSound");
   document.getElementById("themeSound").volume = 0.2;
   document.getElementById("explosionSound").volume = 0.2;
@@ -20,26 +20,20 @@ function setup() {
   let canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   let wrapper = document.getElementById("canvasWrapper");
-  canvas.width = wrapper.clientWidth;
-  canvas.height = wrapper.clientWidth ;
+  canvas.width = wrapper.clientWidth * 0.9;
+  canvas.height = wrapper.clientHeight * 2.5;
   width = canvas.width;
   height = canvas.height;
-  // frameRate(30);
   score = 0;
   lives = 3;
   player = new Player();
   player.makeBullets();
-  setInterval(enemyShoot, 500); //enemy strelja
+  setInterval(enemyShoot, 1000); //enemy strelja
   makeEnemies();
-  //   fill("white");
-  // textSize(20);
   makeWalls();
   playerimg1 = document.getElementById("player1");
   playerimg2 = document.getElementById("player2");
   playerimg3 = document.getElementById("player3");
-  getLocalStorage();
-  //   enterName();
-  playerName = "test";
   start();
 }
 
@@ -63,7 +57,7 @@ function gameLoop(timestamp) {
 function update(delta) {
   // Update the state of the world for the elapsed time since last render
   if (player.lives <= 0) {
-    gameOver();
+    gameOver(score);
   }
   updatePlayer(delta);
   updateEnemies(delta);
@@ -153,35 +147,6 @@ function draw() {
   }
 }
 
-function restartgame() {
-  setLocalStorage();
-  location.reload();
-}
-
-function getLocalStorage() {
-  // Check browser support
-  if (typeof Storage !== "undefined") {
-    // Retrieve
-    var retrievedData = localStorage.getItem("SpaceInvadersCode");
-    if (retrievedData != null) {
-      scoreBoard = JSON.parse(retrievedData); //convert to array
-    }
-  }
-  for (var i = 0; i < scoreBoard.length; i++) {
-    var arrayOfStrings = scoreBoard[i].split(" ");
-  }
-}
-
-function setLocalStorage() {
-  // Check browser support
-  if (typeof Storage !== "undefined") {
-    scoreBoard.push(playerName + " " + score); //save
-    // Store
-    // converts to string and save
-    localStorage.setItem("SpaceInvadersCode", JSON.stringify(scoreBoard));
-  }
-}
-
 function start() {
   requestId = requestAnimationFrame(gameLoop);
 }
@@ -193,6 +158,15 @@ function stop() {
 
 function clear() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function gameOver() {
+  clearInterval(flyDownInterval);
+  clearInterval(MakeEnemiesVisible);
+  stop();
+  alert(playerName + ", you're dead!");
+  saveUser(score);
+  // window.location.href = "game.html";
 }
 
 setup();

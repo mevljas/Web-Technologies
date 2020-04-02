@@ -62,14 +62,8 @@ body {
 .aside {
   text-align: left;
   font-size: 2.8vw;
+  line-height: 6vw;
 }
-
-/* For mobile phones: */
-[class*="col-"] {
-  width: 100%;
-}
-
-
 
 #inputText {
   text-align: center;
@@ -119,7 +113,7 @@ body {
   margin-top: 5%;
 }
 
-#scoreInstructions{
+#scoreInstructions {
   font-size: 3.3vw;
   text-align: left;
   line-height: 5vw;
@@ -140,15 +134,15 @@ caption {
   margin-bottom: 2%;
 }
 
-tr{
+tr {
   /* Prevent text selection */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
 }
 
-tr:hover td{
-  background-color: rgb(102, 107, 104) ;
+tr:hover td {
+  background-color: rgb(102, 107, 104);
 }
 
 th {
@@ -164,7 +158,6 @@ td {
   text-align: center;
   border: 1vw solid rgb(17, 17, 17);
 
-  
   user-select: none;
   padding: 2%;
   border: 0.5vw solid rgb(17, 17, 17);
@@ -172,7 +165,7 @@ td {
   font-size: 2.5vw;
 }
 
-#orderText{
+#orderText {
   font-size: 3.3vw;
   text-align: left;
   margin-left: -8%;
@@ -187,8 +180,6 @@ td {
   margin-bottom: 4%;
 }
 
-
-
 .playerimg {
   width: 5%;
 }
@@ -196,6 +187,12 @@ td {
   width: 5%;
   margin-bottom: -3%;
 }
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {
@@ -237,6 +234,7 @@ td {
 
   .aside {
     font-size: 1vw;
+    line-height: 2vw;
   }
 
   #controls {
@@ -266,8 +264,6 @@ td {
     text-align: left;
     margin-bottom: 5%;
     line-height: 1.5vw;
-    
-    
   }
 
   table {
@@ -291,20 +287,17 @@ td {
     padding: 1.5%;
   }
 
-  #orderText{
+  #orderText {
     font-size: 1vw;
     margin-left: -50%;
   }
 
-  #orderColumn{
+  #orderColumn {
     font-size: 0.8vw;
     padding: 1.5%;
   }
 
-  #canvasWrapper{
-    padding: 0
+  #canvasWrapper {
+    padding: 0;
   }
-
-
-
 }

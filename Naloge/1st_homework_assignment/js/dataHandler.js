@@ -1,10 +1,12 @@
 usersArray = [];
-let lastId = -1;
+playerName = "user";
+lastId = -1;
 
 function setLocalStorage() {
   // Check browser support
   if (typeof Storage !== "undefined") {
     localStorage.setItem("users", JSON.stringify(usersArray));
+    localStorage.setItem("playerName", playerName);
   }
 }
 
@@ -15,6 +17,7 @@ function addUser() {
   const lName = document.querySelector("#lname").value;
   const score = 0;
 
+  playerName = fName;
 
   usersArray.push({
     id: id,
@@ -23,7 +26,6 @@ function addUser() {
     score: score
   });
   setLocalStorage();
-
 }
 
 function loadUsers() {
@@ -31,16 +33,24 @@ function loadUsers() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
-      if(usersArray.length == 0) {
-        lastId = -1
-      }
-      else{
+      if (usersArray.length == 0) {
+        lastId = -1;
+      } else {
         lastId = usersArray[usersArray.length - 1].id;
       }
-     
-
+    }
+    if (localStorage.getItem("playerName") !== null) {
+      playerName = localStorage.getItem("playerName");
     }
   }
 }
 
-
+function saveUser(score) {
+  for (let i = 0; i < usersArray.length; i++) {
+    const element = usersArray[i];
+    if (element.id === lastId) {
+      element.score = score;
+    }
+  }
+  setLocalStorage();
+}

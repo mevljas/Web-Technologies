@@ -1,7 +1,7 @@
-var playerName = "";
+
 function Player() {
     this.width = width / 11
-    this.height = height / 20;
+    this.height = height / 13;
     this.x = (width / 2) - this.width;
     this.y = height - this.height;
     this.speed = width * 0.0005;

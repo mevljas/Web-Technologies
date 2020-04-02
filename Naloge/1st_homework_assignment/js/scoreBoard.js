@@ -34,7 +34,7 @@ function removeParticipant(event) {
   let name = parent.firstElementChild.innerHTML;
   if (
     parent.rowIndex !== 0 &&
-    window.confirm("Are you sure you want to delete " + name + "?")
+    window.confirm("Are you sure you want to delete user " + name + "?")
   ) {
     parent.remove();
     usersArray.splice(parent.id, 1);
