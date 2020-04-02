@@ -69,13 +69,7 @@ body {
   width: 100%;
 }
 
-.playerimg {
-  width: 5%;
-}
-.bulletimg {
-  width: 5%;
-  margin-bottom: -3%;
-}
+
 
 #inputText {
   text-align: center;
@@ -193,15 +187,15 @@ td {
   margin-bottom: 4%;
 }
 
-#canvasWrapper{
-  padding: 0;
+
+
+.playerimg {
+  width: 5%;
 }
-
-#canvas{
-
-
+.bulletimg {
+  width: 5%;
+  margin-bottom: -3%;
 }
-
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {
@@ -305,6 +299,10 @@ td {
   #orderColumn{
     font-size: 0.8vw;
     padding: 1.5%;
+  }
+
+  #canvasWrapper{
+    padding: 0
   }
 
 
