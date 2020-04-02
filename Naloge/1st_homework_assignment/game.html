@@ -1,9 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Space invaders</title>
   </head>
   <body>
     <audio id="themeSound">
@@ -15,53 +17,98 @@
     <audio id="shootSound">
       <source src="sound/shoot.wav" type="audio/wav" />
     </audio>
+    <div class="header">
+      <h1>Space invaders</h1>
+    </div>
 
-    <div id="container">
-      <div id="menu" class="colorClass ">
-        <button
-          id="navodilaButton"
-          class="btn btn-default"
-          onclick="navodila()"
-        >
-          Instructions
-        </button>
-        <button id="scoreButton" class="btn btn-default" onclick="tocke()">
-          ScoreBoard
-        </button>
-        <button
-          id="restartGameButton"
-          class="btn btn-default"
-          onclick="restartgame();"
-        >
-          Restart <br />game
-        </button>
+    <div class=" row">
+      <div class=" colorClass col-3 menu">
+        <ul>
+          <li>New game</li>
+          <li>Instructions</li>
+          <li>ScoreBoard</li>
+          <li>Sources</li>
+          <li>Restart game</li>
+        </ul>
       </div>
-      <h1 id="title">Space Inavders</h1>
-      <canvas id="canvas"></canvas>
-      <div id="stats" class="colorClass">
-        <span id="name">Name: </span>
-        <span id="lives"
-          >Lives:
-          <img src="images/player.gif" class="playerimg" id="player1" />
-          <img src="images/player.gif" class="playerimg" id="player2" />
-          <img src="images/player.gif" class="playerimg" id="player3" />
-        </span>
-        <span id="bullets"
-          >Bullets:
-          <img src="images/bullet.png" class="bulletimg" id="bullet1" />
-          <img src="images/bullet.png" class="bulletimg" id="bullet2" />
-          <img src="images/bullet.png" class="bulletimg" id="bullet3" />
-        </span>
-        <span id="score">Score: </span>
-        <span id="level">Level: </span>
-        <span id="highscore">High Score: </span>
+
+      <div class="col-6 colorClass">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div class="colorClass col-6" id="controls">
+        <img
+          class="controls"
+          id="shoot"
+          src="images/shoot.png"
+          alt="shootButton"
+        />
+        <img
+          class="controls"
+          id="left"
+          src="images/left.png"
+          alt="leftButton"
+        />
+        <img
+          class="controls"
+          id="right"
+          src="images/right.png"
+          alt="rightButtobn"
+        />
+      </div>
+
+      <div class="col-3 colorClass">
+        <div class=" aside">
+          <span id="score">Score: </span><br />
+          <span id="level">Level: </span><br />
+          <span id="lives"
+            >Lives:
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player1"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player2"
+              alt="playerShip"
+            />
+            <img
+              src="images/player.gif"
+              class="playerimg"
+              id="player3"
+              alt="playerShip"
+            />
+          </span>
+          <br />
+          <span id="bullets"
+            >Bullets:
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet1"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet2"
+              alt="bullet"
+            />
+            <img
+              src="images/bullet.png"
+              class="bulletimg"
+              id="bullet3"
+              alt="bullet"
+            />
+          </span>
+        </div>
       </div>
     </div>
 
-    <script type="text/javascript" src="libraries/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="libraries/bootstrap.min.js"></script>
-    <script type="text/javascript" src="libraries/bootbox.min.js"></script>
-    <!-- <script src="libraries/p5.js"></script> -->
+    <script src="libraries/jquery-3.4.1.slim.min.js"></script>
 
     <script type="text/javascript" src="js/preLoad.js"></script>
     <script type="text/javascript" src="js/player.js"></script>
@@ -70,7 +117,6 @@
     <script type="text/javascript" src="js/wall.js"></script>
     <script type="text/javascript" src="js/bootBox.js"></script>
     <script type="text/javascript" src="js/keyHandler.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-
+    <script type="text/javascript" src="js/game.js"></script>
   </body>
 </html>

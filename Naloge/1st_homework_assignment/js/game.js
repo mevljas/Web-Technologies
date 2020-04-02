@@ -1,7 +1,6 @@
 var level = 1;
 var flyDownInterval;
 var scoreBoard = [];
-var HighScore = 0;
 var playerName;
 let d = performance.now();
 let delta = 0;
@@ -36,7 +35,6 @@ function setup() {
   playerimg2 = document.getElementById("player2");
   playerimg3 = document.getElementById("player3");
   getLocalStorage();
-  document.getElementById("highscore").innerHTML = "High Score: " + HighScore;
   //   enterName();
   playerName = "test";
   start();
@@ -103,7 +101,6 @@ function draw() {
   player.drawBullets();
   drawEnemies();
   if (level == 1) drawWalls();
-  document.getElementById("name").innerHTML = "Name: " + playerName;
   document.getElementById("score").innerHTML = "Score: " + score;
   document.getElementById("level").innerHTML = "level: " + level;
   switch (player.lives) {
@@ -170,9 +167,7 @@ function getLocalStorage() {
   for (var i = 0; i < scoreBoard.length; i++) {
     var arrayOfStrings = scoreBoard[i].split(" ");
 
-    if (parseInt(arrayOfStrings[1]) > HighScore) {
-      HighScore = parseInt(arrayOfStrings[1]);
-    }
+
   }
 }
 
