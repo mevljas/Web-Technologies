@@ -59,7 +59,6 @@ function sortArray() {
   let orderColumn = e.options[e.selectedIndex].value;
 
   usersArray.sort(function(a, b) {
-    console.log(orderColumn);
     var nameA = a[orderColumn];
     var nameB = b[orderColumn];
     if (nameA < nameB) {

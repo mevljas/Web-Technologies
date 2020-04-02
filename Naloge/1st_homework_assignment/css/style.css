@@ -45,7 +45,7 @@ body {
 .menu li,
 #loginButton,
 #continueButton {
-  padding: 5%;
+  padding: 4%;
   margin-bottom: 5%;
   background-color: rgba(0, 0, 0, 1);
   color: #ffffff;
@@ -125,12 +125,19 @@ body {
   margin-top: 5%;
 }
 
+#scoreInstructions{
+  font-size: 3.3vw;
+  text-align: left;
+  line-height: 5vw;
+  margin-bottom: 8%;
+}
+
 table {
   border-collapse: collapse;
   margin: 0 auto;
   border: 1vw solid rgb(17, 17, 17);
   font-size: 2.8vw;
-  margin-bottom: 4%;
+  margin-bottom: 6%;
   width: 100%;
 }
 
@@ -171,11 +178,19 @@ td {
   font-size: 2.5vw;
 }
 
+#orderText{
+  font-size: 3.3vw;
+  text-align: left;
+  margin-left: -8%;
+}
+
 #orderColumn {
   color: white;
   font-family: "Press Start";
   padding: 2%;
   background-color: rgb(17, 17, 17);
+  font-size: 3vw;
+  margin-bottom: 4%;
 }
 
 @media only screen and (min-width: 768px) {
@@ -247,6 +262,9 @@ td {
     font-size: 1vw;
     text-align: left;
     margin-bottom: 5%;
+    line-height: 1.5vw;
+    
+    
   }
 
   table {
@@ -257,6 +275,7 @@ td {
   caption {
     text-align: left;
     margin-bottom: 2%;
+    font-size: 0.8vw;
   }
 
   th {
@@ -268,6 +287,17 @@ td {
     font-size: 1vw;
     padding: 1.5%;
   }
+
+  #orderText{
+    font-size: 1vw;
+    margin-left: -50%;
+  }
+
+  #orderColumn{
+    font-size: 0.8vw;
+    padding: 1.5%;
+  }
+
 
 
 }
