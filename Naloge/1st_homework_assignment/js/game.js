@@ -87,10 +87,8 @@ function gameLoop(timestamp) {
     lastFrameTimeMs = timestamp;
     update(delta);
     draw();
-    
   }
   requestId = requestAnimationFrame(gameLoop);
-  
 }
 
 function update(delta) {
@@ -281,7 +279,7 @@ function pause() {
     clearInterval(flyDownInterval);
     clearInterval(MakeEnemiesVisible);
     clearInterval(enemyShootInterval);
-    
+
     cancelAnimationFrame(requestId);
     requestId = undefined;
     document.getElementById("pause").innerHTML = "Continue game";
