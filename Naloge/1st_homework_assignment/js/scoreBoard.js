@@ -2,7 +2,6 @@ function loadTable() {
   clearTable();
   for (let i = 0; i < usersArray.length; i++) {
     let user = {
-      id: usersArray[i].id,
       fName: usersArray[i].fName,
       lName: usersArray[i].lName,
       score: usersArray[i].score
@@ -19,9 +18,6 @@ function domAddParticipant(user) {
   table.appendChild(tr);
 
   for (const key in user) {
-    if (key === "id") {
-      continue;
-    }
     const td = document.createElement("td");
     td.innerText = user[key];
     td.id = "deletable";
@@ -37,8 +33,13 @@ function removeParticipant(event) {
     window.confirm("Are you sure you want to delete user " + name + "?")
   ) {
     parent.remove();
-    usersArray.splice(parent.id, 1);
-    setLocalStorage();
+    let fName = parent.cells[0].textContent;
+    let lName = parent.cells[0].textContent;
+    let score = parent.cells[0].textContent;
+    usersArray = usersArray.filter(
+      e => e.fName !== fName && e.lName !== lName && e.score !== score
+    );
+    saveUsers();
     loadTable();
   }
 }

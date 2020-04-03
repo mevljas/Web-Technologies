@@ -1,5 +1,4 @@
 usersArray = [];
-lastId = -1;
 
 function saveUsers() {
   // Check browser support
@@ -17,13 +16,11 @@ function saveTempUser() {
 
 function addTempUser() {
   loadUsers();
-  const id = ++lastId;
   const fName = document.querySelector("#fname").value;
   const lName = document.querySelector("#lname").value;
   const score = 0;
 
   tempUser = {
-    id: id,
     fName: fName,
     lName: lName,
     score: score
@@ -37,11 +34,6 @@ function loadUsers() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
-      if (usersArray.length == 0) {
-        lastId = -1;
-      } else {
-        lastId = usersArray[usersArray.length - 1].id;
-      }
     }
 
     if (localStorage.getItem("tempUser") !== null) {
