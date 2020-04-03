@@ -40,6 +40,7 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  font-size: 4vw;
 }
 
 .menu li,
@@ -259,6 +260,13 @@ td {
   .aside {
     font-size: 1vw;
     line-height: 2vw;
+  }
+
+  .menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1vw;
   }
 
   #controls {
