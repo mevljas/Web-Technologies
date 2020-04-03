@@ -167,7 +167,7 @@ function makeEnemies() {
     for (var j = 0; j < 10; j++) {
       enemies[i][j] = new Enemy(
         enemyWidth + j * enemyWidth * 1.5,
-        enemyHeight * 3 + i * enemyHeight * 2,
+        enemyHeight * 3 + i * enemyHeight * 2.1,
         i
       );
       if (level == 3) {
