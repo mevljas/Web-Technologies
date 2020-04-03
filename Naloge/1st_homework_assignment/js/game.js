@@ -17,9 +17,9 @@ function setup() {
   document.getElementById("explosionSound").volume = 0.2;
   document.getElementById("shootSound").volume = 0.2;
   themeSound.loop = true;
-  let canvas = document.getElementById("canvas");
+  canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
-  let wrapper = document.getElementById("canvasWrapper");
+  wrapper = document.getElementById("canvasWrapper");
   canvas.width = wrapper.clientWidth * 0.96;
   canvas.height = wrapper.clientHeight * 2;
   if (wrapper.clientWidth > 700) {
@@ -202,4 +202,6 @@ function gameOver() {
   }
 }
 
+
 setup();
+

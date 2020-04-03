@@ -138,8 +138,8 @@ function Enemy(x, y, row) {
             this.y = this.oldY;
           }
         } else if (
-          this.x + this.width + speedX * delta >= width||
-          this.x + speedX * delta <= this.width / 4  // - + - = +
+          this.x + this.width + speedX * delta >= width ||
+          this.x + speedX * delta <= this.width / 4 // - + - = +
         ) {
           if (level == 2 && !alreadyMovedDown) {
             alreadyMovedDown = true;
@@ -166,7 +166,7 @@ function makeEnemies() {
     enemies[i] = new Array();
     for (var j = 0; j < 10; j++) {
       enemies[i][j] = new Enemy(
-        enemyWidth  + j * enemyWidth * 1.5,
+        enemyWidth + j * enemyWidth * 1.5,
         enemyHeight * 3 + i * enemyHeight * 2,
         i
       );
@@ -307,7 +307,7 @@ function doFlyDown() {
       if (!enemies[i][j].flyDown && Math.floor(Math.random() * 3 + 1) == 1) {
         enemies[i][j].oldY = enemies[i][j].y;
         enemies[i][j].flyDown = true;
-        enemies[i][j].speedY = (Math.random() * 4 + 1) / 100 ;
+        enemies[i][j].speedY = (Math.random() * 4 + 1) / 100;
         breakLoop = true;
         break;
       }
@@ -337,12 +337,25 @@ function MakeEnemiesVisible() {
           -enemyWidth,
           Math.floor(Math.random() * 3 + 1)
         );
-        enemies[i][j].speedY = Math.random() * 4 + 1; //random speed
+        enemies[i][j].speedY = (Math.random() * 4 + 1) / 100; //random speed
         enemies[i][j].status = true;
         breakFromLoop = true; //make just 1 enemy
         break;
       }
     }
     if (breakFromLoop) break;
+  }
+}
+
+function resizeEnemies() {
+  enemyWidth = width / 22; //dinamicna veliksot enemy
+  enemyHeight = height / 22; //dinamicna veliksot enemy
+  speedX = width * 0.00004;
+  for (var i = 0; i < enemies.length; i++) {
+    for (var j = 0; j < enemies[i].length; j++) {
+      enemies[i][j].width = enemyWidth;
+      enemies[i][j].height = enemyWidth;
+      enemies[i][j].speedY = (Math.random() * 4 + 1) / 100;
+    }
   }
 }
