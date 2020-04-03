@@ -193,6 +193,30 @@ td {
   width: 100%;
 }
 
+#sources {
+  text-align: left;
+  padding: 1%;
+  font-size: 3vw;
+  line-height: 4vw;
+  font-size: 2.8vw;
+}
+
+#sources ul {
+  padding: 2%;
+}
+
+#sources li {
+  margin: 5% 0;
+}
+
+#sources h2 {
+  text-align: center;
+}
+
+#sources a {
+  color: white;
+}
+
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {
@@ -300,4 +324,20 @@ td {
   #canvasWrapper {
     padding: 0;
   }
+
+
+  #sources {
+    font-size: 0.8vw;
+    line-height: 1.5vw;
+  }
+  
+  #sources ul {
+    padding: 1%;
+  }
+  
+  #sources li {
+    margin: 1% 0;
+  }
+  
+
 }
