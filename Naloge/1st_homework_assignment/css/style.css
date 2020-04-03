@@ -17,7 +17,7 @@ body {
 
 .colorClass {
   background-color: rgba(20, 20, 20, 0.3);
-  border: 0.5vh solid rgba(255, 255, 255, 1);
+  border: 0.3vh solid rgba(255, 255, 255, 1);
   border-radius: 1vh;
 }
 
