@@ -22,7 +22,6 @@ function addTempUser() {
   const lName = document.querySelector("#lname").value;
   const score = 0;
 
-  playerName = fName;
   tempUser = {
     id: id,
     fName: fName,
@@ -43,9 +42,6 @@ function loadUsers() {
       } else {
         lastId = usersArray[usersArray.length - 1].id;
       }
-    }
-    if (localStorage.getItem("playerName") !== null) {
-      playerName = localStorage.getItem("playerName");
     }
 
     if (localStorage.getItem("tempUser") !== null) {

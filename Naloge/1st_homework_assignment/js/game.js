@@ -1,6 +1,5 @@
 var level = 1;
 var flyDownInterval;
-var scoreBoard = [];
 let d = performance.now();
 let delta = 0;
 timestamp = 0;
@@ -11,7 +10,6 @@ var timestep = 1000 / fps;
 let running = true;
 
 function setup() {
-  loadUsers();
   themeSound = document.getElementById("themeSound");
   document.getElementById("themeSound").volume = 0.2;
   document.getElementById("explosionSound").volume = 0.2;
@@ -29,7 +27,6 @@ function setup() {
   width = canvas.width;
   height = canvas.height;
   score = 0;
-  lives = 3;
   player = new Player();
   player.makeBullets();
   setInterval(enemyShoot, 1000);
@@ -41,6 +38,7 @@ function setup() {
   scorelabel = document.getElementById("score");
   levelLabel = document.getElementById("level");
   requestId = requestAnimationFrame(gameLoop);
+  loadState();
   $("#shoot").click(function() {
     pressedKeys[32] = true;
     $("#shoot").css({ opacity: 0.5 });
@@ -76,6 +74,11 @@ function setup() {
       $("#right").css({ opacity: 1 });
     }, 100);
   });
+  $(window).resize(function() {
+    saveState();
+    location.reload();
+  });
+  $(window).on("load", loadUsers);
 }
 
 function gameLoop(timestamp) {
@@ -202,6 +205,78 @@ function gameOver() {
   }
 }
 
+function saveState() {
+  sessionStorage.setItem("saved", true);
+  sessionStorage.setItem("level", level);
+  sessionStorage.setItem("flyDownInterval", flyDownInterval);
+  sessionStorage.setItem("score", score);
+  sessionStorage.setItem("player", JSON.stringify(player));
+  sessionStorage.setItem("enemiesAlive", enemiesAlive);
+  sessionStorage.setItem("flyDownInterval", flyDownInterval);
+  sessionStorage.setItem("wallsAlive", wallsAlive);
+  sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
+  sessionStorage.setItem("running", running);
+  sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
+  sessionStorage.setItem("startTime", startTime);
+  sessionStorage.setItem("previousEnemyX", previousEnemyX);
+  sessionStorage.setItem("changeDirection", changeDirection);
+  sessionStorage.setItem("alreadyMovedDown", alreadyMovedDown);
+  sessionStorage.setItem("walls", JSON.stringify(walls));
+  sessionStorage.setItem("wallWidth", wallWidth);
+  sessionStorage.setItem("usersArray", JSON.stringify(usersArray));
+  sessionStorage.setItem("lastId", lastId);
+  sessionStorage.setItem("tempUser", tempUser);
+  sessionStorage.setItem("enemies", JSON.stringify(enemies));
+  sessionStorage.setItem("boss", JSON.stringify(boss));
+}
+
+function loadState() {
+  if (sessionStorage.getItem("saved")) {
+    sessionStorage.setItem("saved", false);
+    level = sessionStorage.getItem("level", level);
+    flyDownInterval = sessionStorage.getItem("flyDownInterval");
+    score = sessionStorage.getItem("score");
+    let player2 = JSON.parse(sessionStorage.getItem("player"));
+    player.lives = player2.lives;
+    enemiesAlive = sessionStorage.getItem("enemiesAlive");
+    flyDownInterval = sessionStorage.getItem("flyDownInterval");
+    wallsAlive = sessionStorage.getItem("wallsAlive");
+    MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
+    running = sessionStorage.getItem("running");
+    MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
+    startTime = sessionStorage.getItem("startTime");
+    previousEnemyX = sessionStorage.getItem("previousEnemyX");
+    changeDirection = sessionStorage.getItem("changeDirection");
+    alreadyMovedDown = sessionStorage.getItem("alreadyMovedDown");
+    let walls2 = JSON.parse(sessionStorage.getItem("walls"));
+    for (let i = 0; i < walls.length; i++) {
+      walls[i].status = walls2[i].status;
+      walls[i].lives = walls2[i].lives;
+    }
+
+    wallWidth = sessionStorage.getItem("wallWidth");
+    usersArray = JSON.parse(sessionStorage.getItem("usersArray"));
+    lastId = sessionStorage.getItem("lastId");
+    tempUser = sessionStorage.getItem("tempUser");
+    let enemies2 = JSON.parse(sessionStorage.getItem("enemies"));
+    for (let i = 0; i < enemies.length; i++) {
+      for (let j = 0; j < enemies[i].length; j++) {
+        enemies[i][j].status = enemies2[i][j].status;
+        enemies[i][j].lives = enemies2[i][j].lives;
+        enemies[i][j].flyDown = enemies2[i][j].flyDown;
+        enemies[i][j].row = enemies2[i][j].row;
+        enemies[i][j].oldY = enemies2[i][j].oldY;
+      }
+    }
+    let boss2 = JSON.parse(sessionStorage.getItem("boss"));
+    boss.status = boss2.status;
+    boss.lives = boss2.lives;
+    boss.flyDown = boss2.flyDown;
+    boss.row = boss2.row;
+    boss.lives = boss2.lives;
+    boss.oldY = boss2.oldY;
+    sessionStorage.clear()
+  }
+}
 
 setup();
-

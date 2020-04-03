@@ -12,8 +12,7 @@ function Player() {
   this.sWidth = 73;
   this.sHeight = 51;
   this.bulletsActive;
-  this.moveLeft = false;
-  this.moveRight = false;
+
 
   this.draw = function() {
     //cut picture from spritesheet image invadersimage
