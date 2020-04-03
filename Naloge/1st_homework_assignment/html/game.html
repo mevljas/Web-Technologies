@@ -3,19 +3,19 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <title>Space invaders</title>
   </head>
   <body>
     <audio id="themeSound">
-      <source src="sound/themeSound.mp3" type="audio/mp3" />
+      <source src="../sound/themeSound.mp3" type="audio/mp3" />
     </audio>
     <audio id="explosionSound">
-      <source src="sound/explosion.wav" type="audio/wav" />
+      <source src="../sound/explosion.wav" type="audio/wav" />
     </audio>
     <audio id="shootSound">
-      <source src="sound/shoot.wav" type="audio/wav" />
+      <source src="../sound/shoot.wav" type="audio/wav" />
     </audio>
     <div class="header">
       <h1>Space invaders</h1>
@@ -25,8 +25,10 @@
       <div class=" colorClass col-3 menu">
         <ul>
           <li onclick="location.href = '../index.html';">New game</li>
+          <li onclick="pause();" id="pause">Pause game</li>
           <li onclick="location.href = 'instructions.html';">Instructions</li>
           <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
+          <li onclick="location.href = 'edit.html';">Edit information</li>
           <li onclick="location.href = 'sources.html';">Sources</li>
         </ul>
       </div>
@@ -39,19 +41,19 @@
         <img
           class="controls"
           id="shoot"
-          src="images/shoot.png"
+          src="../images/shoot.png"
           alt="shootButton"
         />
         <img
           class="controls"
           id="left"
-          src="images/left.png"
+          src="../images/left.png"
           alt="leftButton"
         />
         <img
           class="controls"
           id="right"
-          src="images/right.png"
+          src="../images/right.png"
           alt="rightButtobn"
         />
       </div>
@@ -63,19 +65,19 @@
           <span id="lives"
             >Lives:
             <img
-              src="images/player.gif"
+              src="../images/player.gif"
               class="playerimg"
               id="player1"
               alt="playerShip"
             />
             <img
-              src="images/player.gif"
+              src="../images/player.gif"
               class="playerimg"
               id="player2"
               alt="playerShip"
             />
             <img
-              src="images/player.gif"
+              src="../images/player.gif"
               class="playerimg"
               id="player3"
               alt="playerShip"
@@ -85,19 +87,19 @@
           <span id="bullets"
             >Bullets:
             <img
-              src="images/bullet.png"
+              src="../images/bullet.png"
               class="bulletimg"
               id="bullet1"
               alt="bullet"
             />
             <img
-              src="images/bullet.png"
+              src="../images/bullet.png"
               class="bulletimg"
               id="bullet2"
               alt="bullet"
             />
             <img
-              src="images/bullet.png"
+              src="../images/bullet.png"
               class="bulletimg"
               id="bullet3"
               alt="bullet"
@@ -107,15 +109,15 @@
       </div>
     </div>
 
-    <script src="libraries/jquery-3.4.1.slim.min.js"></script>
+    <script src="../libraries/jquery-3.4.1.slim.min.js"></script>
 
-    <script type="text/javascript" src="js/preLoad.js"></script>
-    <script type="text/javascript" src="js/player.js"></script>
-    <script type="text/javascript" src="js/bullet.js"></script>
-    <script type="text/javascript" src="js/enemy.js"></script>
-    <script type="text/javascript" src="js/wall.js"></script>
-    <script type="text/javascript" src="js/dataHandler.js"></script>
-    <script type="text/javascript" src="js/keyHandler.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="../js/preLoad.js"></script>
+    <script type="text/javascript" src="../js/player.js"></script>
+    <script type="text/javascript" src="../js/bullet.js"></script>
+    <script type="text/javascript" src="../js/enemy.js"></script>
+    <script type="text/javascript" src="../js/wall.js"></script>
+    <script type="text/javascript" src="../js/dataHandler.js"></script>
+    <script type="text/javascript" src="../js/keyHandler.js"></script>
+    <script type="text/javascript" src="../js/game.js"></script>
   </body>
 </html>

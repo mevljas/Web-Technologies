@@ -24,21 +24,44 @@
       </div>
 
       <div class="col-6 colorClass">
-        <p id="InstructionsText">
-          Goal of the game is to defeat as many enemies as possible. You can
-          move by using arrow keys and shoot with a space bar. Alternatively, on
-          mobile phones, you can use special on-screen buttons. Good luck!
+        <p id="Instructions">
+          Edit First and Last name.
         </p>
-        <button id="continueButton" onclick="window.location.href = 'game.html';">
-          Continue
-        </button>
+        <div id="inputForm">
+          <form action="instructions.html">
+            <label for="fname">First Name</label>
+            <input
+              type="text"
+              id="fname"
+              name="firstname"
+              placeholder="Your name.."
+              required
+              minlength="3"
+              maxlength="10"
+            />
+            <br />
+
+            <label for="lname">Last Name&nbsp;</label>
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Your last name.."
+              required
+              minlength="3"
+              maxlength="10"
+            />
+
+            <br />
+            <input type="submit" value="Change" />
+          </form>
+        </div>
       </div>
 
-      </div>
     </div>
 
     <script src="../libraries/jquery-3.4.1.slim.min.js"></script>
     <script src="../js/dataHandler.js"></script>
-    <script src="../js/login.js"></script>
+    <script src="../js/edit.js"></script>
   </body>
 </html>

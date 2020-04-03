@@ -29,7 +29,7 @@ function setup() {
   score = 0;
   player = new Player();
   player.makeBullets();
-  setInterval(enemyShoot, 1000);
+  enemyShootInterval = setInterval(enemyShoot, 1000);
   makeEnemies();
   makeWalls();
   playerimg1 = document.getElementById("player1");
@@ -82,20 +82,15 @@ function setup() {
 }
 
 function gameLoop(timestamp) {
-  // Track the accumulated time that hasn't been simulated yet
-  delta += timestamp - lastFrameTimeMs;
-  lastFrameTimeMs = timestamp;
-
-  // Simulate the total elapsed time in fixed-size chunks
-  while (delta >= timestep) {
-    update(timestep);
-    delta -= timestep;
+  if (running) {
+    delta = timestamp - lastFrameTimeMs;
+    lastFrameTimeMs = timestamp;
+    update(delta);
+    draw();
+    
   }
-  draw();
-
-  if (requestId) {
-    requestId = requestAnimationFrame(gameLoop);
-  }
+  requestId = requestAnimationFrame(gameLoop);
+  
 }
 
 function update(delta) {
@@ -275,7 +270,31 @@ function loadState() {
     boss.row = boss2.row;
     boss.lives = boss2.lives;
     boss.oldY = boss2.oldY;
-    sessionStorage.clear()
+    sessionStorage.clear();
+  }
+}
+
+function pause() {
+  if (running) {
+    running = false;
+    disableEnemyBullets();
+    clearInterval(flyDownInterval);
+    clearInterval(MakeEnemiesVisible);
+    clearInterval(enemyShootInterval);
+    
+    cancelAnimationFrame(requestId);
+    requestId = undefined;
+    document.getElementById("pause").innerHTML = "Continue game";
+  } else {
+    running = true;
+    if (level == 3) {
+      setInterval(MakeEnemiesVisible, 500);
+    } else if (wallsAlive <= 0 || level == 2) {
+      flyDownInterval = setInterval(doFlyDown, 5000);
+    }
+    enemyShootInterval = setInterval(enemyShoot, 1000);
+    document.getElementById("pause").innerHTML = "Pause game";
+    requestId = requestAnimationFrame(gameLoop);
   }
 }
 
