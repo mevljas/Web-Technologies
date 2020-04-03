@@ -63,6 +63,12 @@ function Player() {
       }
       pressedKeys[32] = undefined;
     }
+    if (this.lives > 3) {
+      this.lives = 3;
+    }
+    if (this.bulletsActive > 3) {
+      this.bulletsActive = 3;
+    }
   };
   this.makeBullets = function() {
     for (var i = 0; i < 3; i++) {
@@ -85,12 +91,4 @@ function Player() {
 function updatePlayer(delta) {
   player.update(delta);
   player.updateBullets(delta);
-}
-
-function resizePLayer(){
-  player.width = width / 11;
-  player.height = height / 13;
-  player.x = width / 2 - this.width;
-  player.y = height - this.height;
-  player.speed = width * 0.0005;
 }

@@ -96,9 +96,4 @@ function destroyWalls() {
   wallsAlive = -1;
 }
 
-function resizeWalls() {
-  for (var i = 0; i < 6; i++) {
-    walls[i].width = wallWidth;
-    walls[i].height = height / 7;
-  }
-}
+

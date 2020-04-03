@@ -347,15 +347,4 @@ function MakeEnemiesVisible() {
   }
 }
 
-function resizeEnemies() {
-  enemyWidth = width / 22; //dinamicna veliksot enemy
-  enemyHeight = height / 22; //dinamicna veliksot enemy
-  speedX = width * 0.00004;
-  for (var i = 0; i < enemies.length; i++) {
-    for (var j = 0; j < enemies[i].length; j++) {
-      enemies[i][j].width = enemyWidth;
-      enemies[i][j].height = enemyWidth;
-      enemies[i][j].speedY = (Math.random() * 4 + 1) / 100;
-    }
-  }
-}
+

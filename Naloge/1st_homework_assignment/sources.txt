@@ -26,3 +26,4 @@ https://dev.to/banesag/sorting-arrays-of-strings-in-javascript-2g11
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 https://stackoverflow.com/questions/7271490/delete-all-rows-in-an-html-table
 https://stackoverflow.com/questions/8624268/html5-canvas-resize-to-parent
+https://stackoverflow.com/questions/5489946/how-to-wait-for-the-end-of-resize-event-and-only-then-perform-an-action
