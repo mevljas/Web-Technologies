@@ -192,7 +192,7 @@ function gameOver() {
     cancelAnimationFrame(requestId);
     requestId = undefined;
     alert(tempUser.fName + ", game over!" + "\nScore: " + score);
-    saveUser(score);
+    if (score !== "undefined") saveUser(score);
     window.location.href = "scoreBoard.html";
   }
 }
