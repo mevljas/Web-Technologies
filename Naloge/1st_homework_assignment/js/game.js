@@ -22,7 +22,7 @@ function setup() {
   canvas.height = wrapper.clientHeight * 2;
   if (wrapper.clientWidth > 700) {
     canvas.width = wrapper.clientWidth * 0.99;
-    canvas.height = wrapper.clientHeight * 2.5;
+    canvas.height = wrapper.clientHeight * 2.4;
   }
   width = canvas.width;
   height = canvas.height;
