@@ -201,7 +201,7 @@ function gameOver() {
     requestId = undefined;
     alert(tempUser.fName + ", you're dead!" + "\nScore: " + score);
     saveUser(score);
-    // window.location.href = "game.html";
+    window.location.href = "scoreBoard.html";
   }
 }
 

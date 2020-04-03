@@ -15,11 +15,10 @@
     <div class=" row">
       <div class=" colorClass col-3 menu">
         <ul>
-          <li>New game</li>
-          <li>Instructions</li>
-          <li>ScoreBoard</li>
-          <li>Sources</li>
-          <li>Restart game</li>
+          <li onclick="location.href = 'index.html';">New game</li>
+          <li onclick="location.href = 'instructions.html';">Instructions</li>
+          <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
+          <li onclick="location.href = 'sources.html';">Sources</li>
         </ul>
       </div>
 
@@ -58,74 +57,6 @@
         </div>
       </div>
 
-      <div class="colorClass col-6" id="controls">
-        <img
-          class="controls"
-          id="shoot"
-          src="images/shoot.png"
-          alt="shootButton"
-        />
-        <img
-          class="controls"
-          id="left"
-          src="images/left.png"
-          alt="leftButton"
-        />
-        <img
-          class="controls"
-          id="right"
-          src="images/right.png"
-          alt="rightButtobn"
-        />
-      </div>
-
-      <div class="col-3 colorClass">
-        <div class=" aside">
-          <span id="lives"
-            >Lives:
-            <img
-              src="images/player.gif"
-              class="playerimg"
-              id="player1"
-              alt="playerShip"
-            />
-            <img
-              src="images/player.gif"
-              class="playerimg"
-              id="player2"
-              alt="playerShip"
-            />
-            <img
-              src="images/player.gif"
-              class="playerimg"
-              id="player3"
-              alt="playerShip"
-            />
-          </span>
-          <br />
-          <span id="bullets"
-            >Bullets:
-            <img
-              src="images/bullet.png"
-              class="bulletimg"
-              id="bullet1"
-              alt="bullet"
-            />
-            <img
-              src="images/bullet.png"
-              class="bulletimg"
-              id="bullet2"
-              alt="bullet"
-            />
-            <img
-              src="images/bullet.png"
-              class="bulletimg"
-              id="bullet3"
-              alt="bullet"
-            />
-          </span>
-        </div>
-      </div>
     </div>
 
     <script src="libraries/jquery-3.4.1.slim.min.js"></script>
