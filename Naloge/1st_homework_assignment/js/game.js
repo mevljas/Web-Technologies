@@ -104,7 +104,6 @@ function update(delta) {
         level = 2;
         destroyWalls();
         makeEnemies();
-        if (flyDownInterval == undefined) console.log("test");
         flyDownInterval = setInterval(doFlyDown, 5000);
       }, 2000);
       enemiesAlive = -1;
@@ -192,7 +191,7 @@ function gameOver() {
     clearInterval(MakeEnemiesVisible);
     cancelAnimationFrame(requestId);
     requestId = undefined;
-    alert(tempUser.fName + ", you're dead!" + "\nScore: " + score);
+    alert(tempUser.fName + ", game over!" + "\nScore: " + score);
     saveUser(score);
     window.location.href = "scoreBoard.html";
   }
