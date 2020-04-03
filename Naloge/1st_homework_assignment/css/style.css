@@ -325,19 +325,16 @@ td {
     padding: 0;
   }
 
-
   #sources {
     font-size: 0.8vw;
     line-height: 1.5vw;
   }
-  
+
   #sources ul {
     padding: 1%;
   }
-  
+
   #sources li {
     margin: 1% 0;
   }
-  
-
 }

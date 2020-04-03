@@ -95,5 +95,3 @@ function destroyWalls() {
   }
   wallsAlive = -1;
 }
-
-

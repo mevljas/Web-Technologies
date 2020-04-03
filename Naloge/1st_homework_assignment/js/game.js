@@ -209,12 +209,10 @@ function saveState() {
   sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
   sessionStorage.setItem("running", running);
   sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
-  sessionStorage.setItem("startTime", startTime);
   sessionStorage.setItem("previousEnemyX", previousEnemyX);
   sessionStorage.setItem("changeDirection", changeDirection);
   sessionStorage.setItem("alreadyMovedDown", alreadyMovedDown);
   sessionStorage.setItem("walls", JSON.stringify(walls));
-  sessionStorage.setItem("wallWidth", wallWidth);
   sessionStorage.setItem("usersArray", JSON.stringify(usersArray));
   sessionStorage.setItem("lastId", lastId);
   sessionStorage.setItem("tempUser", tempUser);
@@ -236,7 +234,6 @@ function loadState() {
     MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
     running = sessionStorage.getItem("running");
     MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
-    startTime = sessionStorage.getItem("startTime");
     previousEnemyX = sessionStorage.getItem("previousEnemyX");
     changeDirection = sessionStorage.getItem("changeDirection");
     alreadyMovedDown = sessionStorage.getItem("alreadyMovedDown");
@@ -246,7 +243,6 @@ function loadState() {
       walls[i].lives = walls2[i].lives;
     }
 
-    wallWidth = sessionStorage.getItem("wallWidth");
     usersArray = JSON.parse(sessionStorage.getItem("usersArray"));
     lastId = sessionStorage.getItem("lastId");
     tempUser = sessionStorage.getItem("tempUser");

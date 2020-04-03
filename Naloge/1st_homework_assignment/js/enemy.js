@@ -347,18 +347,12 @@ function MakeEnemiesVisible() {
   }
 }
 
-
 function disableEnemyBullets() {
-
   for (var i = 0; i < enemies.length; i++) {
     for (var j = 0; j < enemies[i].length; j++) {
       if (enemies[i][j]) {
         enemies[i][j].bullet.status = false;
-        
       }
     }
   }
-
 }
-
-

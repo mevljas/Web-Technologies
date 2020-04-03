@@ -13,7 +13,6 @@ function Player() {
   this.sHeight = 51;
   this.bulletsActive;
 
-
   this.draw = function() {
     //cut picture from spritesheet image invadersimage
     ctx.drawImage(
