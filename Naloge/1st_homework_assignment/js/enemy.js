@@ -138,7 +138,7 @@ function Enemy(x, y, row) {
             this.y = this.oldY;
           }
         } else if (
-          this.x + this.width * 2 + speedX * delta >= width||
+          this.x + this.width + speedX * delta >= width||
           this.x + speedX * delta <= this.width / 4  // - + - = +
         ) {
           if (level == 2 && !alreadyMovedDown) {
@@ -167,7 +167,7 @@ function makeEnemies() {
     for (var j = 0; j < 10; j++) {
       enemies[i][j] = new Enemy(
         enemyWidth  + j * enemyWidth * 1.5,
-        enemyHeight * 2 + i * enemyHeight * 1.5,
+        enemyHeight * 3 + i * enemyHeight * 2,
         i
       );
       if (level == 3) {

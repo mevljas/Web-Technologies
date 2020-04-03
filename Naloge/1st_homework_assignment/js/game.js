@@ -20,8 +20,12 @@ function setup() {
   let canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   let wrapper = document.getElementById("canvasWrapper");
-  canvas.width = wrapper.clientWidth * 0.99;
-  canvas.height = wrapper.clientHeight * 3;
+  canvas.width = wrapper.clientWidth * 0.96;
+  canvas.height = wrapper.clientHeight * 2;
+  if (wrapper.clientWidth > 700) {
+    canvas.width = wrapper.clientWidth * 0.99;
+    canvas.height = wrapper.clientHeight * 2.5;
+  }
   width = canvas.width;
   height = canvas.height;
   score = 0;
@@ -40,7 +44,7 @@ function setup() {
   $("#shoot").click(function() {
     pressedKeys[32] = true;
     $("#shoot").css({ opacity: 0.5 });
-    if (typeof playerShootInterval !== 'undefined') {
+    if (typeof playerShootInterval !== "undefined") {
       clearInterval(playerShootInterval);
     }
     playerShootInterval = setTimeout(function() {
@@ -51,7 +55,7 @@ function setup() {
 
   $("#left").click(function() {
     pressedKeys[37] = true;
-    if (typeof playerLeftInterval !== 'undefined') {
+    if (typeof playerLeftInterval !== "undefined") {
       clearInterval(playerLeftInterval);
       $("#left").css({ opacity: 0.5 });
     }
@@ -63,7 +67,7 @@ function setup() {
 
   $("#right").click(function() {
     pressedKeys[39] = true;
-    if (typeof playerRightInterval !== 'undefined') {
+    if (typeof playerRightInterval !== "undefined") {
       clearInterval(playerRightInterval);
       $("#right").css({ opacity: 0.5 });
     }
