@@ -215,7 +215,6 @@ function saveState() {
   sessionStorage.setItem("alreadyMovedDown", alreadyMovedDown);
   sessionStorage.setItem("walls", JSON.stringify(walls));
   sessionStorage.setItem("usersArray", JSON.stringify(usersArray));
-  sessionStorage.setItem("lastId", lastId);
   sessionStorage.setItem("tempUser", tempUser);
   sessionStorage.setItem("enemies", JSON.stringify(enemies));
   sessionStorage.setItem("boss", JSON.stringify(boss));
@@ -245,7 +244,6 @@ function loadState() {
     }
 
     usersArray = JSON.parse(sessionStorage.getItem("usersArray"));
-    lastId = sessionStorage.getItem("lastId");
     tempUser = sessionStorage.getItem("tempUser");
     let enemies2 = JSON.parse(sessionStorage.getItem("enemies"));
     for (let i = 0; i < enemies.length; i++) {
