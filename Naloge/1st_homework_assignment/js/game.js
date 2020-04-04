@@ -39,42 +39,42 @@ function setup() {
   levelLabel = document.getElementById("level");
   requestId = requestAnimationFrame(gameLoop);
   loadState();
-  $("#shoot").click(function() {
+  $("#shoot").click(function () {
     pressedKeys[32] = true;
     $("#shoot").css({ opacity: 0.5 });
     if (typeof playerShootInterval !== "undefined") {
       clearInterval(playerShootInterval);
     }
-    playerShootInterval = setTimeout(function() {
+    playerShootInterval = setTimeout(function () {
       pressedKeys[32] = false;
       $("#shoot").css({ opacity: 1 });
     }, 100);
   });
 
-  $("#left").click(function() {
+  $("#left").click(function () {
     pressedKeys[37] = true;
     if (typeof playerLeftInterval !== "undefined") {
       clearInterval(playerLeftInterval);
       $("#left").css({ opacity: 0.5 });
     }
-    playerLeftInterval = setTimeout(function() {
+    playerLeftInterval = setTimeout(function () {
       pressedKeys[37] = false;
       $("#left").css({ opacity: 1 });
     }, 100);
   });
 
-  $("#right").click(function() {
+  $("#right").click(function () {
     pressedKeys[39] = true;
     if (typeof playerRightInterval !== "undefined") {
       clearInterval(playerRightInterval);
       $("#right").css({ opacity: 0.5 });
     }
-    playerRightInterval = setTimeout(function() {
+    playerRightInterval = setTimeout(function () {
       pressedKeys[39] = false;
       $("#right").css({ opacity: 1 });
     }, 100);
   });
-  $(window).resize(function() {
+  $(window).resize(function () {
     saveState();
     location.reload();
   });
@@ -100,7 +100,7 @@ function update(delta) {
   if (level === 1) {
     updateWalls();
     if (enemiesAlive === 0) {
-      setTimeout(function() {
+      setTimeout(function () {
         level = 2;
         destroyWalls();
         makeEnemies();
@@ -114,7 +114,7 @@ function update(delta) {
     }
   } else if (level === 2) {
     if (enemiesAlive === 0) {
-      setTimeout(function() {
+      setTimeout(function () {
         clearInterval(flyDownInterval);
         level = 3;
         makeEnemies();
@@ -191,6 +191,7 @@ function gameOver() {
     clearInterval(MakeEnemiesVisible);
     cancelAnimationFrame(requestId);
     requestId = undefined;
+    if (tempUser.fName === "undefined") tempUser.fName = "user";
     alert(tempUser.fName + ", game over!" + "\nScore: " + score);
     if (score !== "undefined") saveUser(score);
     window.location.href = "scoreBoard.html";
