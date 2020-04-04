@@ -278,7 +278,8 @@ td {
 
   #inputForm input[type="text"] {
     width: 50%;
-    margin: 4%;
+    margin: 2%;
+    padding: 2%;
   }
 
   #inputForm #fname {
@@ -310,18 +311,18 @@ td {
   }
 
   th {
-    line-height: 1.5vw;
+    line-height: 1vw;
     font-size: 1vw;
   }
 
   td {
     font-size: 1vw;
-    padding: 1.5%;
+    padding: 1%;
   }
 
   #orderText {
     font-size: 1vw;
-    margin-left: -50%;
+    margin-left: -68%;
   }
 
   #orderColumn {
