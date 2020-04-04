@@ -221,7 +221,7 @@ function saveState() {
 }
 
 function loadState() {
-  if (sessionStorage.getItem("saved")) {
+  if (sessionStorage.getItem("saved") === true) {
     sessionStorage.setItem("saved", false);
     level = sessionStorage.getItem("level", level);
     flyDownInterval = sessionStorage.getItem("flyDownInterval");
