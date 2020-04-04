@@ -263,6 +263,12 @@ function loadState() {
     boss.lives = boss2.lives;
     boss.oldY = boss2.oldY;
     sessionStorage.clear();
+    running = (running == "true");
+    if(!running){
+      running = true;
+      pause();
+      draw();
+    }
   }
 }
 
