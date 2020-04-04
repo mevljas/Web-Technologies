@@ -199,7 +199,7 @@ function gameOver() {
 }
 
 function saveState() {
-  sessionStorage.setItem("saved", true);
+  sessionStorage.setItem("saved", "true");
   sessionStorage.setItem("level", level);
   sessionStorage.setItem("flyDownInterval", flyDownInterval);
   sessionStorage.setItem("score", score);
@@ -221,8 +221,8 @@ function saveState() {
 }
 
 function loadState() {
-  if (sessionStorage.getItem("saved") === true) {
-    sessionStorage.setItem("saved", false);
+  if (sessionStorage.getItem("saved") === "true") {
+    sessionStorage.setItem("saved", "false");
     level = sessionStorage.getItem("level", level);
     flyDownInterval = sessionStorage.getItem("flyDownInterval");
     score = sessionStorage.getItem("score");
