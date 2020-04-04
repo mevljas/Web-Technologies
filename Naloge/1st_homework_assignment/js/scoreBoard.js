@@ -2,9 +2,10 @@ function loadTable() {
   clearTable();
   for (let i = 0; i < usersArray.length; i++) {
     let user = {
+      id: usersArray[i].id,
       fName: usersArray[i].fName,
       lName: usersArray[i].lName,
-      score: usersArray[i].score
+      score: usersArray[i].score,
     };
     domAddParticipant(user);
   }
@@ -27,18 +28,14 @@ function domAddParticipant(user) {
 
 function removeParticipant(event) {
   let parent = event.target.parentElement;
-  let name = parent.firstElementChild.innerHTML;
+  let name = parent.cells[1].textContent;
   if (
     parent.rowIndex !== 0 &&
     window.confirm("Are you sure you want to delete user " + name + "?")
   ) {
     parent.remove();
-    let fName = parent.cells[0].textContent;
-    let lName = parent.cells[0].textContent;
-    let score = parent.cells[0].textContent;
-    usersArray = usersArray.filter(
-      e => e.fName !== fName && e.lName !== lName && e.score !== score
-    );
+    let id = parent.cells[0].textContent;
+    usersArray = usersArray.filter((e) => e.id != id);
     saveUsers();
     loadTable();
   }
@@ -46,7 +43,12 @@ function removeParticipant(event) {
 
 function fillSelect() {
   let select = document.getElementById("orderColumn");
-  let columns = { fName: "First name", lName: "Last name", score: "Score" };
+  let columns = {
+    id: "Id",
+    fName: "First name",
+    lName: "Last name",
+    score: "Score",
+  };
   for (key in columns) {
     option = document.createElement("option");
     option.setAttribute("value", key);
@@ -59,7 +61,7 @@ function sortArray() {
   let e = document.getElementById("orderColumn");
   let orderColumn = e.options[e.selectedIndex].value;
 
-  usersArray.sort(function(a, b) {
+  usersArray.sort(function (a, b) {
     var nameA = a[orderColumn];
     var nameB = b[orderColumn];
     if (nameA < nameB) {

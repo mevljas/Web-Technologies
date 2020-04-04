@@ -201,18 +201,11 @@ function gameOver() {
 function saveState() {
   sessionStorage.setItem("saved", "true");
   sessionStorage.setItem("level", level);
-  sessionStorage.setItem("flyDownInterval", flyDownInterval);
   sessionStorage.setItem("score", score);
   sessionStorage.setItem("player", JSON.stringify(player));
   sessionStorage.setItem("enemiesAlive", enemiesAlive);
-  sessionStorage.setItem("flyDownInterval", flyDownInterval);
   sessionStorage.setItem("wallsAlive", wallsAlive);
-  sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
   sessionStorage.setItem("running", running);
-  sessionStorage.setItem("MakeEnemiesVisible", MakeEnemiesVisible);
-  sessionStorage.setItem("previousEnemyX", previousEnemyX);
-  sessionStorage.setItem("changeDirection", changeDirection);
-  sessionStorage.setItem("alreadyMovedDown", alreadyMovedDown);
   sessionStorage.setItem("walls", JSON.stringify(walls));
   sessionStorage.setItem("usersArray", JSON.stringify(usersArray));
   sessionStorage.setItem("tempUser", tempUser);
@@ -223,20 +216,12 @@ function saveState() {
 function loadState() {
   if (sessionStorage.getItem("saved") === "true") {
     sessionStorage.setItem("saved", "false");
-    level = sessionStorage.getItem("level", level);
-    flyDownInterval = sessionStorage.getItem("flyDownInterval");
-    score = sessionStorage.getItem("score");
-    let player2 = JSON.parse(sessionStorage.getItem("player"));
-    player.lives = player2.lives;
-    enemiesAlive = sessionStorage.getItem("enemiesAlive");
-    flyDownInterval = sessionStorage.getItem("flyDownInterval");
-    wallsAlive = sessionStorage.getItem("wallsAlive");
-    MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
-    running = sessionStorage.getItem("running");
-    MakeEnemiesVisible = sessionStorage.getItem("MakeEnemiesVisible");
-    previousEnemyX = sessionStorage.getItem("previousEnemyX");
-    changeDirection = sessionStorage.getItem("changeDirection");
-    alreadyMovedDown = sessionStorage.getItem("alreadyMovedDown");
+    level = parseInt(sessionStorage.getItem("level", level), 10);
+    score = parseInt(sessionStorage.getItem("score"),10);
+    player.lives = JSON.parse(sessionStorage.getItem("player")).lives;
+    enemiesAlive = parseInt(sessionStorage.getItem("enemiesAlive"),10);
+    wallsAlive = parseInt(sessionStorage.getItem("wallsAlive"),10);
+    running = sessionStorage.getItem("running") == "true";
     let walls2 = JSON.parse(sessionStorage.getItem("walls"));
     for (let i = 0; i < walls.length; i++) {
       walls[i].status = walls2[i].status;
@@ -250,9 +235,7 @@ function loadState() {
       for (let j = 0; j < enemies[i].length; j++) {
         enemies[i][j].status = enemies2[i][j].status;
         enemies[i][j].lives = enemies2[i][j].lives;
-        enemies[i][j].flyDown = enemies2[i][j].flyDown;
         enemies[i][j].row = enemies2[i][j].row;
-        enemies[i][j].oldY = enemies2[i][j].oldY;
       }
     }
     let boss2 = JSON.parse(sessionStorage.getItem("boss"));
@@ -263,11 +246,13 @@ function loadState() {
     boss.lives = boss2.lives;
     boss.oldY = boss2.oldY;
     sessionStorage.clear();
-    running = running == "true";
     if (!running) {
       running = true;
       pause();
       draw();
+    }
+    else{
+      prepareLevel();
     }
   }
 }
@@ -284,16 +269,21 @@ function pause() {
     requestId = undefined;
     document.getElementById("pause").innerHTML = "Continue game";
   } else {
-    running = true;
-    if (level == 3) {
-      setInterval(MakeEnemiesVisible, 500);
-    } else if (wallsAlive <= 0 || level == 2) {
-      flyDownInterval = setInterval(doFlyDown, 5000);
-    }
-    enemyShootInterval = setInterval(enemyShoot, 1000);
+    prepareLevel();
     document.getElementById("pause").innerHTML = "Pause game";
-    requestId = requestAnimationFrame(gameLoop);
   }
+}
+
+function prepareLevel(){
+  running = true;
+  if (level == 3) {
+    setInterval(MakeEnemiesVisible, 500);
+  } else if (wallsAlive <= 0 || level == 2) {
+    flyDownInterval = setInterval(doFlyDown, 5000);
+  }
+  enemyShootInterval = setInterval(enemyShoot, 1000);
+
+  requestId = requestAnimationFrame(gameLoop);
 }
 
 setup();

@@ -1,4 +1,5 @@
 usersArray = [];
+lastId = -1
 
 function saveUsers() {
   // Check browser support
@@ -21,9 +22,10 @@ function addTempUser() {
   const score = 0;
 
   tempUser = {
+    id: ++lastId,
     fName: fName,
     lName: lName,
-    score: score
+    score: score,
   };
 
   saveTempUser();
@@ -34,6 +36,11 @@ function loadUsers() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("users") !== null) {
       usersArray = JSON.parse(localStorage.getItem("users"));
+      if (usersArray.length == 0) {
+        lastId = -1;
+      } else {
+        lastId = Math.max.apply(Math, usersArray.map(function(o) { return o.id; }))
+      }
     }
 
     if (localStorage.getItem("tempUser") !== null) {
