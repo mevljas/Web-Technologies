@@ -1,13 +1,14 @@
-var level = 1;
-var flyDownInterval;
+let level = 1;
+let flyDownInterval;
 let d = performance.now();
 let delta = 0;
 timestamp = 0;
-lastFrameTimeMs = 0;
+previousTimeStamp = 0;
 fps = 120;
 // We want to simulate 1000 ms / 120 FPS
-var timestep = 1000 / fps;
-let running = true;
+let timestep = 1000 / fps;
+running = true;
+wasPaused = false;
 
 function setup() {
   themeSound = document.getElementById("themeSound");
@@ -83,12 +84,16 @@ function setup() {
 
 function gameLoop(timestamp) {
   if (running) {
-    delta = timestamp - lastFrameTimeMs;
-    lastFrameTimeMs = timestamp;
+    delta = timestamp - previousTimeStamp;
+    previousTimeStamp = timestamp;
+    if (wasPaused) {
+      wasPaused = false;
+      delta = 0;
+    }
     update(delta);
-    draw();
+    requestId = requestAnimationFrame(gameLoop);
   }
-  requestId = requestAnimationFrame(gameLoop);
+  draw();
 }
 
 function update(delta) {
@@ -118,7 +123,7 @@ function update(delta) {
         clearInterval(flyDownInterval);
         level = 3;
         makeEnemies();
-        setInterval(MakeEnemiesVisible, 500);
+        MakeEnemiesVisibleInterval = setInterval(MakeEnemiesVisible, 500);
       }, 2000);
       enemiesAlive = -1;
     }
@@ -217,10 +222,10 @@ function loadState() {
   if (sessionStorage.getItem("saved") === "true") {
     sessionStorage.setItem("saved", "false");
     level = parseInt(sessionStorage.getItem("level", level), 10);
-    score = parseInt(sessionStorage.getItem("score"),10);
+    score = parseInt(sessionStorage.getItem("score"), 10);
     player.lives = JSON.parse(sessionStorage.getItem("player")).lives;
-    enemiesAlive = parseInt(sessionStorage.getItem("enemiesAlive"),10);
-    wallsAlive = parseInt(sessionStorage.getItem("wallsAlive"),10);
+    enemiesAlive = parseInt(sessionStorage.getItem("enemiesAlive"), 10);
+    wallsAlive = parseInt(sessionStorage.getItem("wallsAlive"), 10);
     running = sessionStorage.getItem("running") == "true";
     let walls2 = JSON.parse(sessionStorage.getItem("walls"));
     for (let i = 0; i < walls.length; i++) {
@@ -236,6 +241,9 @@ function loadState() {
         enemies[i][j].status = enemies2[i][j].status;
         enemies[i][j].lives = enemies2[i][j].lives;
         enemies[i][j].row = enemies2[i][j].row;
+        if(level === 3){
+          enemies[i][j].y = -enemies[i][j].height;
+        }
       }
     }
     let boss2 = JSON.parse(sessionStorage.getItem("boss"));
@@ -250,8 +258,7 @@ function loadState() {
       running = true;
       pause();
       draw();
-    }
-    else{
+    } else {
       prepareLevel();
     }
   }
@@ -260,11 +267,12 @@ function loadState() {
 function pause() {
   if (running) {
     running = false;
+    wasPaused = true;
     disableEnemyBullets();
     clearInterval(flyDownInterval);
-    clearInterval(MakeEnemiesVisible);
+    if (typeof MakeEnemiesVisibleInterval !== 'undefined')
+      clearInterval(MakeEnemiesVisibleInterval);
     clearInterval(enemyShootInterval);
-
     cancelAnimationFrame(requestId);
     requestId = undefined;
     document.getElementById("pause").innerHTML = "Continue game";
@@ -274,10 +282,10 @@ function pause() {
   }
 }
 
-function prepareLevel(){
+function prepareLevel() {
   running = true;
   if (level == 3) {
-    setInterval(MakeEnemiesVisible, 500);
+    MakeEnemiesVisibleInterval = setInterval(MakeEnemiesVisible, 500);
   } else if (wallsAlive <= 0 || level == 2) {
     flyDownInterval = setInterval(doFlyDown, 5000);
   }

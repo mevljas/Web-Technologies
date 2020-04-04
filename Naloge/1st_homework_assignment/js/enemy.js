@@ -57,7 +57,7 @@ function Enemy(x, y, row) {
     this.sHeight = 79;
   }
 
-  this.draw = function() {
+  this.draw = function () {
     if (this.status) {
       if ((performance.now() - startTime) / 1000 <= 1) {
         ctx.drawImage(
@@ -100,7 +100,7 @@ function Enemy(x, y, row) {
       );
     }
   };
-  this.collision = function() {
+  this.collision = function () {
     //collision bottom canvas border
     if (level == 3) {
       if (this.y > height) {
@@ -124,7 +124,7 @@ function Enemy(x, y, row) {
       enemiesAlive--;
     }
   };
-  this.update = function(delta) {
+  this.update = function (delta) {
     if (this.status) {
       if (level < 3) {
         if (this.flyDown) {
@@ -277,7 +277,7 @@ function enemyShoot(enemy) {
 function explosion(enemy) {
   enemy.explosion = true;
   explosionSound.play();
-  setTimeout(function() {
+  setTimeout(function () {
     enemy.explosion = false;
   }, 1000);
 }
@@ -337,6 +337,7 @@ function MakeEnemiesVisible() {
           -enemyWidth,
           Math.floor(Math.random() * 3 + 1)
         );
+        enemies[i][j].speedY = -this.width;
         enemies[i][j].speedY = (Math.random() * 4 + 1) / 100; //random speed
         enemies[i][j].status = true;
         breakFromLoop = true; //make just 1 enemy
