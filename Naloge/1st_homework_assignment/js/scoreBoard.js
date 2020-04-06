@@ -28,16 +28,19 @@ function domAddParticipant(user) {
 
 function removeParticipant(event) {
   let parent = event.target.parentElement;
-  let name = parent.cells[1].textContent;
-  if (
-    parent.rowIndex !== 0 &&
-    window.confirm("Are you sure you want to delete user " + name + "?")
-  ) {
-    parent.remove();
-    let id = parent.cells[0].textContent;
-    usersArray = usersArray.filter((e) => e.id != id);
-    saveUsers();
-    loadTable();
+
+  if (typeof parent.cells !== "undefined") {
+    let name = parent.cells[1].textContent;
+    if (
+      parent.rowIndex !== 0 &&
+      window.confirm("Are you sure you want to delete user " + name + "?")
+    ) {
+      parent.remove();
+      let id = parent.cells[0].textContent;
+      usersArray = usersArray.filter((e) => e.id != id);
+      saveUsers();
+      loadTable();
+    }
   }
 }
 
