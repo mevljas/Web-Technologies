@@ -116,6 +116,7 @@ table {
   font-size: 2.8vw;
   margin-bottom: 6%;
   width: 100%;
+  margin-top: 8%;
 }
 
 caption {
@@ -154,13 +155,15 @@ td {
   font-size: 2.5vw;
 }
 
-#orderText {
+#orderText,
+#filterText {
   font-size: 3.3vw;
   text-align: left;
-  margin-left: -8%;
+  margin-left: -15%;
 }
 
-#orderColumn {
+#orderColumn,
+#filter {
   color: white;
   font-family: "Press Start";
   padding: 2%;
@@ -204,6 +207,14 @@ td {
 
 #sources a {
   color: white;
+}
+
+#filterText {
+  margin-left: 0;
+}
+
+#filter {
+  width: 70%;
 }
 
 @media only screen and (min-width: 768px) {
@@ -284,6 +295,7 @@ td {
   table {
     font-size: 1vw;
     margin-bottom: 5%;
+    margin-top: 2%;
   }
 
   caption {
@@ -302,12 +314,14 @@ td {
     padding: 1%;
   }
 
-  #orderText {
+  #orderText,
+  #filterText {
     font-size: 1vw;
     margin-left: -68%;
   }
 
-  #orderColumn {
+  #orderColumn,
+  #filter {
     font-size: 0.8vw;
     padding: 1.5%;
   }
@@ -327,5 +341,13 @@ td {
 
   #sources li {
     margin: 1% 0;
+  }
+
+  #filterText {
+    margin-left: -58%;
+  }
+
+  #filter {
+    width: 30%;
   }
 }

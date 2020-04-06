@@ -12,21 +12,29 @@
       <h1>Space invaders</h1>
     </div>
 
-      <div class="colorClass col-3 menu">
-        <ul>
-          <li onclick="location.href = '../index.html';">New game</li>
-          <li onclick="location.href = 'instructions.html';">Instructions</li>
-          <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
-          <li onclick="location.href = 'edit.html';">Edit information</li>
-          <li onclick="location.href = 'sources.html';">Sources</li>
-        </ul>
-      </div>
+    <div class="colorClass col-3 menu">
+      <ul>
+        <li onclick="location.href = '../index.html';">New game</li>
+        <li onclick="location.href = 'instructions.html';">Instructions</li>
+        <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
+        <li onclick="location.href = 'edit.html';">Edit information</li>
+        <li onclick="location.href = 'sources.html';">Sources</li>
+      </ul>
+    </div>
 
     <div class="col-9 colorClass">
       <p id="InstructionsText">
         Delete a user from the table by clicking on it. Change table order by
-        selecting another column.
+        selecting another column. Filer data by entering a desired filer.
       </p>
+
+      <label id="filterText" for="filter">Filter </label>
+      <input
+        type="text"
+        id="filter"
+        placeholder="Desired filter..."
+        class="colorClass"
+      />
       <table id="users-table">
         <caption>
           The list of existing users.
@@ -39,10 +47,8 @@
         </tr>
       </table>
 
-      <div id="order">
-        <span id="orderText">Order by: </span>
-        <select id="orderColumn" class="colorClass"> </select>
-      </div>
+      <span id="orderText">Order by </span>
+      <select id="orderColumn" class="colorClass"> </select>
     </div>
 
     <script src="../libraries/jquery-3.4.1.slim.min.js"></script>
