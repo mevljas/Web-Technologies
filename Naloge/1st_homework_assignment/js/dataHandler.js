@@ -53,4 +53,7 @@ function saveUser(score) {
   tempUser.score = score;
   usersArray.push(tempUser);
   saveUsers();
+  tempUser.id++;
+  saveTempUser();
+  
 }

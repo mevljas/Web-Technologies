@@ -17,13 +17,13 @@ body {
 
 .colorClass {
   background-color: rgba(20, 20, 20, 0.3);
-  border: 0.3vh solid rgba(255, 255, 255, 1);
+  border: 0.2vw solid rgba(255, 255, 255, 1);
   border-radius: 1vh;
 }
 
 [class*="col-"] {
   float: left;
-  padding: 15px;
+  padding: 1%;
 }
 
 .header {
@@ -44,7 +44,7 @@ body {
   margin-bottom: 5%;
   background-color: rgba(0, 0, 0, 1);
   color: #ffffff;
-  box-shadow: 0 1px 3px rgba(204, 197, 197, 0.774);
+  box-shadow: 0 0.3vw 1vw rgba(204, 197, 197, 0.774);
 }
 
 .menu li:hover,
@@ -70,8 +70,8 @@ body {
   margin-top: 2%;
   margin-bottom: 10%;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1% solid #ccc;
+  border-radius: 1vw;
   box-sizing: border-box;
   font-family: "Press Start";
   color: white;
@@ -154,6 +154,8 @@ td {
   background-color: rgb(72, 77, 74);
   font-size: 2.5vw;
 }
+
+table td.first { display: none; }
 
 #orderText,
 #filterText {
@@ -279,6 +281,7 @@ td {
     width: 30%;
     margin: 2%;
     padding: 1%;
+    border-radius: 0.3vw;
   }
 
   #inputForm #fname {
@@ -289,13 +292,14 @@ td {
     text-align: left;
     font-size: 1vw;
     line-height: 1.8vw;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
   }
 
   table {
     font-size: 1vw;
     margin-bottom: 5%;
-    margin-top: 2%;
+    margin-top: 0;
+    margin-bottom: 2%;
   }
 
   caption {
@@ -317,13 +321,17 @@ td {
   #orderText,
   #filterText {
     font-size: 1vw;
-    margin-left: -68%;
+    margin-left: -70.5%;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   #orderColumn,
   #filter {
     font-size: 0.8vw;
     padding: 1.5%;
+    margin-top: 0;
+    margin-bottom: 2%;
   }
 
   #canvasWrapper {
@@ -344,10 +352,23 @@ td {
   }
 
   #filterText {
-    margin-left: -58%;
+    margin-left: -57%;
   }
 
   #filter {
     width: 30%;
+    margin-left: 3%;
+  }
+
+  .menu li,
+  #loginButton,
+  #continueButton {
+    box-shadow: 0 0.1vw 0.5vw rgba(204, 197, 197, 0.774);
+  }
+
+  .colorClass {
+    background-color: rgba(20, 20, 20, 0.3);
+    border: 0.1vw solid rgba(255, 255, 255, 1);
+    border-radius: 1vh;
   }
 }
