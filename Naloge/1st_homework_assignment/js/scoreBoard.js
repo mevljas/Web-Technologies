@@ -56,7 +56,6 @@ function removeParticipant(event) {
 function fillSelect() {
   let select = document.getElementById("orderColumn");
   let columns = {
-    id: "Id",
     fName: "First name",
     lName: "Last name",
     score: "Score",

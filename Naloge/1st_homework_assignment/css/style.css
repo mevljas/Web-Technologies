@@ -155,7 +155,9 @@ td {
   font-size: 2.5vw;
 }
 
-table td.first { display: none; }
+table tr td:nth-child(1){
+  display:none;
+}
 
 #orderText,
 #filterText {
