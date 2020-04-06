@@ -1,5 +1,6 @@
 function loadTable() {
   clearTable();
+  let filter = $("#filter").val();
   for (let i = 0; i < usersArray.length; i++) {
     let user = {
       id: usersArray[i].id,
@@ -7,7 +8,15 @@ function loadTable() {
       lName: usersArray[i].lName,
       score: usersArray[i].score,
     };
-    domAddParticipant(user);
+    if (
+      filter === "" ||
+      user.id.toString().includes(filter) ||
+      user.fName.includes(filter) ||
+      user.lName.includes(filter) ||
+      user.score.toString().includes(filter)
+    ) {
+      domAddParticipant(user);
+    }
   }
 }
 
@@ -87,3 +96,4 @@ fillSelect();
 sortArray();
 document.getElementsByTagName("table")[0].onclick = removeParticipant;
 document.getElementById("orderColumn").onchange = sortArray;
+document.getElementById("filter").oninput = loadTable;
