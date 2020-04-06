@@ -277,9 +277,9 @@ td {
   }
 
   #inputForm input[type="text"] {
-    width: 50%;
+    width: 30%;
     margin: 2%;
-    padding: 2%;
+    padding: 1%;
   }
 
   #inputForm #fname {
