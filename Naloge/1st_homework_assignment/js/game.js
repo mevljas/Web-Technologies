@@ -198,7 +198,7 @@ function gameOver() {
     requestId = undefined;
     if (tempUser.fName === "undefined") tempUser.fName = "user";
     alert(tempUser.fName + ", game over!" + "\nScore: " + score);
-    if (score !== "undefined") saveUser(score);
+    if ( typeof score !== 'undefined') saveUser(score);
     window.location.href = "scoreBoard.html";
   }
 }
