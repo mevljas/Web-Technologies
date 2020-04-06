@@ -12,52 +12,50 @@
       <h1>Space invaders</h1>
     </div>
 
-    <div class=" row">
-      <div class=" colorClass col-3 menu">
-        <ul>
-          <li onclick="location.href = 'index.html';">New game</li>
-          <li onclick="location.href = 'html/instructions.html';">
-            Instructions
-          </li>
-          <li onclick="location.href = 'html/ScoreBoard.html';">ScoreBoard</li>
-          <li onclick="location.href = 'html/edit.html';">Edit information</li>
-          <li onclick="location.href = 'html/sources.html';">Sources</li>
-        </ul>
-      </div>
+    <div class="colorClass col-3 menu">
+      <ul>
+        <li onclick="location.href = 'index.html';">New game</li>
+        <li onclick="location.href = 'html/instructions.html';">
+          Instructions
+        </li>
+        <li onclick="location.href = 'html/ScoreBoard.html';">ScoreBoard</li>
+        <li onclick="location.href = 'html/edit.html';">Edit information</li>
+        <li onclick="location.href = 'html/sources.html';">Sources</li>
+      </ul>
+    </div>
 
-      <div class="col-9 colorClass">
-        <p id="Instructions">
-          Please fill out this form.
-        </p>
-        <div id="inputForm">
-          <form action="html/instructions.html">
-            <label for="fname">First Name</label>
-            <input
-              type="text"
-              id="fname"
-              name="firstname"
-              placeholder="Your name.."
-              required
-              minlength="3"
-              maxlength="10"
-            />
-            <br />
+    <div class="col-9 colorClass">
+      <p id="Instructions">
+        Please fill out this form.
+      </p>
+      <div id="inputForm">
+        <form action="html/instructions.html">
+          <label for="fname">First Name</label>
+          <input
+            type="text"
+            id="fname"
+            name="firstname"
+            placeholder="Your name.."
+            required
+            minlength="3"
+            maxlength="10"
+          />
+          <br />
 
-            <label for="lname">Last Name&nbsp;</label>
-            <input
-              type="text"
-              id="lname"
-              name="lastname"
-              placeholder="Your last name.."
-              required
-              minlength="3"
-              maxlength="10"
-            />
+          <label for="lname">Last Name&nbsp;</label>
+          <input
+            type="text"
+            id="lname"
+            name="lastname"
+            placeholder="Your last name.."
+            required
+            minlength="3"
+            maxlength="10"
+          />
 
-            <br />
-            <input type="submit" value="Login" />
-          </form>
-        </div>
+          <br />
+          <input type="submit" value="Login" />
+        </form>
       </div>
     </div>
 

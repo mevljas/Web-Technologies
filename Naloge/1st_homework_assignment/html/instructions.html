@@ -12,36 +12,31 @@
       <h1>Space invaders</h1>
     </div>
 
-    <div class="row">
-      <div class="colorClass col-3 menu">
-        <ul>
-          <li onclick="location.href = '../index.html';">New game</li>
-          <li onclick="location.href = 'instructions.html';">Instructions</li>
-          <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
-          <li onclick="location.href = 'edit.html';">Edit information</li>
-          <li onclick="location.href = 'sources.html';">Sources</li>
-        </ul>
-      </div>
+    <div class="colorClass col-3 menu">
+      <ul>
+        <li onclick="location.href = '../index.html';">New game</li>
+        <li onclick="location.href = 'instructions.html';">Instructions</li>
+        <li onclick="location.href = 'ScoreBoard.html';">ScoreBoard</li>
+        <li onclick="location.href = 'edit.html';">Edit information</li>
+        <li onclick="location.href = 'sources.html';">Sources</li>
+      </ul>
+    </div>
 
-      <div class="col-9 colorClass">
-        <p id="InstructionsText">
-          Goal of the game is to defeat as many enemies as possible. You can
-          move by using arrow keys and shoot with a space bar. Alternatively, on
-          mobile phones, you can use special on-screen buttons.
-          <br />
-          <br />
-          You can check out previous results and edit your current information.
-          <br />
-          <br />
-          Good luck!
-        </p>
-        <button
-          id="continueButton"
-          onclick="window.location.href = 'game.html';"
-        >
-          Play
-        </button>
-      </div>
+    <div class="col-9 colorClass">
+      <p id="InstructionsText">
+        Goal of the game is to defeat as many enemies as possible. You can move
+        by using arrow keys and shoot with a space bar. Alternatively, on mobile
+        phones, you can use special on-screen buttons.
+        <br />
+        <br />
+        You can check out previous results and edit your current information.
+        <br />
+        <br />
+        Good luck!
+      </p>
+      <button id="continueButton" onclick="window.location.href = 'game.html';">
+        Play
+      </button>
     </div>
 
     <script src="../libraries/jquery-3.4.1.slim.min.js"></script>
