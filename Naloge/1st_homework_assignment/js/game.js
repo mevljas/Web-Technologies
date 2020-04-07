@@ -1,14 +1,13 @@
 let level = 1;
 let flyDownInterval;
 let d = performance.now();
-let delta = 0;
 timestamp = 0;
 previousTimeStamp = 0;
 fps = 120;
 // We want to simulate 1000 ms / 120 FPS
-let timestep = 1000 / fps;
 running = true;
 wasPaused = false;
+score = 0;
 
 function setup() {
   themeSound = document.getElementById("themeSound");
@@ -27,7 +26,7 @@ function setup() {
   }
   width = canvas.width;
   height = canvas.height;
-  score = 0;
+
   player = new Player();
   player.makeBullets();
   enemyShootInterval = setInterval(enemyShoot, 1000);
@@ -84,7 +83,7 @@ function setup() {
 
 function gameLoop(timestamp) {
   if (running) {
-    delta = timestamp - previousTimeStamp;
+    let delta = timestamp - previousTimeStamp;
     previousTimeStamp = timestamp;
     if (wasPaused) {
       wasPaused = false;
@@ -198,7 +197,7 @@ function gameOver() {
     requestId = undefined;
     if (tempUser.fName === "undefined") tempUser.fName = "user";
     alert(tempUser.fName + ", game over!" + "\nScore: " + score);
-    if ( typeof score !== 'undefined') saveUser(score);
+    if (typeof score !== "undefined") saveUser(score);
     window.location.href = "scoreBoard.html";
   }
 }
@@ -241,7 +240,7 @@ function loadState() {
         enemies[i][j].status = enemies2[i][j].status;
         enemies[i][j].lives = enemies2[i][j].lives;
         enemies[i][j].row = enemies2[i][j].row;
-        if(level === 3){
+        if (level === 3) {
           enemies[i][j].y = -enemies[i][j].height;
         }
       }
@@ -270,7 +269,7 @@ function pause() {
     wasPaused = true;
     disableEnemyBullets();
     clearInterval(flyDownInterval);
-    if (typeof MakeEnemiesVisibleInterval !== 'undefined')
+    if (typeof MakeEnemiesVisibleInterval !== "undefined")
       clearInterval(MakeEnemiesVisibleInterval);
     clearInterval(enemyShootInterval);
     cancelAnimationFrame(requestId);

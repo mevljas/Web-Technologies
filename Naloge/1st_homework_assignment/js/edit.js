@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $("form").on("submit", function() {
+$(document).ready(function () {
+  $("form").on("submit", function () {
     addTempUser();
     alert("User information successfully changed.");
   });

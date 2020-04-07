@@ -10,7 +10,6 @@ function loadTable() {
     };
     if (
       filter === "" ||
-      user.id.toString().includes(filter) ||
       user.fName.includes(filter) ||
       user.lName.includes(filter) ||
       user.score.toString().includes(filter)

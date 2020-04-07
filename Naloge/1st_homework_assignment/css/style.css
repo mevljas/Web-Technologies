@@ -124,7 +124,10 @@ caption {
   margin-bottom: 2%;
 }
 
-tr {
+tr,
+.menu li,
+#loginButton,
+#continueButton {
   /* Prevent text selection */
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -155,8 +158,8 @@ td {
   font-size: 2.5vw;
 }
 
-table tr td:nth-child(1){
-  display:none;
+table tr td:nth-child(1) {
+  display: none;
 }
 
 #orderText,
@@ -164,6 +167,10 @@ table tr td:nth-child(1){
   font-size: 3.3vw;
   text-align: left;
   margin-left: -15%;
+}
+
+#orderText {
+  margin-left: -22%;
 }
 
 #orderColumn,
@@ -174,6 +181,15 @@ table tr td:nth-child(1){
   background-color: rgb(17, 17, 17);
   font-size: 3vw;
   margin-bottom: 4%;
+}
+
+#filterText{
+  margin-left: -12%;
+}
+
+#filter {
+width: 50%;
+margin-left: 7%;
 }
 
 .playerimg {
@@ -213,13 +229,7 @@ table tr td:nth-child(1){
   color: white;
 }
 
-#filterText {
-  margin-left: 0;
-}
 
-#filter {
-  width: 70%;
-}
 
 @media only screen and (min-width: 768px) {
   /* For desktop: */

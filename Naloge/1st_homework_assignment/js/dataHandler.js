@@ -1,5 +1,5 @@
 usersArray = [];
-lastId = -1
+lastId = -1;
 
 function saveUsers() {
   // Check browser support
@@ -39,7 +39,12 @@ function loadUsers() {
       if (usersArray.length == 0) {
         lastId = -1;
       } else {
-        lastId = Math.max.apply(Math, usersArray.map(function(o) { return o.id; }))
+        lastId = Math.max.apply(
+          Math,
+          usersArray.map(function (o) {
+            return o.id;
+          })
+        );
       }
     }
 
@@ -55,5 +60,4 @@ function saveUser(score) {
   saveUsers();
   tempUser.id++;
   saveTempUser();
-  
 }
