@@ -70,7 +70,7 @@ body {
   margin-top: 2%;
   margin-bottom: 10%;
   display: inline-block;
-  border: 1% solid #ccc;
+  border: 0.1vw solid #ccc;
   border-radius: 1vw;
   box-sizing: border-box;
   font-family: "Press Start";
