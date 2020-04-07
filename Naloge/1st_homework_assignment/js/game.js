@@ -21,7 +21,6 @@ function setup() {
   canvas.width = wrapper.clientWidth * 0.96;
   canvas.height = wrapper.clientHeight * 2.2;
   if ($('#controls').css('display') === 'none') {
-    console.log("test")
     canvas.width = wrapper.clientWidth * 0.99;
     canvas.height = wrapper.clientHeight * 1.5;
   }
