@@ -19,11 +19,12 @@ function setup() {
   ctx = canvas.getContext("2d");
   wrapper = document.getElementById("canvasWrapper");
   canvas.width = wrapper.clientWidth * 0.96;
-  canvas.height = wrapper.clientHeight * 3;
-  // if (wrapper.clientWidth > 1000) {
-  //   canvas.width = wrapper.clientWidth * 0.99;
-  //   canvas.height = wrapper.clientHeight * 2.4;
-  // }
+  canvas.height = wrapper.clientHeight * 2.2;
+  if ($('#controls').css('display') === 'none') {
+    console.log("test")
+    canvas.width = wrapper.clientWidth * 0.99;
+    canvas.height = wrapper.clientHeight * 1.5;
+  }
   width = canvas.width;
   height = canvas.height;
 
