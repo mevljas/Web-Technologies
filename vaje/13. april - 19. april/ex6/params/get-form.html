@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Form that sends a GET request</title>
+
+<p>This form will send out a HTTP get request with two parameters:</p>
+<ul>
+    <li><pre>first_name</pre> representing the value in the first input field and</li>
+    <li><pre>last_name</pre> representing the value in the second input field.</li>
+</ul>
+<form action="process-get-request.php" method="get">
+    <p><label for="first_name">First name:</label>
+	<input type="text" name="first_name" id="first_name" /></p>
+
+	<p><label for="last_name">Last name:</label>
+    <input type="text" name="last_name" id="last_name" /></p>
+	
+    <p><button type="submit">Send request</button></p>
+</form>
