@@ -39,6 +39,16 @@ connection: Close\r
 <p>Page cannot be found.</p>
 """
 
+# Template for a 400 (Bad request) error
+RESPONSE_400 = """HTTP/1.1 400 Bad request\r
+content-type: text/html\r
+connection: Close\r
+\r
+<!doctype html>
+<h1>400 Bad request</h1>
+<p>Request cannot be interpreted.</p>
+"""
+
 
 def save_to_db(first, last):
     """Create a new user with given first and last name and store it into
@@ -109,7 +119,54 @@ def process_request(connection, address):
     :param address is a 2-tuple (address(str), port(int)) of the client
     """
 
-    # Read and parse the request line
+    # Make reading from a socket like reading/writing from a file
+    # Use binary mode, so we can read and write binary data. However,
+    # this also means that we have to decode (and encode) data (preferably
+    # to utf-8) when reading (and writing) text
+    # socket connection preoblikujemo tako, da se obnasa kot datoteka.
+    client = connection.makefile("wrb")
+
+    #  Rabimo try-catch blok zaradi morebitnih nepravilnih argumentov
+    try:
+        # Read one line, decode it to utf-8 and strip leading and trailing spaces
+        # prebere eno vrstico odjemalca in jo moramo dekodirat, ker je to seznam bajtov. Odstranimo morebite presledek na
+        # zacetku in na koncu
+        line = client.readline().decode("utf-8").strip()
+
+        method, uri, version, params = parse_request_line(line)
+        # print(method, uri, version, headers)
+
+
+
+    #     Lahko imamo 3 različne napaki
+    except (ValueError, AssertionError) as e:
+        # print("Invalid request %s (%s)" % (line, e))
+        client.write(RESPONSE_400.encode("utf-8"))
+    except IOError:
+        client.write(RESPONSE_404.encode("utf-8"))
+    finally:
+        client.close()
+
+
+# Read and parse the request line
+def parse_request_line(line):
+    # vrstico moramo razbit v 3 dele
+
+    params = {}
+    method = ""
+    uri = ""
+    version = ""
+
+    try:
+        method, uri, version, params = line.split()
+    except ValueError:
+        method, uri, version = line.split()
+
+    assert method == "GET" or method == "POST", "Invalid request method"
+    assert len(uri) > 0 and uri[0] == "/", "Invalid request URI"
+    assert version == "HTTP/1.1", "Invalid HTTP version"
+
+    return method, uri, version, params
 
     # Read and parse headers
 

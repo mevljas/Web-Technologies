@@ -149,11 +149,11 @@ class ServerTest(unittest.TestCase):
     def test_parse_request_line1(self):
         """Parse request line 'GET / HTTP/1.1'"""
 
-        # method, uri, protocol, params = parse_request_line("GET / HTTP/1.1")
-        # self.assertEqual(method, "GET")
-        # self.assertEqual(uri, "/")
-        # self.assertEqual(protocol, "HTTP/1.1")
-        # self.assertEqual(params, {})
+        method, uri, protocol, params = parse_request_line("GET / HTTP/1.1")
+        self.assertEqual(method, "GET")
+        self.assertEqual(uri, "/")
+        self.assertEqual(protocol, "HTTP/1.1")
+        self.assertEqual(params, {})
 
     ###################################################################
     #                      INTEGRATION TESTS
@@ -189,6 +189,12 @@ class ServerTest(unittest.TestCase):
     def test_invalid_request_line(self):
         """Return code 400 when the request line is invalid"""
         response = self._manual_request("This is really not an HTTP request\n")
+        self.assertTrue(response.startswith("HTTP/1.1 400"))
+
+
+    def test_invalid_request_method(self):
+        """Return code 400 when the method is invalid"""
+        response = self._manual_request("GET2 / HTTP/1.1\n")
         self.assertTrue(response.startswith("HTTP/1.1 400"))
 
 
