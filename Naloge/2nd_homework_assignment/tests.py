@@ -198,6 +198,17 @@ class ServerTest(unittest.TestCase):
         self.assertTrue(response.startswith("HTTP/1.1 400"))
 
 
+    def test_invalid_request_uri(self):
+        """Return code 400 when the uri is invalid"""
+        response = self._manual_request("GET 2/ HTTP/1.1\n")
+        self.assertTrue(response.startswith("HTTP/1.1 400"))
+
+    def test_invalid_request_version(self):
+        """Return code 400 when the version is invalid"""
+        response = self._manual_request("GET / HTTP/1.3\n")
+        self.assertTrue(response.startswith("HTTP/1.1 400"))
+
+
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         test_db = ServerTest()
