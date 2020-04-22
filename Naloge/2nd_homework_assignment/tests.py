@@ -146,6 +146,7 @@ class ServerTest(unittest.TestCase):
 
     # Add your unit tests below.
     # Below is an example of a function that parses the request line
+
     def test_parse_request_line1(self):
         """Parse request line 'GET / HTTP/1.1'"""
 
@@ -154,6 +155,11 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(uri, "/")
         self.assertEqual(protocol, "HTTP/1.1")
         self.assertEqual(params, {})
+
+
+
+
+
 
     ###################################################################
     #                      INTEGRATION TESTS

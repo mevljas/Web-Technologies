@@ -5,6 +5,7 @@ import pickle
 import socket
 from os.path import isdir
 from urllib.parse import unquote_plus
+from mimetypes import guess_type
 
 # Pickle file for storing data
 PICKLE_DB = "db.pkl"
@@ -18,6 +19,9 @@ content-type: %s\r
 content-length: %d\r
 connection: Close\r
 \r
+<!doctype html>
+<h1>200 OK</h1>
+<p>Hello, world.</p>
 """
 
 # Represents a table row that holds user data
@@ -45,8 +49,27 @@ content-type: text/html\r
 connection: Close\r
 \r
 <!doctype html>
-<h1>400 Bad request</h1>
-<p>Request cannot be interpreted.</p>
+<h1>400 Bad Request</h1>
+   <p>Your browser sent a request that this server could not understand.</p>
+   <p>The request line contained invalid characters following the protocol string.</p>
+"""
+
+# Template for a 301 (Moved Permanently)
+RESPONSE_301 = """HTTP/1.1 301 Moved Permanently\r
+content-type: text/html\r
+connection: Close\r
+\r
+"""
+
+# Template for a 405 (Method not allowed)
+RESPONSE_405 = """HTTP/1.1 405 Method Not Allowed\r
+content-type: text/html\r
+connection: Close\r
+\r
+<!doctype html>
+<h1>405 Method Not Allowed</h1>
+<p>Request is not allowed.</p>
+<p>Try another method!.</p>
 """
 
 
@@ -127,6 +150,7 @@ def process_request(connection, address):
     client = connection.makefile("wrb")
 
     #  Rabimo try-catch blok zaradi morebitnih nepravilnih argumentov
+    # Read and parse the request line
     try:
         # Read one line, decode it to utf-8 and strip leading and trailing spaces
         # prebere eno vrstico odjemalca in jo moramo dekodirat, ker je to seznam bajtov. Odstranimo morebite presledek na
@@ -134,11 +158,45 @@ def process_request(connection, address):
         line = client.readline().decode("utf-8").strip()
 
         method, uri, version, params = parse_request_line(line)
+
+        headers = parse_headers(client)
+        print(method, uri, version, headers)
+
+        # with je podobno kot new scanner v javi - ni treba zapirat toka
+        # zacne se s slashom, zato beremo od 1 naprej
+        # binarno branje
+        with open(uri[1:], "rb") as handle:
+            # preberemo vse
+            body = handle.read()
+
+        # sestavmo zaglavje
+        # header_response je šablona, moramo vnesit value notr
+
+        # Better -> Guess the type of a file based on its filename or URL, given by url.
+        type, encoding = guess_type(uri)
+        head = HEADER_RESPONSE_200 % (
+            type,
+            len(body)
+        )
+
+        #     pošljemo vsebino in zakodiramo
+        client.write(head.encode("utf-8"))
+        #     pošljemo še body, je že zakodiran
+        client.write(body)
+
+
         # print(method, uri, version, headers)
 
+        # Read and parse headers
+
+        # Read and parse the body of the request (if applicable)
+
+        # create the response
+
+        # Write the response back to the socket
 
 
-    #     Lahko imamo 3 različne napaki
+    # Lahko imamo 3 različne napaki
     except (ValueError, AssertionError) as e:
         # print("Invalid request %s (%s)" % (line, e))
         client.write(RESPONSE_400.encode("utf-8"))
@@ -146,6 +204,17 @@ def process_request(connection, address):
         client.write(RESPONSE_404.encode("utf-8"))
     finally:
         client.close()
+
+    # Create a response: the same text, but in upper case
+    # Vse male crcke spremeni v velike
+    # response = line.upper()
+    #
+    # Write the response to the socket
+    # Rezultat poslje nazaj odjmelcu - zakodiran
+    # client.write(response.encode("utf-8"))
+
+    # Closes file-like object
+    client.close()
 
 
 # Read and parse the request line
@@ -168,13 +237,27 @@ def parse_request_line(line):
 
     return method, uri, version, params
 
-    # Read and parse headers
+
+# Read and parse headers
+# prejme objket connection - socket, address in port.
+def parse_headers(client):
+    headers = dict()
+    while True:
+        line = client.readline().decode("utf-8").strip()
+        # vrstica je prazna
+        if not line:
+            return headers
+        # ta split razbije samo prvo dvopičje v vrstici, ostale pusti
+        key, value = line.split(":", 1)
+        headers[key.strip()] = value.strip()
 
     # Read and parse the body of the request (if applicable)
 
     # create the response
 
     # Write the response back to the socket
+
+
 
 
 def main(port):
