@@ -161,18 +161,18 @@ def process_request(connection, address):
 
         # Read and parse headers
         headers = parse_headers(client)
-        # print(method, uri, version, headers)
 
+        params = parse_params(params, method, client)
 
         # Read and parse the body of the request (if applicable)
         body = parse_body(uri)
 
-        # sestavmo zaglavje
-        # header_response je šablona, moramo vnesit value notr
 
-        # Better -> Guess the type of a file based on its filename or URL, given by url.
         # create the response
-        type, encoding = guess_type(uri) or "application/octet-stream"
+        if method == "POST":
+            type = "application/x-www-form-urlencoded"
+        else:
+            type, encoding = guess_type(uri) or "application/octet-stream"
         head = HEADER_RESPONSE_200 % (
             type,
             len(body)
@@ -239,6 +239,21 @@ def parse_headers(client):
         # ta split razbije samo prvo dvopičje v vrstici, ostale pusti
         key, value = line.split(":", 1)
         headers[key.strip()] = value.strip()
+
+
+#parse parameters
+def parse_params(params, method, client):
+    param_dict = {}
+    if method == "GET":
+        params = unquote_plus(params)
+    else:
+        params = unquote_plus(client.readline().decode("utf-8").strip())
+
+    for param in params.split("&"):
+        key, value = param.split("=")
+        param_dict[key] = value
+
+    return param_dict
 
 # Read and parse the body of the request (if applicable)
 def parse_body(uri):

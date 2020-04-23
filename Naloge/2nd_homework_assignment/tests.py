@@ -165,11 +165,12 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(protocol, "HTTP/1.1")
         self.assertEqual(params, "name1=value")
 
-    # def test_parse_body(self):
-    #     """Parse body '/hello.htm'"""
-    #
-    #     body = parse_body("/hello.html")
-    #     self.assertEqual(body, "hello.html")
+
+    def test_parse_request_params_GET(self):
+        """Parse params 'name1=value&name2=value2'"""
+
+        params = parse_params("name1=value&name2=value2", "GET","-")
+        self.assertEqual(params, {'name1': 'value', 'name2': 'value2'})
 
 
 
