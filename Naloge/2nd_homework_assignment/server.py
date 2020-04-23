@@ -162,6 +162,7 @@ def process_request(connection, address):
         # Read and parse headers
         headers = parse_headers(client)
 
+        # parse parameters
         params = parse_params(params, method, client)
 
         # Read and parse the body of the request (if applicable)
@@ -169,20 +170,10 @@ def process_request(connection, address):
 
 
         # create the response
-        if method == "POST":
-            type = "application/x-www-form-urlencoded"
-        else:
-            type, encoding = guess_type(uri) or "application/octet-stream"
-        head = HEADER_RESPONSE_200 % (
-            type,
-            len(body)
-        )
+        head = create_response(method, uri, body)
 
         # Write the response back to the socket
-        #     pošljemo vsebino in zakodiramo
-        client.write(head.encode("utf-8"))
-        #     pošljemo še body, je že zakodiran
-        client.write(body)
+        write(client,head,body)
 
 
 
@@ -269,8 +260,25 @@ def parse_body(uri):
 
     # Write the response back to the socket
 
+# create the response
+def create_response(method, uri, body):
 
+    if method == "POST":
+        type = "application/x-www-form-urlencoded"
+    else:
+        type, encoding = guess_type(uri) or "application/octet-stream"
+    head = HEADER_RESPONSE_200 % (
+        type,
+        len(body)
+    )
+    return head
 
+# Write the response back to the socket
+def write(client, head, body):
+    #pošljemo vsebino in zakodiramo
+    client.write(head.encode("utf-8"))
+    #pošljemo še body, je že zakodiran
+    client.write(body)
 
 def main(port):
     """Starts the server and waits for connections."""
