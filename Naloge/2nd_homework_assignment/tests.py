@@ -156,6 +156,22 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(protocol, "HTTP/1.1")
         self.assertEqual(params, {})
 
+    def test_parse_request_line_params(self):
+        """Parse request line 'GET /demo_form.php?name1=value HTTP/1.1'"""
+
+        method, uri, protocol, params = parse_request_line("GET /demo_form.php?name1=value HTTP/1.1")
+        self.assertEqual(method, "GET")
+        self.assertEqual(uri, "/demo_form.php")
+        self.assertEqual(protocol, "HTTP/1.1")
+        self.assertEqual(params, "name1=value")
+
+    # def test_parse_body(self):
+    #     """Parse body '/hello.htm'"""
+    #
+    #     body = parse_body("/hello.html")
+    #     self.assertEqual(body, "hello.html")
+
+
 
 
 

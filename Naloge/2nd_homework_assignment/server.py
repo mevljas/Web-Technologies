@@ -159,41 +159,31 @@ def process_request(connection, address):
 
         method, uri, version, params = parse_request_line(line)
 
+        # Read and parse headers
         headers = parse_headers(client)
-        print(method, uri, version, headers)
+        # print(method, uri, version, headers)
 
-        # with je podobno kot new scanner v javi - ni treba zapirat toka
-        # zacne se s slashom, zato beremo od 1 naprej
-        # binarno branje
-        with open(uri[1:], "rb") as handle:
-            # preberemo vse
-            body = handle.read()
+
+        # Read and parse the body of the request (if applicable)
+        body = parse_body(uri)
 
         # sestavmo zaglavje
         # header_response je šablona, moramo vnesit value notr
 
         # Better -> Guess the type of a file based on its filename or URL, given by url.
-        type, encoding = guess_type(uri)
+        # create the response
+        type, encoding = guess_type(uri) or "application/octet-stream"
         head = HEADER_RESPONSE_200 % (
             type,
             len(body)
         )
 
+        # Write the response back to the socket
         #     pošljemo vsebino in zakodiramo
         client.write(head.encode("utf-8"))
         #     pošljemo še body, je že zakodiran
         client.write(body)
 
-
-        # print(method, uri, version, headers)
-
-        # Read and parse headers
-
-        # Read and parse the body of the request (if applicable)
-
-        # create the response
-
-        # Write the response back to the socket
 
 
     # Lahko imamo 3 različne napaki
@@ -226,10 +216,9 @@ def parse_request_line(line):
     uri = ""
     version = ""
 
-    try:
-        method, uri, version, params = line.split()
-    except ValueError:
-        method, uri, version = line.split()
+    method, uri, version = line.split()
+    if "?" in uri:
+        uri, params = uri.split("?")
 
     assert method == "GET" or method == "POST", "Invalid request method"
     assert len(uri) > 0 and uri[0] == "/", "Invalid request URI"
@@ -251,7 +240,15 @@ def parse_headers(client):
         key, value = line.split(":", 1)
         headers[key.strip()] = value.strip()
 
-    # Read and parse the body of the request (if applicable)
+# Read and parse the body of the request (if applicable)
+def parse_body(uri):
+    # with je podobno kot new scanner v javi - ni treba zapirat toka
+    # zacne se s slashom, zato beremo od 1 naprej
+    # binarno branje
+    with open(uri[1:], "rb") as handle:
+        # preberemo vse
+        body = handle.read()
+    return body
 
     # create the response
 
