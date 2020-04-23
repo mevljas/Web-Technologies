@@ -220,16 +220,24 @@ def parse_request_line(line):
 
 # Read and parse headers
 # prejme objket connection - socket, address in port.
-def parse_headers(client):
+def parse_headers(client, method):
     headers = dict()
+    found_content_length = False
     while True:
         line = client.readline().decode("utf-8").strip()
         # vrstica je prazna
         if not line:
-            return headers
+            if found_content_length:
+                return headers
+            else:
+                raise AssertionError('Content-length is missing.')
         # ta split razbije samo prvo dvopičje v vrstici, ostale pusti
         key, value = line.split(":", 1)
+        if key.strip() == "content-length":
+            found_content_length = True
         headers[key.strip()] = value.strip()
+
+
 
 
 #parse parameters
@@ -256,9 +264,6 @@ def parse_body(uri):
         body = handle.read()
     return body
 
-    # create the response
-
-    # Write the response back to the socket
 
 # create the response
 def create_response(method, uri, body):
