@@ -216,9 +216,9 @@ class ServerTest(unittest.TestCase):
 
 
     def test_invalid_request_method(self):
-        """Return code 400 when the method is invalid"""
+        """Return code 405 when the method is invalid"""
         response = self._manual_request("GET2 / HTTP/1.1\n")
-        self.assertTrue(response.startswith("HTTP/1.1 400"))
+        self.assertTrue(response.startswith("HTTP/1.1 405"))
 
 
     def test_invalid_request_uri(self):
@@ -230,6 +230,16 @@ class ServerTest(unittest.TestCase):
         """Return code 400 when the version is invalid"""
         response = self._manual_request("GET / HTTP/1.3\n")
         self.assertTrue(response.startswith("HTTP/1.1 400"))
+
+    def test_POST_app_add (self):
+        """test_contains_text @ POST {'first': 'Ed', 'last': 'Sheeran'} /app-add"""
+        response = self._manual_request(
+            "POST /app-add HTTP/1.1\n\
+            Content-Length: 21\n\
+                           \n\
+            first=Ed&last=Sheeran\n"
+        )
+        self.assertTrue(response.startswith("HTTP/1.1 200"))
 
 
 if __name__ == '__main__':

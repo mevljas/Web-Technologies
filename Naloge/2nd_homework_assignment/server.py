@@ -5,7 +5,6 @@ import pickle
 import socket
 from os.path import isdir
 from urllib.parse import unquote_plus
-from mimetypes import guess_type
 
 # Pickle file for storing data
 PICKLE_DB = "db.pkl"
@@ -56,6 +55,7 @@ connection: Close\r
 
 # Template for a 301 (Moved Permanently)
 RESPONSE_301 = """HTTP/1.1 301 Moved Permanently\r
+Location: *url*\r
 content-type: text/html\r
 connection: Close\r
 \r
@@ -71,6 +71,10 @@ connection: Close\r
 <p>Request is not allowed.</p>
 <p>Try another method!.</p>
 """
+
+# chosen header
+selected_header = HEADER_RESPONSE_200
+
 
 
 def save_to_db(first, last):
@@ -155,34 +159,46 @@ def process_request(connection, address):
         # Read one line, decode it to utf-8 and strip leading and trailing spaces
         # prebere eno vrstico odjemalca in jo moramo dekodirat, ker je to seznam bajtov. Odstranimo morebite presledek na
         # zacetku in na koncu
+
         line = client.readline().decode("utf-8").strip()
 
         method, uri, version, params = parse_request_line(line)
 
+
         # Read and parse headers
-        headers = parse_headers(client)
+        headers = parse_headers(client, method)
 
         # parse parameters
         params = parse_params(params, method, client)
 
         # Read and parse the body of the request (if applicable)
-        body = parse_body(uri)
-
+        body, uri = parse_body(uri, method, params)
 
         # create the response
         head = create_response(method, uri, body)
 
         # Write the response back to the socket
-        write(client,head,body)
+        write(client, head, body)
 
 
 
-    # Lahko imamo 3 različne napaki
-    except (ValueError, AssertionError) as e:
-        # print("Invalid request %s (%s)" % (line, e))
+    # Lahko imamo 3 različne napake
+    except PermissionError as e:
+        print(e)
+        client.write(RESPONSE_405.encode("utf-8"))
+    except ValueError as e:
+        print(e)
         client.write(RESPONSE_400.encode("utf-8"))
-    except IOError:
+    except IOError as e:
+        print(e)
         client.write(RESPONSE_404.encode("utf-8"))
+    except AssertionError as e:
+        print(e)
+        client.write(RESPONSE_400.encode("utf-8"))
+    except AttributeError as e:
+        print(e)
+        client.write(RESPONSE_405.encode("utf-8"))
+
     finally:
         client.close()
 
@@ -211,7 +227,10 @@ def parse_request_line(line):
     if "?" in uri:
         uri, params = uri.split("?")
 
-    assert method == "GET" or method == "POST", "Invalid request method"
+    try:
+        assert method == "GET" or method == "POST", "Invalid request method"
+    except AssertionError as e:
+        raise AttributeError(e)
     assert len(uri) > 0 and uri[0] == "/", "Invalid request URI"
     assert version == "HTTP/1.1", "Invalid HTTP version"
 
@@ -222,68 +241,175 @@ def parse_request_line(line):
 # prejme objket connection - socket, address in port.
 def parse_headers(client, method):
     headers = dict()
-    found_content_length = False
+    if method == "POST":
+        found_content_length = False
+    else:
+        found_content_length = True
+
     while True:
         line = client.readline().decode("utf-8").strip()
         # vrstica je prazna
-        if not line:
+        if not line or line == "\n":
             if found_content_length:
                 return headers
             else:
-                raise AssertionError('Content-length is missing.')
+                raise ValueError('Content-length is missing.')
         # ta split razbije samo prvo dvopičje v vrstici, ostale pusti
         key, value = line.split(":", 1)
-        if key.strip() == "content-length":
+        if key.strip().lower() == "content-length":
             found_content_length = True
         headers[key.strip()] = value.strip()
 
 
-
-
-#parse parameters
+# parse parameters
 def parse_params(params, method, client):
+
+    if params == {}:
+        params = ""
     param_dict = {}
     if method == "GET":
         params = unquote_plus(params)
     else:
         params = unquote_plus(client.readline().decode("utf-8").strip())
 
-    for param in params.split("&"):
-        key, value = param.split("=")
-        param_dict[key] = value
+    if params:
+        for param in params.split("&"):
+            key, value = param.split("=")
+            param_dict[key] = value
 
     return param_dict
 
+
 # Read and parse the body of the request (if applicable)
-def parse_body(uri):
-    # with je podobno kot new scanner v javi - ni treba zapirat toka
-    # zacne se s slashom, zato beremo od 1 naprej
-    # binarno branje
-    with open(uri[1:], "rb") as handle:
-        # preberemo vse
-        body = handle.read()
-    return body
+def parse_body(uri, method, params):
+    if uri.endswith("/"):
+        with open(WWW_DATA + uri +"index.html", "rb") as handle:
+            # preberemo vse
+            body = handle.read()
+        uri = uri + "index.html"
+        selected_header = RESPONSE_301.replace("*url*", WWW_DATA + uri +"index.html")
+        return body, uri
+    if "." not in uri and "/" in uri:
+        if uri == "/app-add":
+            if method == "POST":
+                if params["first"] and params["last"]:
+                    save_to_db(params["first"], params["last"])
+                    # binarno branje
+                    with open(WWW_DATA + "/app_add.html", "rb") as handle:
+                        # preberemo vse
+                        body = handle.read()
+                    uri = uri + "app_add.html"
+                    return body, uri
+
+                else:
+                    raise ValueError("Wrong arguments.")
+            else:
+                raise PermissionError("Wrong method.")
+        elif uri == "/app-index":
+            if method == "GET":
+                if params["number"] or params["first"] or params["last"]:
+                    criteria = {}
+                    if params["number"]:
+                        criteria["number"] = params["number"]
+
+                    if params["first"]:
+                        criteria["first"] = params["first"]
+
+                    if params["last"]:
+                        criteria["last"] = params["last"]
+                    data = read_from_db(criteria)
+                    # binarno branje
+                else:
+                    data = read_from_db()
+
+                rows = ""
+                selected_header = HEADER_RESPONSE_200
+                for row in data:
+                    number, first, last = row
+                    # rows.join(TABLE_ROW.replace("%d", number).replace("%s", first).replace("%s", last))
+                    rows = rows % (
+                        number,
+                        first,
+                        last
+                    )
+
+                with open(WWW_DATA + "/app_list.html", "r") as handle:
+                    # preberemo vse
+                    body = handle.read()
+
+                body = body.replace("{{STUDENTS}}", rows)
+                uri = uri + "app_list.html"
+                return body.encode("utf-8"), uri
+
+            else:
+                raise PermissionError("Wrong method.")
+        elif uri == "/app-json":
+            if method == "GET":
+                if params["number"] or params["first"] or params["last"]:
+                    criteria = {}
+                    if params["number"]:
+                        criteria["number"] = params["number"]
+
+                    if params["first"]:
+                        criteria["first"] = params["first"]
+
+                    if params["last"]:
+                        criteria["last"] = params["last"]
+                    data =  json.dumps(read_from_db(criteria))
+                    # binarno branje
+                else:
+                    data =  json.dumps(read_from_db())
+
+                return data.encode("utf-8"), uri + "app-json"
+
+            else:
+                raise PermissionError("Wrong method.")
+    else:
+        try:
+            with open(WWW_DATA + uri, "rb") as handle:
+                # preberemo vse
+                 body = handle.read()
+            selected_header = RESPONSE_301.replace("*url*", WWW_DATA + uri)
+            return body, uri
+
+        except IOError:
+            if isdir(WWW_DATA + uri):
+                with open(WWW_DATA + uri + "/index.html", "rb") as handle:
+                    # preberemo vse
+                    body = handle.read()
+                selected_header = RESPONSE_301.replace("*url*",WWW_DATA + uri + "/index.html")
+                return body, uri + "/index.html"
+
+
+            else:
+                raise IOError('File does not exist')
 
 
 # create the response
 def create_response(method, uri, body):
-
     if method == "POST":
         type = "application/x-www-form-urlencoded"
+
+    elif uri.endswith("app-json"):
+        type = "application/json"
+
     else:
-        type, encoding = guess_type(uri) or "application/octet-stream"
-    head = HEADER_RESPONSE_200 % (
+        type, encoding = mimetypes.guess_type(uri) or "application/octet-stream"
+
+    head = selected_header % (
         type,
         len(body)
     )
     return head
 
+
 # Write the response back to the socket
 def write(client, head, body):
-    #pošljemo vsebino in zakodiramo
+    # pošljemo vsebino in zakodiramo
     client.write(head.encode("utf-8"))
-    #pošljemo še body, je že zakodiran
+    # pošljemo še body, je že zakodiran
     client.write(body)
+
 
 def main(port):
     """Starts the server and waits for connections."""
