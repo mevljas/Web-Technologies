@@ -165,18 +165,11 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(protocol, "HTTP/1.1")
         self.assertEqual(params, "name1=value")
 
-
     def test_parse_request_params_GET(self):
         """Parse params 'name1=value&name2=value2'"""
 
-        params = parse_params("name1=value&name2=value2", "GET","-")
+        params = parse_params("name1=value&name2=value2", "GET", "-",{})
         self.assertEqual(params, {'name1': 'value', 'name2': 'value2'})
-
-
-
-
-
-
 
     ###################################################################
     #                      INTEGRATION TESTS
@@ -214,12 +207,10 @@ class ServerTest(unittest.TestCase):
         response = self._manual_request("This is really not an HTTP request\n")
         self.assertTrue(response.startswith("HTTP/1.1 400"))
 
-
     def test_invalid_request_method(self):
         """Return code 405 when the method is invalid"""
         response = self._manual_request("GET2 / HTTP/1.1\n")
         self.assertTrue(response.startswith("HTTP/1.1 405"))
-
 
     def test_invalid_request_uri(self):
         """Return code 400 when the uri is invalid"""
@@ -231,15 +222,26 @@ class ServerTest(unittest.TestCase):
         response = self._manual_request("GET / HTTP/1.3\n")
         self.assertTrue(response.startswith("HTTP/1.1 400"))
 
-    def test_POST_app_add (self):
-        """test_contains_text @ POST {'first': 'Ed', 'last': 'Sheeran'} /app-add"""
+    def test_GET_app_index(self):
+        """test_GET_app_index @ GET {'first': 'bob'} /app-index"""
+        self.prepare_db_data()
         response = self._manual_request(
-            "POST /app-add HTTP/1.1\n\
-            Content-Length: 21\n\
-                           \n\
-            first=Ed&last=Sheeran\n"
+            "GET /app-index?first=bob HTTP/1.1\n\n"
         )
         self.assertTrue(response.startswith("HTTP/1.1 200"))
+
+    def test_GET_app_json(self):
+        """test_GET_app_index @  GET /app-json"""
+        self.prepare_db_data()
+        response = self._manual_request(
+            "GET /app-json HTTP/1.1\n\n"
+        )
+        self.assertTrue(response.startswith("HTTP/1.1 200"))
+
+    def test_POST_app_add(self):
+        """test_contains_text @ POST {'first': 'Ed', 'last': 'Sheeran'} /app-add"""
+        r = requests.post(self.server, data={'key': 'value'},  timeout=2)
+        self.assertEqual(r.status_code, 200)
 
 
 if __name__ == '__main__':

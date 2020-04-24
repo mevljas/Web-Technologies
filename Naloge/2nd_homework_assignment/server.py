@@ -23,6 +23,14 @@ connection: Close\r
 <p>Hello, world.</p>
 """
 
+# Header template for a successful HTTP request ( app)
+HEADER_RESPONSE_200_APP = """HTTP/1.1 200 OK\r
+content-type: %s\r
+content-length: %d\r
+connection: Close\r
+\r
+"""
+
 # Represents a table row that holds user data
 TABLE_ROW = """
 <tr>
@@ -34,7 +42,8 @@ TABLE_ROW = """
 
 # Template for a 404 (Not found) error
 RESPONSE_404 = """HTTP/1.1 404 Not found\r
-content-type: text/html\r
+content-type: %s\r
+content-length: %d\r
 connection: Close\r
 \r
 <!doctype html>
@@ -44,7 +53,8 @@ connection: Close\r
 
 # Template for a 400 (Bad request) error
 RESPONSE_400 = """HTTP/1.1 400 Bad request\r
-content-type: text/html\r
+content-type: %s\r
+content-length: %d\r
 connection: Close\r
 \r
 <!doctype html>
@@ -55,15 +65,17 @@ connection: Close\r
 
 # Template for a 301 (Moved Permanently)
 RESPONSE_301 = """HTTP/1.1 301 Moved Permanently\r
-Location: *url*\r
-content-type: text/html\r
+content-type: %s\r
+content-length: %d\r
+location: *url*\r
 connection: Close\r
 \r
 """
 
 # Template for a 405 (Method not allowed)
 RESPONSE_405 = """HTTP/1.1 405 Method Not Allowed\r
-content-type: text/html\r
+content-type: %s\r
+content-length: %d\r
 connection: Close\r
 \r
 <!doctype html>
@@ -74,7 +86,6 @@ connection: Close\r
 
 # chosen header
 selected_header = HEADER_RESPONSE_200
-
 
 
 def save_to_db(first, last):
@@ -139,7 +150,7 @@ def read_from_db(criteria=None):
         return []
 
 
-def process_request(connection, address):
+def process_request(connection, address, port):
     """Process an incoming socket request.
 
     :param connection is a socket of the client
@@ -160,19 +171,23 @@ def process_request(connection, address):
         # prebere eno vrstico odjemalca in jo moramo dekodirat, ker je to seznam bajtov. Odstranimo morebite presledek na
         # zacetku in na koncu
 
+        protocol = "http"
+        hostname, _ = address;
+        if hostname == '127.0.0.1':
+            hostname = "localhost"
+
         line = client.readline().decode("utf-8").strip()
 
         method, uri, version, params = parse_request_line(line)
-
 
         # Read and parse headers
         headers = parse_headers(client, method)
 
         # parse parameters
-        params = parse_params(params, method, client)
+        params = parse_params(params, method, client, headers)
 
         # Read and parse the body of the request (if applicable)
-        body, uri = parse_body(uri, method, params)
+        body, uri = parse_body(uri, method, params, protocol, hostname, port )
 
         # create the response
         head = create_response(method, uri, body)
@@ -248,29 +263,28 @@ def parse_headers(client, method):
 
     while True:
         line = client.readline().decode("utf-8").strip()
+        print(line)
         # vrstica je prazna
-        if not line or line == "\n":
+        if not line:
             if found_content_length:
                 return headers
             else:
-                raise ValueError('Content-length is missing.')
+                raise ValueError('Content-Length is missing.')
         # ta split razbije samo prvo dvopičje v vrstici, ostale pusti
         key, value = line.split(":", 1)
-        if key.strip().lower() == "content-length":
+        if key.strip() == "Content-Length":
             found_content_length = True
         headers[key.strip()] = value.strip()
 
-
 # parse parameters
-def parse_params(params, method, client):
-
+def parse_params(params, method, client, headers):
     if params == {}:
         params = ""
     param_dict = {}
     if method == "GET":
         params = unquote_plus(params)
     else:
-        params = unquote_plus(client.readline().decode("utf-8").strip())
+        params = unquote_plus(client.read(int(headers["Content-Length"])).decode("utf-8").strip())
 
     if params:
         for param in params.split("&"):
@@ -281,24 +295,25 @@ def parse_params(params, method, client):
 
 
 # Read and parse the body of the request (if applicable)
-def parse_body(uri, method, params):
+def parse_body(uri, method, params, protocol, hostname, port):
+    global selected_header
     if uri.endswith("/"):
-        with open(WWW_DATA + uri +"index.html", "rb") as handle:
+        with open(WWW_DATA + uri + "index.html", "rb") as handle:
             # preberemo vse
             body = handle.read()
-        uri = uri + "index.html"
-        selected_header = RESPONSE_301.replace("*url*", WWW_DATA + uri +"index.html")
+        selected_header = RESPONSE_301.replace("*url*", "{}://{}:{}{}index.html".format(protocol, hostname, port, uri))
         return body, uri
-    if "." not in uri and "/" in uri:
+    elif "." not in uri and "/" in uri:
         if uri == "/app-add":
             if method == "POST":
-                if params["first"] and params["last"]:
-                    save_to_db(params["first"], params["last"])
+                if params.get("first", False) and params.get("last", False):
+                    save_to_db(params.get("first"), params.get("last"))
+                    selected_header = HEADER_RESPONSE_200_APP
                     # binarno branje
                     with open(WWW_DATA + "/app_add.html", "rb") as handle:
                         # preberemo vse
                         body = handle.read()
-                    uri = uri + "app_add.html"
+                    uri = "app_add.html"
                     return body, uri
 
                 else:
@@ -307,90 +322,101 @@ def parse_body(uri, method, params):
                 raise PermissionError("Wrong method.")
         elif uri == "/app-index":
             if method == "GET":
-                if params["number"] or params["first"] or params["last"]:
+                if params.get("number", False) or params.get("first", False) or params.get("last", False):
                     criteria = {}
-                    if params["number"]:
-                        criteria["number"] = params["number"]
+                    if params.get("number", False):
+                        criteria["number"] = params.get("number", False)
 
-                    if params["first"]:
+                    if params.get("first", False):
                         criteria["first"] = params["first"]
 
-                    if params["last"]:
-                        criteria["last"] = params["last"]
+                    if params.get("last", False):
+                        criteria["last"] = params.get("last")
                     data = read_from_db(criteria)
                     # binarno branje
                 else:
                     data = read_from_db()
 
                 rows = ""
-                selected_header = HEADER_RESPONSE_200
+                selected_header = HEADER_RESPONSE_200_APP
                 for row in data:
-                    number, first, last = row
-                    # rows.join(TABLE_ROW.replace("%d", number).replace("%s", first).replace("%s", last))
-                    rows = rows % (
-                        number,
+                    number, first, last = row.values()
+                    rows += TABLE_ROW % (
+                        int(number),
                         first,
                         last
                     )
-
                 with open(WWW_DATA + "/app_list.html", "r") as handle:
                     # preberemo vse
                     body = handle.read()
-
-                body = body.replace("{{STUDENTS}}", rows)
-                uri = uri + "app_list.html"
+                body = body.replace("{{students}}", rows)
+                uri = "app_list.html"
                 return body.encode("utf-8"), uri
 
             else:
                 raise PermissionError("Wrong method.")
         elif uri == "/app-json":
             if method == "GET":
-                if params["number"] or params["first"] or params["last"]:
+                if params.get("number", False) or params.get("first", False) or params.get("last", False):
                     criteria = {}
-                    if params["number"]:
+                    if params.get("number", False):
                         criteria["number"] = params["number"]
 
-                    if params["first"]:
+                    if params.get("first", False):
                         criteria["first"] = params["first"]
 
-                    if params["last"]:
-                        criteria["last"] = params["last"]
-                    data =  json.dumps(read_from_db(criteria))
+                    if params.get("last", False):
+                        criteria["last"] = params.get("last")
+
+                    data = json.dumps(read_from_db(criteria))
                     # binarno branje
                 else:
-                    data =  json.dumps(read_from_db())
-
-                return data.encode("utf-8"), uri + "app-json"
+                    data = json.dumps(read_from_db())
+                selected_header = HEADER_RESPONSE_200_APP
+                return data.encode("utf-8"), "app-json"
 
             else:
                 raise PermissionError("Wrong method.")
+        else:
+            try:
+                with open(WWW_DATA + uri, "rb") as handle:
+                    # preberemo vse
+                    body = handle.read()
+                selected_header = HEADER_RESPONSE_200_APP
+                return body, uri
+
+            except IOError:
+                if isdir(WWW_DATA + uri):
+                    with open(WWW_DATA + uri + "/index.html", "rb") as handle:
+                        # preberemo vse
+                        body = handle.read()
+                    selected_header = RESPONSE_301.replace("*url*",
+                                                           "{}://{}:{}/index.html".format(protocol, hostname, port))
+                    return body, uri + "/index.html"
+
+
+                else:
+                    raise IOError('File does not exist')
     else:
         try:
+            if uri.startswith("/www-data"):
+                uri = uri.replace("/www-data", "", 1)
             with open(WWW_DATA + uri, "rb") as handle:
                 # preberemo vse
-                 body = handle.read()
-            selected_header = RESPONSE_301.replace("*url*", WWW_DATA + uri)
+                body = handle.read()
+            selected_header = HEADER_RESPONSE_200
             return body, uri
 
         except IOError:
-            if isdir(WWW_DATA + uri):
-                with open(WWW_DATA + uri + "/index.html", "rb") as handle:
-                    # preberemo vse
-                    body = handle.read()
-                selected_header = RESPONSE_301.replace("*url*",WWW_DATA + uri + "/index.html")
-                return body, uri + "/index.html"
-
-
-            else:
-                raise IOError('File does not exist')
+            raise IOError('File does not exist')
 
 
 # create the response
 def create_response(method, uri, body):
-    if method == "POST":
-        type = "application/x-www-form-urlencoded"
+    # if method == "POST":
+    #     type = "application/x-www-form-urlencoded"
 
-    elif uri.endswith("app-json"):
+    if uri.endswith("app-json"):
         type = "application/json"
 
     else:
@@ -424,7 +450,7 @@ def main(port):
     while True:
         connection, address = server.accept()
         print("[%s:%d] CONNECTED" % address)
-        process_request(connection, address)
+        process_request(connection, address, port)
         connection.close()
         print("[%s:%d] DISCONNECTED" % address)
 
