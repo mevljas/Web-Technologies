@@ -168,7 +168,7 @@ class ServerTest(unittest.TestCase):
     def test_parse_request_params_GET(self):
         """Parse params 'name1=value&name2=value2'"""
 
-        params = parse_params("name1=value&name2=value2", "GET", "-",{})
+        params = parse_params("name1=value&name2=value2", "GET", "-", {})
         self.assertEqual(params, {'name1': 'value', 'name2': 'value2'})
 
     ###################################################################
@@ -240,7 +240,7 @@ class ServerTest(unittest.TestCase):
 
     def test_POST_app_add(self):
         """test_contains_text @ POST {'first': 'Ed', 'last': 'Sheeran'} /app-add"""
-        r = requests.post(self.server, data={'key': 'value'},  timeout=2)
+        r = requests.post(self.server, data={'key': 'value'}, timeout=2)
         self.assertEqual(r.status_code, 200)
 
 
