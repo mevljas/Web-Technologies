@@ -1,0 +1,24 @@
+	
+Pregledal sem odgovore, ki ste jih zapisali pri 11. domači nalogi. Čeprav ste večinoma zelo dobro odgovarjali, podajam nekaj komentarjev.
+
+> Primeri uporab spletnih aplikacij v stvarnem času.
+
+Imeli ste precej zelo dobrih odgovorov kot so denimo spletni IDE, skupinski urejevalnik dokumentov, spletne igre kot so Travian in podobno.
+
+Bi pa poudaril da pretočne avdio in video vsebine (Twitch, YouTube in podobni) ne sodijo v to kategorijo. Spletne vtičnice še vedno na transportni plati uporabljajo protokol TCP, ki za pretakanje zvoka in videa v stvarnem času ni primeren. Za tovrstne aplikacije se pogosto uporablja tehnologija HTTP Live Streaming.
+
+> Kdaj je AJAX izpraševanje boljše od spletnih vtičnic.
+
+V tehničnem smislu bi sam rekel -- nikoli. Spletne vtičnice ponujajo krajši odzivni čas in manjšo obremenitev tako na strežniku kot na odjemalcu (držanje odprte povezave TCP zahteva manj virov kot periodično odpiranje novih povezave, pošiljanje zahtevkov HTTP in razčlenjevanje odgovorov).
+
+Vendar pa uporaba spletnih vtičnic poveča stopnjo kompleksnosti programske rešitve in zahteva novejšo programsko opremo (moderen brskalnik). Možen odgovor je tako, da je izpraševanje AJAX boljše takrat kadar projekt takšne kompleksnosti ne upravičuje, ali je višja latenca sprejemljiva, ali pa bodo odjemalci uporabljali starejše brskalnike.
+
+Všeč mi je bil podan primer uporabe izpraševanja: če odjemalec izprašuje strežnik po enem samem podatku (ki bo v kratkem nastal, ni pa še na voljo -- denimo čakanje, da se neko daljše procesiranje na strežniku konča), in ko ga strežnik pošlje oz. ga odjemalec prejme, se izpraševanje prekine.
+
+> Je mogoče implementirati SSE na strežniku iz 2. domače naloge.
+
+Odgovor je ne, in sicer zaradi tega, ker bi že prvi odjemalec ob vstopu v neskončno zanko okupiral edino nit izvajanja. Tako bi vsi ostali odjemalci zgolj neuspešno čakali, da se njihove povezave sprejmejo.
+
+Nekateri ste zapisali, da bi morali za vsakega novega SSE odjemalca pognati novo nit. To bi sicer delovalo, vendar bi z uporabo klasičnih niti verjetno hitro prišli do mej take rešitve.
+
+Skalabilne rešitve uporabljajo t. i. ne-blokirajoč vhodho/izhodni sistem (angl. non-blocking I/O), kjer tipično v eni sami niti preklapljajo med mnogimi povezavami. Tako denimo deluje NodeJS.
