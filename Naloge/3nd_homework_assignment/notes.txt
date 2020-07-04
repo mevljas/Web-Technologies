@@ -1,3 +1,0 @@
- php artisan krlove:generate:model Natakar --table-name=Natakar 
- php artisan make:controller JedilnikController --resource       
- php artisan serve   
