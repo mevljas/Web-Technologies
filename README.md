@@ -1,4 +1,4 @@
-# Web-technologies
+# Web Technologies
 Faculty subject Web technologies.
 ## Content (Syllabus outline)
 Introduction – web technologies  
