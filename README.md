@@ -1,6 +1,6 @@
 # Web-technologies
 Faculty subject Web technologies.
-## WContent (Syllabus outline)
+## Content (Syllabus outline)
 Introduction – web technologies
 Internet (computer, network)
 Web (WWW) – distributed document-based system
@@ -21,7 +21,7 @@ Web application security (users, identity, certificates,
 encryption)
 Semantic web
 Single-page applications (Angular)
-##Objectives and competences
+## Objectives and competences
 The primary objective of this course is to introduce
 students a Web as a distributed system and the use of
 online technologies on the client and server-side. The
