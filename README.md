@@ -34,7 +34,7 @@ science and for independent work in solving technical
 problems and to apply the acquired practical skills and
 knowledge of software technologies for successful
 professional work.
-##Intended learning outcomes
+## Intended learning outcomes
 Knowledge and understanding:
 Knowledge of web (Internet) presented as a distributed
 system that operates on the principle of client-server
