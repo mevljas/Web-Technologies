@@ -1,20 +1,20 @@
 # Web-technologies
 Faculty subject Web technologies.
 ## Content (Syllabus outline)
-Introduction – web technologies\n
-Internet (computer, network)\n
-Web (WWW) – distributed document-based system\n
-Web architecture (client-server model, communication, naming, ...)\n
-Standards and protocols\n
-Client programming: (X)HTML, Script programming (JavaScript, jQuery, ...)\n
+Introduction – web technologies  
+Internet (computer, network)  
+Web (WWW) – distributed document-based system  
+Web architecture (client-server model, communication, naming, ...)  
+Standards and protocols  
+Client programming: (X)HTML, Script programming (JavaScript, jQuery, ...)  
 Server programming (PHP, CGI, servlet, ...)\n
-Web Search technologies and resource extraction (portal, Search engine, Forum, ...)\n
-Meta- language XML (naming, XML checking, presentation formats, XML applications\n
-XML based web services (SOAP, WSDL, UDDI), RESTful\n
-Web engineering (methodologies and strategies of web application design, customer support)\n
-Web application security (users, identity, certificates, encryption)\n
-Semantic web\n
-Single-page applications (Angular)\n
+Web Search technologies and resource extraction (portal, Search engine, Forum, ...)  
+Meta- language XML (naming, XML checking, presentation formats, XML applications  
+XML based web services (SOAP, WSDL, UDDI), RESTful  
+Web engineering (methodologies and strategies of web application design, customer support)  
+Web application security (users, identity, certificates, encryption)  
+Semantic web  
+Single-page applications (Angular)  
 ## Objectives and competences
 The primary objective of this course is to introduce
 students a Web as a distributed system and the use of
