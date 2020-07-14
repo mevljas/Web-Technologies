@@ -32,3 +32,10 @@ CSRF attack. This entry forces the visitor's browser to issue a GET request to t
 ```html
 <img src="joke/delete?id=3&delete_confirmation=on" width="0" height="0" />
 ```
+
+
+# Assignments
+1) Fix broken access control for editing joke
+entries.
+2) Implement the suggested CSRF defense
+strategy when deleting joke entries.
