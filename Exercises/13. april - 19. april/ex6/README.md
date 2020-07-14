@@ -23,6 +23,5 @@ Update the book application so that it will
 correctly:
 - display,
 - add,
-- and edit  
-the newly added year attribute
+- and edit the newly added year attribute
  (all .php files in book folder)
