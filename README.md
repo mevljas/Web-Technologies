@@ -1,27 +1,21 @@
-# Web-technologies
+# Web Technologies
 Faculty subject Web technologies.
-## WContent (Syllabus outline)
-Introduction – web technologies
-Internet (computer, network)
-Web (WWW) – distributed document-based system
-Web architecture (client-server model, communication,
-naming, ...)
-Standards and protocols
-Client programming: (X)HTML, Script programming
-(JavaScript, jQuery, ...)
-Server programming (PHP, CGI, servlet, ...)
-Web Search technologies and resource extraction
-(portal, Search engine, Forum, ...)
-Meta- language XML (naming, XML checking,
-presentation formats, XML applications
-XML based web services (SOAP, WSDL, UDDI), RESTful
-Web engineering (methodologies and strategies of web
-application design, customer support)
-Web application security (users, identity, certificates,
-encryption)
-Semantic web
-Single-page applications (Angular)
-##Objectives and competences
+## Content (Syllabus outline)
+Introduction – web technologies  
+Internet (computer, network)  
+Web (WWW) – distributed document-based system  
+Web architecture (client-server model, communication, naming, ...)  
+Standards and protocols  
+Client programming: (X)HTML, Script programming (JavaScript, jQuery, ...)  
+Server programming (PHP, CGI, servlet, ...)\n
+Web Search technologies and resource extraction (portal, Search engine, Forum, ...)  
+Meta- language XML (naming, XML checking, presentation formats, XML applications  
+XML based web services (SOAP, WSDL, UDDI), RESTful  
+Web engineering (methodologies and strategies of web application design, customer support)  
+Web application security (users, identity, certificates, encryption)  
+Semantic web  
+Single-page applications (Angular)  
+## Objectives and competences
 The primary objective of this course is to introduce
 students a Web as a distributed system and the use of
 online technologies on the client and server-side. The
@@ -34,7 +28,7 @@ science and for independent work in solving technical
 problems and to apply the acquired practical skills and
 knowledge of software technologies for successful
 professional work.
-##Intended learning outcomes
+## Intended learning outcomes
 Knowledge and understanding:
 Knowledge of web (Internet) presented as a distributed
 system that operates on the principle of client-server
