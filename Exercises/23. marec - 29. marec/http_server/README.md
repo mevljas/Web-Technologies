@@ -1,0 +1,16 @@
+# Assignment
+- Write a simple HTTP server in Python
+    - It should serve files inside some directory
+    - It does not need to support parallel connections
+- You have to implement
+    - Accepting incoming connections (done)
+    - Parsing of HTTP requests
+    - Generation of HTTP responses
+- The server should return either
+    - The **contents of the resource** when the resource **exists**, or
+    - A **404 message** when the **resource is not found**
+- Testing your solution
+    - Use Netcat to manually send HTTP requests
+    - Use dedicated programs like curl
+- https://curl.haxx.se/download.html
+    - Use your web browser
